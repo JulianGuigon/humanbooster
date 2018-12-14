@@ -1,5 +1,74 @@
 package com.topaidi.model;
 
+import java.util.ArrayList;
+import java.util.Date;
+
+import com.topaidi.model.roles.Admin;
+
 public class Category {
+
+	private int id;
+	private String name;
+	private Date dateCreate;
+	private Admin admin;
+	private ArrayList<Idea> listIdea;
+
+	public Category() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Category(int id, String name, Date dateCreate, Admin admin, ArrayList<Idea> listIdea) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.dateCreate = dateCreate;
+		this.admin = admin;
+		this.listIdea = listIdea;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getDateCreate() {
+		return dateCreate;
+	}
+
+	public void setDateCreate(Date dateCreate) {
+		this.dateCreate = dateCreate;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+
+	public ArrayList<Idea> getListIdea() {
+		return listIdea;
+	}
+
+	public void setListIdea(ArrayList<Idea> listIdea) {
+		this.listIdea = listIdea;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", dateCreate=" + dateCreate + "]";
+	}
 
 }
