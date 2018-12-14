@@ -5,23 +5,22 @@ import com.topaidi.model.roles.User;
 public class Note {
 
 	private int id;
-	private boolean isTop;
-	private Idea flop;
-	private Idea top;
+	private Idea idea;
 	private User user;
+	private boolean isTop;
 
 	public Note() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Note(int id, boolean isTop, Idea flop, Idea top, User user) {
+	public Note(int id, boolean isTop, Idea idea, User user) {
 		super();
 		this.id = id;
 		this.isTop = isTop;
-		this.flop = flop;
-		this.top = top;
+		this.idea = idea;
 		this.user = user;
 	}
+
 
 	public Note getNoteById(int id) {
 		throw new UnsupportedOperationException();
@@ -43,20 +42,12 @@ public class Note {
 		this.isTop = isTop;
 	}
 
-	public Idea getFlop() {
-		return flop;
+	public Idea getIdea() {
+		return idea;
 	}
 
-	public void setFlop(Idea flop) {
-		this.flop = flop;
-	}
-
-	public Idea getTop() {
-		return top;
-	}
-
-	public void setTop(Idea top) {
-		this.top = top;
+	public void setIdea(Idea idea) {
+		this.idea = idea;
 	}
 
 	public User getUser() {
@@ -69,7 +60,6 @@ public class Note {
 
 	@Override
 	public String toString() {
-		return "Note [id=" + id + ", isTop=" + isTop + "]";
+		return "Note [id=" + id + ", isTop=" + isTop + ", idea=" + idea + ", user=" + user + "]";
 	}
-
 }

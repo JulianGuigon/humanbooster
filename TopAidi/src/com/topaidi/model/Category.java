@@ -9,7 +9,7 @@ public class Category {
 
 	private int id;
 	private String name;
-	private Date dateCreate;
+	private Date createdAt;
 	private Admin admin;
 	private ArrayList<Idea> listIdea;
 
@@ -17,11 +17,11 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(int id, String name, Date dateCreate, Admin admin, ArrayList<Idea> listIdea) {
+	public Category(int id, String name, Date createdAt, Admin admin, ArrayList<Idea> listIdea) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.dateCreate = dateCreate;
+		this.createdAt = createdAt;
 		this.admin = admin;
 		this.listIdea = listIdea;
 	}
@@ -42,12 +42,12 @@ public class Category {
 		this.name = name;
 	}
 
-	public Date getDateCreate() {
-		return dateCreate;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setDateCreate(Date dateCreate) {
-		this.dateCreate = dateCreate;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public Admin getAdmin() {
@@ -68,7 +68,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", dateCreate=" + dateCreate + "]";
+		return "Category [id=" + id + ", name=" + name + ", dateCreate=" + createdAt + "]";
 	}
 
 }

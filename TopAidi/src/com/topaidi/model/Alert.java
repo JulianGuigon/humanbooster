@@ -1,6 +1,5 @@
 package com.topaidi.model;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import com.topaidi.abstracts.Connected;

@@ -8,7 +8,7 @@ public class Comment {
 	private String value;
 	private User user;
 	private Idea idea;
-	// voir pour lien entre comment > alert
+	//TODO voir pour lien entre comment > alert
 
 	public Comment() {
 		// TODO Auto-generated constructor stub

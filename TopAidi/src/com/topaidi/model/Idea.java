@@ -11,9 +11,9 @@ public class Idea {
 	private String title;
 	private String description;
 	private String picture;
-	private Date dateCreate;
-	private Date dateLastEdit;
-	private Date dateDisable;
+	private Date createdAt;
+	private Date updatedAt;
+	private Date disabledAt;
 	private ArrayList<Alert> listAlert;
 	private ArrayList<Comment> listComment;
 	private Category category;
@@ -25,17 +25,17 @@ public class Idea {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Idea(int id, String title, String description, String picture, Date dateCreate, Date dateLastEdit,
-			Date dateDisable, ArrayList<Alert> listAlert, ArrayList<Comment> listComment, Category category,
+	public Idea(int id, String title, String description, String picture, Date createdAt, Date updatedAt,
+			Date disabledAt, ArrayList<Alert> listAlert, ArrayList<Comment> listComment, Category category,
 			ArrayList<Note> listFlop, ArrayList<Note> listTop, User user) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.picture = picture;
-		this.dateCreate = dateCreate;
-		this.dateLastEdit = dateLastEdit;
-		this.dateDisable = dateDisable;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.disabledAt = disabledAt;
 		this.listAlert = listAlert;
 		this.listComment = listComment;
 		this.category = category;
@@ -92,28 +92,28 @@ public class Idea {
 		this.picture = picture;
 	}
 
-	public Date getDateCreate() {
-		return dateCreate;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setDateCreate(Date dateCreate) {
-		this.dateCreate = dateCreate;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	public Date getDateLastEdit() {
-		return dateLastEdit;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setDateLastEdit(Date dateLastEdit) {
-		this.dateLastEdit = dateLastEdit;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
-	public Date getDateDisable() {
-		return dateDisable;
+	public Date getDisabledAt() {
+		return disabledAt;
 	}
 
-	public void setDateDisable(Date dateDisable) {
-		this.dateDisable = dateDisable;
+	public void setDisabledAt(Date disabledAt) {
+		this.disabledAt = disabledAt;
 	}
 
 	public ArrayList<Alert> getListAlert() {
@@ -167,7 +167,7 @@ public class Idea {
 	@Override
 	public String toString() {
 		return "Idea [id=" + id + ", title=" + title + ", description=" + description + ", picture=" + picture
-				+ ", dateCreate=" + dateCreate + ", dateLastEdit=" + dateLastEdit + ", dateDisable=" + dateDisable
+				+ ", dateCreate=" + createdAt + ", dateLastEdit=" + updatedAt + ", dateDisable=" + disabledAt
 				+ "]";
 	}
 
