@@ -21,9 +21,9 @@ public class Admin extends Connected {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(int id, String name, String email, String password, Address address, Integer phoneNumber,
-			String secretQuestion, String secretAnswer, String element) {
-		super(id, name, email, password, address, phoneNumber, secretQuestion, secretAnswer);
+	public Admin(String name, String email, String password, Address address, String phoneNumber,
+			String secretQuestion, String secretAnswer) {
+		super(name, email, password, address, phoneNumber, secretQuestion, secretAnswer);
 	}
 	
 	public boolean ban(User user) {

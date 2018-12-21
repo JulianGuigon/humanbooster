@@ -8,6 +8,6 @@ public interface GenericDao<T, K> {
     List<T> findAll();
     T findByKey(K key) throws NotFoundException;
     void insert(T obj);
-    T update(K key) throws NotFoundException;
+    T update(T obj, K key) throws NotFoundException;
     void delete(K key) throws NotFoundException;
 }
