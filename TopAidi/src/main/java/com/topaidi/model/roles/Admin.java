@@ -1,7 +1,7 @@
 package com.topaidi.model.roles;
 
-import com.sun.jndi.cosnaming.IiopUrl.Address;
 import com.topaidi.abstracts.Connected;
+import com.topaidi.model.Address;
 import com.topaidi.model.Category;
 import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;

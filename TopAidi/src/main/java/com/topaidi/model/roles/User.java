@@ -2,8 +2,8 @@ package com.topaidi.model.roles;
 
 import java.util.List;
 
-import com.sun.jndi.cosnaming.IiopUrl.Address;
 import com.topaidi.abstracts.Connected;
+import com.topaidi.model.Address;
 import com.topaidi.model.Idea;
 import com.topaidi.model.Note;
 

@@ -1,6 +1,6 @@
 package com.topaidi.abstracts;
 
-import com.sun.jndi.cosnaming.IiopUrl.Address;
+import com.topaidi.model.Address;
 import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;
 
