@@ -2,11 +2,14 @@ package com.topaidi.model.roles;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import com.topaidi.abstracts.Connected;
 import com.topaidi.model.Address;
 import com.topaidi.model.Idea;
 import com.topaidi.model.Note;
 
+@Entity
 public class User extends Connected {
 	private boolean isActive = false;
 	private boolean isValid = false;

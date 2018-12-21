@@ -1,12 +1,21 @@
 package com.topaidi.model.roles;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 import com.topaidi.abstracts.Connected;
 import com.topaidi.model.Address;
 import com.topaidi.model.Category;
 import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;
 
+@Entity
 public class Admin extends Connected {
+	@OneToMany(mappedBy="admin")
+	protected List<Category> categoriesCreated = new ArrayList<>();
 	
 	public Admin() {
 		// TODO Auto-generated constructor stub
