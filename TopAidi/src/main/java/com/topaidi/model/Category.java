@@ -2,6 +2,7 @@ package com.topaidi.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,13 +25,13 @@ public class Category {
 	@ManyToOne
 	private Admin admin;
 	@OneToMany(mappedBy="category")
-	private ArrayList<Idea> listIdea;
+	private List<Idea> listIdea;
 
 	public Category() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(int id, String name, Date createdAt, Admin admin, ArrayList<Idea> listIdea) {
+	public Category(int id, String name, Date createdAt, Admin admin, List<Idea> listIdea) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -71,11 +72,11 @@ public class Category {
 		this.admin = admin;
 	}
 
-	public ArrayList<Idea> getListIdea() {
+	public List<Idea> getListIdea() {
 		return listIdea;
 	}
 
-	public void setListIdea(ArrayList<Idea> listIdea) {
+	public void setListIdea(List<Idea> listIdea) {
 		this.listIdea = listIdea;
 	}
 

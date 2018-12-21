@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.topaidi.abstracts.Connected;
+import com.topaidi.model.roles.User;
 
 @Entity
 public class Alert {
@@ -27,22 +28,24 @@ public class Alert {
 	@ManyToOne
 	private Comment comment;
 	
+//	@ManyToOne
+//	private Connected connectedAlerted;
+	
 	@ManyToOne
-	private Connected connectedAlerted;
+	private User user;
 
 	//testRepo
 	public Alert() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Alert(int id, String message, String type, Idea ideaAlerted, Comment comment, Connected connectedAlerted) {
+	public Alert(int id, String message, String type, Idea ideaAlerted, Comment comment) {
 		super();
 		this.id = id;
 		this.message = message;
 		this.type = type;
 		this.ideaAlerted = ideaAlerted;
 		this.comment = comment;
-		this.connectedAlerted = connectedAlerted;
 	}
 
 	public Alert getAlertById(int id) {
@@ -95,14 +98,6 @@ public class Alert {
 
 	public void setComment(Comment comment) {
 		this.comment = comment;
-	}
-
-	public Connected getConnectedAlerted() {
-		return connectedAlerted;
-	}
-
-	public void setConnectedAlerted(Connected connectedAlerted) {
-		this.connectedAlerted = connectedAlerted;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.topaidi.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class Comment {
 	private Idea idea;
 	
 	@OneToMany(mappedBy="comment")
-	private ArrayList<Alert> listAlerte = new ArrayList<>();
+	private List<Alert> listAlerte = new ArrayList<>();
 
 	public Comment() {
 		// TODO Auto-generated constructor stub
