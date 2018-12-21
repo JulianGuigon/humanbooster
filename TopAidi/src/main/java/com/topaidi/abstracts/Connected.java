@@ -1,14 +1,28 @@
 package com.topaidi.abstracts;
 
+import java.util.ArrayList;
+
+import javax.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+
 import com.topaidi.model.Address;
+import com.topaidi.model.Alert;
 import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;
 
+@Entity
+//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Connected extends Role{
 	private String name;
 	private String email;
 	private String password;
+	
+	@ManyToOne
 	private Address address;
+	
 	private Integer phoneNumber;
 	private String secretQuestion;
 	private String secretAnswer;

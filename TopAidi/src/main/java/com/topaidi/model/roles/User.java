@@ -1,15 +1,36 @@
 package com.topaidi.model.roles;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.topaidi.abstracts.Connected;
 import com.topaidi.model.Address;
+import com.topaidi.model.Alert;
+import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;
 import com.topaidi.model.Note;
 
+@Entity
+@Table(name="Uzer")
 public class User extends Connected {
 	private boolean isActive = false;
 	private boolean isValid = false;
+	
+	@OneToMany(mappedBy="user")
+	private List<Comment> listComment = new ArrayList<>();
+	
+	@OneToMany(mappedBy="user")
+	private List<Note> listNote = new ArrayList<>();
+	
+	@OneToMany(mappedBy="user")
+	private List<Idea> listIdea = new ArrayList<>();
+	
+	@OneToMany(mappedBy="user")
+	private List<Alert> listAlert = new ArrayList<>();
 	
 	public User() {
 		// TODO Auto-generated constructor stub

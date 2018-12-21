@@ -2,30 +2,50 @@ package com.topaidi.model;
 
 import java.util.ArrayList;
 
-import com.topaidi.abstracts.Connected;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import com.topaidi.abstracts.Connected;
+import com.topaidi.model.roles.User;
+
+@Entity
 public class Alert {
 
+	@Id
+	@Column(name="alertId")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String message;
 	private String type;
+	
+	@ManyToOne
 	private Idea ideaAlerted;
+	
+	@ManyToOne
 	private Comment comment;
-	private Connected connectedAlerted;
+	
+//	@ManyToOne
+//	private Connected connectedAlerted;
+	
+	@ManyToOne
+	private User user;
 
 	//testRepo
 	public Alert() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Alert(int id, String message, String type, Idea ideaAlerted, Comment comment, Connected connectedAlerted) {
+	public Alert(int id, String message, String type, Idea ideaAlerted, Comment comment) {
 		super();
 		this.id = id;
 		this.message = message;
 		this.type = type;
 		this.ideaAlerted = ideaAlerted;
 		this.comment = comment;
-		this.connectedAlerted = connectedAlerted;
 	}
 
 	public Alert getAlertById(int id) {
@@ -78,14 +98,6 @@ public class Alert {
 
 	public void setComment(Comment comment) {
 		this.comment = comment;
-	}
-
-	public Connected getConnectedAlerted() {
-		return connectedAlerted;
-	}
-
-	public void setConnectedAlerted(Connected connectedAlerted) {
-		this.connectedAlerted = connectedAlerted;
 	}
 
 	@Override
