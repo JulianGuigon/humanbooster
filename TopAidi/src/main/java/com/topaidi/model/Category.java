@@ -1,7 +1,6 @@
 package com.topaidi.model;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,7 +20,7 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private Date createdAt;
+	private LocalDate createdAt;
 	@ManyToOne
 	private Admin admin;
 	@OneToMany(mappedBy="category")
@@ -31,9 +30,8 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(int id, String name, Date createdAt, Admin admin, List<Idea> listIdea) {
+	public Category(String name, Date createdAt, Admin admin, List<Idea> listIdea) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
 		this.admin = admin;
@@ -56,11 +54,11 @@ public class Category {
 		this.name = name;
 	}
 
-	public Date getCreatedAt() {
+	public LocalDate getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(LocalDate createdAt) {
 		this.createdAt = createdAt;
 	}
 
