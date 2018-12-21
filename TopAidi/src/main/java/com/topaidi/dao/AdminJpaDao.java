@@ -14,7 +14,16 @@ public class AdminJpaDao extends GenericJpaDao<Admin, Integer> {
 	
 	@Override
 	public void insert(Admin obj) {
-		genericDao1.insert(obj.getAddress());
+		Address a = obj.getAddress();
+		if(a.getId()!=null) {
+			try {
+				a = genericDao1.findByKey(a.getId());
+			} catch (NotFoundException e) {
+				e.printStackTrace();
+			}
+		}else {
+			genericDao1.insert(a);
+		}
 		super.insert(obj);
 	}
 	

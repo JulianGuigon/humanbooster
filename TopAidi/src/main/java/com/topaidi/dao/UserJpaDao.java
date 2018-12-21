@@ -14,7 +14,18 @@ public class UserJpaDao extends GenericJpaDao<User, Integer> {
 	
 	@Override
 	public void insert(User obj) {
-		genericDao1.insert(obj.getAddress());
+		Address a = obj.getAddress();
+		if(a.getId()!=null) {
+			try {
+				a = genericDao1.findByKey(a.getId());
+			} catch (NotFoundException e) {
+				e.printStackTrace();
+			}
+		}else {
+			genericDao1.insert(a);
+		}
+		System.out.println(obj.getAddress());
+		
 		super.insert(obj);
 	}
 	
