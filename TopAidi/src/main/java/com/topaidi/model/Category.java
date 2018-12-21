@@ -23,6 +23,7 @@ public class Category {
 	private Date createdAt;
 	@ManyToOne
 	private Admin admin;
+	@OneToMany(mappedBy="category")
 	private ArrayList<Idea> listIdea;
 
 	public Category() {
