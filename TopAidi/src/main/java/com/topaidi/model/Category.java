@@ -30,7 +30,7 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(String name, Date createdAt, Admin admin, List<Idea> listIdea) {
+	public Category(String name, LocalDate createdAt, Admin admin, List<Idea> listIdea) {
 		super();
 		this.name = name;
 		this.createdAt = createdAt;
