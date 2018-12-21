@@ -19,7 +19,7 @@ public class UserJpaDao extends GenericJpaDao<User, Integer> {
 	}
 	
 	public User update(User entity) throws NotFoundException {
-		return super.update(entity.getId());
+		return super.update(entity, entity.getId());
 	}
 	
 	@Override

@@ -5,6 +5,7 @@ import com.topaidi.model.roles.Admin;
 
 import javassist.NotFoundException;
 
+//TODO
 public class CategoryJpaDao extends GenericJpaDao<Category, Integer> {
 	private AdminJpaDao genericDao1;
 	
@@ -19,7 +20,7 @@ public class CategoryJpaDao extends GenericJpaDao<Category, Integer> {
 	}
 	
 	public Category update(Category entity) throws NotFoundException {
-		return super.update(entity.getId());
+		return super.update(entity, entity.getId());
 	}
 
 	@Override

@@ -7,11 +7,7 @@ import com.topaidi.abstracts.Role;
 @Entity
 public class Visitor extends Role {
 	public Visitor() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Visitor(int id) {
-		super(id);
+		super();
 	}
 
 	public boolean connect(String email, String password) {

@@ -14,7 +14,7 @@ public class Connected extends Role{
 	private String password;
 	@ManyToOne
 	private Address address;
-	private Integer phoneNumber;
+	private String phoneNumber;
 	private String secretQuestion;
 	private String secretAnswer;
 	
@@ -22,8 +22,8 @@ public class Connected extends Role{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Connected(int id, String name, String email, String password, Address address, Integer phoneNumber, String secretQuestion, String secretAnswer) {
-		super(id);
+	public Connected(String name, String email, String password, Address address, String phoneNumber, String secretQuestion, String secretAnswer) {
+		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -77,11 +77,11 @@ public class Connected extends Role{
 		this.address = address;
 	}
 
-	public Integer getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

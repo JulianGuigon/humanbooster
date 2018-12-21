@@ -19,7 +19,7 @@ public class AdminJpaDao extends GenericJpaDao<Admin, Integer> {
 	}
 	
 	public Admin update(Admin entity) throws NotFoundException {
-		return super.update(entity.getId());
+		return super.update(entity, entity.getId());
 	}
 
 	@Override
