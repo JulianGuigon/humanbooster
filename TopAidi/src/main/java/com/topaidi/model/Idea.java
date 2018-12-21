@@ -2,6 +2,7 @@ package com.topaidi.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,19 +29,21 @@ public class Idea {
 	private Date disabledAt;
 	
 	@OneToMany(mappedBy="ideaAlerted")
-	private ArrayList<Alert> listAlert = new ArrayList<>();
+	private List<Alert> listAlert = new ArrayList<>();
 	
-	@OneToMany(mappedBy="comment")
-	private ArrayList<Comment> listComment = new ArrayList<>();
+	@OneToMany(mappedBy="idea")
+	private List<Comment> listComment = new ArrayList<>();
 	
 	@ManyToOne
 	private Category category;
 	
 	@OneToMany(mappedBy="idea")
-	private ArrayList<Note> listFlop = new ArrayList<>();
+	private List<Note> listFlop = new ArrayList<>();
 	
 	@OneToMany(mappedBy="idea")
-	private ArrayList<Note> listTop = new ArrayList<>();
+	private List<Note> listTop = new ArrayList<>();
+	
+	@ManyToOne
 	private User user;
 
 	public Idea() {
@@ -48,8 +51,8 @@ public class Idea {
 	}
 
 	public Idea(int id, String title, String description, String picture, Date createdAt, Date updatedAt,
-			Date disabledAt, ArrayList<Alert> listAlert, ArrayList<Comment> listComment, Category category,
-			ArrayList<Note> listFlop, ArrayList<Note> listTop, User user) {
+			Date disabledAt, List<Alert> listAlert, List<Comment> listComment, Category category,
+			List<Note> listFlop, List<Note> listTop, User user) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -78,7 +81,7 @@ public class Idea {
 		throw new UnsupportedOperationException();
 	}
 
-	public ArrayList<Idea> getIdeaSortByDateCreate() {
+	public List<Idea> getIdeaSortByDateCreate() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -138,19 +141,19 @@ public class Idea {
 		this.disabledAt = disabledAt;
 	}
 
-	public ArrayList<Alert> getListAlert() {
+	public List<Alert> getListAlert() {
 		return listAlert;
 	}
 
-	public void setListAlert(ArrayList<Alert> listAlert) {
+	public void setListAlert(List<Alert> listAlert) {
 		this.listAlert = listAlert;
 	}
 
-	public ArrayList<Comment> getListComment() {
+	public List<Comment> getListComment() {
 		return listComment;
 	}
 
-	public void setListComment(ArrayList<Comment> listComment) {
+	public void setListComment(List<Comment> listComment) {
 		this.listComment = listComment;
 	}
 
@@ -162,19 +165,19 @@ public class Idea {
 		this.category = category;
 	}
 
-	public ArrayList<Note> getListFlop() {
+	public List<Note> getListFlop() {
 		return listFlop;
 	}
 
-	public void setListFlop(ArrayList<Note> listFlop) {
+	public void setListFlop(List<Note> listFlop) {
 		this.listFlop = listFlop;
 	}
 
-	public ArrayList<Note> getListTop() {
+	public List<Note> getListTop() {
 		return listTop;
 	}
 
-	public void setListTop(ArrayList<Note> listTop) {
+	public void setListTop(List<Note> listTop) {
 		this.listTop = listTop;
 	}
 
