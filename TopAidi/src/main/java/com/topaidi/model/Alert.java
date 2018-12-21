@@ -2,15 +2,32 @@ package com.topaidi.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import com.topaidi.abstracts.Connected;
 
+@Entity
 public class Alert {
 
+	@Id
+	@Column(name="alertId")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String message;
 	private String type;
+	
+	@ManyToOne
 	private Idea ideaAlerted;
+	
+	@ManyToOne
 	private Comment comment;
+	
+	@ManyToOne
 	private Connected connectedAlerted;
 
 	//testRepo

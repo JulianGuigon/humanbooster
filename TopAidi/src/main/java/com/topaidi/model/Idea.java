@@ -3,10 +3,22 @@ package com.topaidi.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import com.topaidi.model.roles.User;
 
+@Entity
 public class Idea {
 
+	@Id
+	@Column(name="ideaId")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
 	private String description;
@@ -14,11 +26,21 @@ public class Idea {
 	private Date createdAt;
 	private Date updatedAt;
 	private Date disabledAt;
-	private ArrayList<Alert> listAlert;
-	private ArrayList<Comment> listComment;
+	
+	@OneToMany(mappedBy="ideaAlerted")
+	private ArrayList<Alert> listAlert = new ArrayList<>();
+	
+	@OneToMany(mappedBy="comment")
+	private ArrayList<Comment> listComment = new ArrayList<>();
+	
+	@ManyToOne
 	private Category category;
-	private ArrayList<Note> listFlop;
-	private ArrayList<Note> listTop;
+	
+	@OneToMany(mappedBy="idea")
+	private ArrayList<Note> listFlop = new ArrayList<>();
+	
+	@OneToMany(mappedBy="idea")
+	private ArrayList<Note> listTop = new ArrayList<>();
 	private User user;
 
 	public Idea() {

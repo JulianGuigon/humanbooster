@@ -1,6 +1,11 @@
 package com.topaidi.abstracts;
 
+import java.util.ArrayList;
+
+import javax.persistence.OneToMany;
+
 import com.topaidi.model.Address;
+import com.topaidi.model.Alert;
 import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;
 
@@ -12,6 +17,9 @@ public class Connected extends Role{
 	private Integer phoneNumber;
 	private String secretQuestion;
 	private String secretAnswer;
+	
+	@OneToMany(mappedBy="connectedAlerted")
+	private ArrayList<Alert> listAlert = new ArrayList<>();
 	
 	public Connected() {
 		// TODO Auto-generated constructor stub

@@ -3,6 +3,8 @@ package com.topaidi.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.OneToMany;
+
 import com.topaidi.model.roles.Admin;
 
 public class Category {
@@ -11,6 +13,7 @@ public class Category {
 	private String name;
 	private Date createdAt;
 	private Admin admin;
+	@OneToMany(mappedBy="category")
 	private ArrayList<Idea> listIdea;
 
 	public Category() {

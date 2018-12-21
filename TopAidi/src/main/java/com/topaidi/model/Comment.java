@@ -1,14 +1,34 @@
 package com.topaidi.model;
 
+import java.util.ArrayList;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import com.topaidi.model.roles.User;
 
+@Entity
 public class Comment {
 
+	@Id
+	@Column(name="commentId")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String value;
+	
+	@ManyToOne
 	private User user;
+	
+	@ManyToOne
 	private Idea idea;
-	//TODO voir pour lien entre comment > alert
+	
+	@OneToMany(mappedBy="comment")
+	private ArrayList<Alert> listAlerte = new ArrayList<>();
 
 	public Comment() {
 		// TODO Auto-generated constructor stub
