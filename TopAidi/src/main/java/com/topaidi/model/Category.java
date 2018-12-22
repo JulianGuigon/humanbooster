@@ -1,7 +1,6 @@
 package com.topaidi.model;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,9 +20,9 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private Date createdAt;
+	private LocalDate createdAt;
 	@ManyToOne
-	private Admin admin;
+	private Admin adminCreating;
 	@OneToMany(mappedBy="category")
 	private List<Idea> listIdea;
 
@@ -31,12 +30,11 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(int id, String name, Date createdAt, Admin admin, List<Idea> listIdea) {
+	public Category(String name, LocalDate createdAt, Admin adminCreating, List<Idea> listIdea) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
-		this.admin = admin;
+		this.adminCreating = adminCreating;
 		this.listIdea = listIdea;
 	}
 
@@ -56,20 +54,20 @@ public class Category {
 		this.name = name;
 	}
 
-	public Date getCreatedAt() {
+	public LocalDate getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(LocalDate createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public Admin getAdmin() {
-		return admin;
+	public Admin getAdminCreating() {
+		return adminCreating;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setAdminCreating(Admin adminCreating) {
+		this.adminCreating = adminCreating;
 	}
 
 	public List<Idea> getListIdea() {
@@ -82,7 +80,8 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", dateCreate=" + createdAt + "]";
+		return "Category [id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", adminCreating=" + adminCreating
+				+ ", listIdea=" + listIdea + "]";
 	}
 
 }

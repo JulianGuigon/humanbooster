@@ -20,25 +20,25 @@ public class User extends Connected {
 	private boolean isActive = false;
 	private boolean isValid = false;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="userCommenting")
 	private List<Comment> listComment = new ArrayList<>();
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="userNoting")
 	private List<Note> listNote = new ArrayList<>();
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="userSubmitting")
 	private List<Idea> listIdea = new ArrayList<>();
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="userAlerting")
 	private List<Alert> listAlert = new ArrayList<>();
 	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int id, String name, String email, String password, Address address, Integer phoneNumber,
+	public User(String name, String email, String password, Address address, String phoneNumber,
 			String secretQuestion, String secretAnswer, boolean isActive, boolean isValid) {
-		super(id, name, email, password, address, phoneNumber, secretQuestion, secretAnswer);
+		super(name, email, password, address, phoneNumber, secretQuestion, secretAnswer);
 		this.isActive = isActive;
 		this.isValid = isValid;
 	}

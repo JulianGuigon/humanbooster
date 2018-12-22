@@ -20,11 +20,6 @@ public class Role {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Role(int id) {
-		super();
-		this.id = id;
-	}
-
 	public int getId() {
 		return id;
 	}

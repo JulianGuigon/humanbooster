@@ -11,13 +11,12 @@ import com.topaidi.utility.Connection;
 import javassist.NotFoundException;
 
 public abstract class GenericJpaDao<T,K> implements GenericDao<T,K> {
-	private EntityManagerFactory emf;
+	private EntityManagerFactory emf = Connection.getInstance().getEmf();
 	private Class<T> type;
 	
 	@SuppressWarnings("unchecked")
 	public GenericJpaDao() {
 		super();
-		this.emf = Connection.getInstance().getEmf();
 		this.type = ((Class<T>) ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
 	}
 
@@ -52,13 +51,14 @@ public abstract class GenericJpaDao<T,K> implements GenericDao<T,K> {
 	}
 
 	@Override
-	public T update(K key) throws NotFoundException {
+	public T update(T obj, K key) throws NotFoundException {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		T entityUpdated = em.find(type, key);
 		if(entityUpdated==null) {
 			throw new NotFoundException("The element don't exist in the database.");
 		}
+		entityUpdated = obj;
 		em.merge(entityUpdated);
 		em.getTransaction().commit();
 		em.close();

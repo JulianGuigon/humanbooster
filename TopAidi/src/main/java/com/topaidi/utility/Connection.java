@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 public class Connection {
 	private static Connection instance = null;
 
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("niprpg");
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("topaidi");
 	
 	private Connection() {}
 

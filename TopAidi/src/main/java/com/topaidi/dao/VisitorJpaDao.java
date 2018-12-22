@@ -6,7 +6,7 @@ import javassist.NotFoundException;
 
 public class VisitorJpaDao extends GenericJpaDao<Visitor, Integer> {
 	public Visitor update(Visitor entity) throws NotFoundException {
-		return super.update(entity.getId());
+		return super.update(entity, entity.getId());
 	}
 
 	public void delete(Visitor entity) throws NotFoundException {
