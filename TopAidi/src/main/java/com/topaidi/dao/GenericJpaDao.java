@@ -11,13 +11,12 @@ import com.topaidi.utility.Connection;
 import javassist.NotFoundException;
 
 public abstract class GenericJpaDao<T,K> implements GenericDao<T,K> {
-	private EntityManagerFactory emf;
+	private EntityManagerFactory emf = Connection.getInstance().getEmf();
 	private Class<T> type;
 	
 	@SuppressWarnings("unchecked")
 	public GenericJpaDao() {
 		super();
-		this.emf = Connection.getInstance().getEmf();
 		this.type = ((Class<T>) ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
 	}
 

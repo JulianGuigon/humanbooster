@@ -13,53 +13,62 @@ import com.topaidi.utility.Connection;
 import javassist.NotFoundException;
 
 public class AdminJpaDaoTest {
-	Address a = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+	private Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 	
 	@Test
 	public void testUpdateAdmin() {
-		Admin v = new Admin("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-		AdminJpaDao genericDao1 = new AdminJpaDao();
-		genericDao1.insert(v);
-		v.setPassword("bbbb");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		AdminJpaDao adminJpaDao = new AdminJpaDao();
+		adminJpaDao.insert(admin);
+		admin.setPassword("bbbb");
 		try {
-			genericDao1.findByKey(v.getId());
+			adminJpaDao.update(admin);
 		} catch (NotFoundException e) {
 			fail();
 		}
-		Assert.assertTrue(v.getPassword().equals("bbbb"));
+		try {
+			Assert.assertTrue(adminJpaDao.findByKey(admin.getId()).getPassword().equals("bbbb"));
+		} catch (NotFoundException e) {
+			fail();
+		}
 	}
 
 	@Test
 	public void testDeleteAdmin() {
-		Admin v = new Admin("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-		AdminJpaDao genericDao1 = new AdminJpaDao();
-		genericDao1.insert(v);
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		AdminJpaDao adminJpaDao = new AdminJpaDao();
+		adminJpaDao.insert(admin);
 		try {
-			genericDao1.delete(v);
+			adminJpaDao.delete(admin);
 		} catch (NotFoundException e) {
 			fail();
+		}
+		try {
+			adminJpaDao.findByKey(admin.getId());
+			fail();
+		} catch (NotFoundException e) {
 		}
 	}
 
 	@Test
 	public void testFindAll() {
-		Admin h1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-		Admin h2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-		Admin h3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-		AdminJpaDao genericDao1 = new AdminJpaDao();
-		genericDao1.insert(h1);
-		genericDao1.insert(h2);
-		genericDao1.insert(h3);
-		assertTrue(genericDao1.findAll().size()==3);
+		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		AdminJpaDao adminJpaDao = new AdminJpaDao();
+		adminJpaDao.insert(admin1);
+		adminJpaDao.insert(admin2);
+		adminJpaDao.insert(admin3);
+		assertTrue(adminJpaDao.findAll().size()==3);
 	}
 
 	@Test
 	public void testInsertAndFindByKey() {
-		Admin v = new Admin("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-		AdminJpaDao genericDao1 = new AdminJpaDao();
-		genericDao1.insert(v);
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		AdminJpaDao adminJpaDao = new AdminJpaDao();
+		adminJpaDao.insert(admin);
 		try {
-			genericDao1.findByKey(v.getId());
+			adminJpaDao.findByKey(admin.getId());
 		} catch (NotFoundException e) {
 			fail();
 		}

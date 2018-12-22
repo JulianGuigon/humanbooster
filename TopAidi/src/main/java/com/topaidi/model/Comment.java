@@ -23,24 +23,23 @@ public class Comment {
 	private String value;
 	
 	@ManyToOne
-	private User user;
+	private User userCommenting;
 	
 	@ManyToOne
-	private Idea idea;
+	private Idea ideaCommented;
 	
-	@OneToMany(mappedBy="comment")
+	@OneToMany(mappedBy="commentAlerted")
 	private List<Alert> listAlerte = new ArrayList<>();
 
 	public Comment() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(int id, String value, User user, Idea idea) {
+	public Comment(String value, User userCommenting, Idea ideaCommented) {
 		super();
-		this.id = id;
 		this.value = value;
-		this.user = user;
-		this.idea = idea;
+		this.userCommenting = userCommenting;
+		this.ideaCommented = ideaCommented;
 	}
 
 	public Comment getCommentById(int id) {
@@ -63,20 +62,20 @@ public class Comment {
 		this.value = value;
 	}
 
-	public User getUser() {
-		return user;
+	public User getUserCommenting() {
+		return userCommenting;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserCommenting(User userCommenting) {
+		this.userCommenting = userCommenting;
 	}
 
-	public Idea getIdea() {
-		return idea;
+	public Idea getIdeaCommented() {
+		return ideaCommented;
 	}
 
-	public void setIdea(Idea idea) {
-		this.idea = idea;
+	public void setIdeaCommented(Idea ideaCommented) {
+		this.ideaCommented = ideaCommented;
 	}
 
 	@Override

@@ -18,10 +18,10 @@ public class Note {
 	private int id;
 	
 	@ManyToOne
-	private Idea idea;
+	private Idea ideaNoted;
 	
 	@ManyToOne
-	private User user;
+	private User userNoting;
 	
 	private boolean isTop;
 
@@ -29,12 +29,11 @@ public class Note {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Note(int id, boolean isTop, Idea idea, User user) {
+	public Note(boolean isTop, Idea ideaNoted, User userNoting) {
 		super();
-		this.id = id;
 		this.isTop = isTop;
-		this.idea = idea;
-		this.user = user;
+		this.ideaNoted = ideaNoted;
+		this.userNoting = userNoting;
 	}
 
 
@@ -58,24 +57,24 @@ public class Note {
 		this.isTop = isTop;
 	}
 
-	public Idea getIdea() {
-		return idea;
+	public Idea getIdeaNoted() {
+		return ideaNoted;
 	}
 
-	public void setIdea(Idea idea) {
-		this.idea = idea;
+	public void setIdeaNoted(Idea ideaNoted) {
+		this.ideaNoted = ideaNoted;
 	}
 
-	public User getUser() {
-		return user;
+	public User getUserNoting() {
+		return userNoting;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserNoting(User userNoting) {
+		this.userNoting = userNoting;
 	}
 
 	@Override
 	public String toString() {
-		return "Note [id=" + id + ", isTop=" + isTop + ", idea=" + idea + ", user=" + user + "]";
+		return "Note [id=" + id + ", ideaNoted=" + ideaNoted + ", userNoting=" + userNoting + ", isTop=" + isTop + "]";
 	}
 }

@@ -6,23 +6,19 @@ import com.topaidi.model.roles.Admin;
 import javassist.NotFoundException;
 
 public class AdminJpaDao extends GenericJpaDao<Admin, Integer> {
-	private AddressJpaDao genericDao1;
-	
-	public AdminJpaDao() {
-		genericDao1 = new AddressJpaDao();
-	}
+	private AddressJpaDao addressJpaDao = new AddressJpaDao();
 	
 	@Override
 	public void insert(Admin obj) {
-		Address a = obj.getAddress();
-		if(a.getId()!=null) {
+		Address address = obj.getAddress();
+		if(address.getId()!=null) {
 			try {
-				a = genericDao1.findByKey(a.getId());
+				address = addressJpaDao.findByKey(address.getId());
 			} catch (NotFoundException e) {
 				e.printStackTrace();
 			}
 		}else {
-			genericDao1.insert(a);
+			addressJpaDao.insert(address);
 		}
 		super.insert(obj);
 	}
@@ -33,9 +29,7 @@ public class AdminJpaDao extends GenericJpaDao<Admin, Integer> {
 
 	@Override
 	public void delete(Integer key) throws NotFoundException {
-		Address a = findByKey(key).getAddress();
 		super.delete(key);
-		genericDao1.delete(a);
 	}
 	
 	public void delete(Admin entity) throws NotFoundException {
