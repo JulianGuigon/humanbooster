@@ -14,8 +14,8 @@ import com.topaidi.model.Idea;
 
 @Entity
 public class Admin extends Connected {
-	@OneToMany(mappedBy="admin")
-	protected List<Category> categoriesCreated = new ArrayList<>();
+	@OneToMany(mappedBy="adminCreating")
+	protected List<Category> listCategoryCreated = new ArrayList<>();
 	
 	public Admin() {
 		// TODO Auto-generated constructor stub
@@ -56,8 +56,9 @@ public class Admin extends Connected {
 
 	@Override
 	public String toString() {
-		return "Admin [getName()=" + getName() + ", getEmail()=" + getEmail() + ", getPassword()=" + getPassword()
-				+ ", getAddress()=" + getAddress() + ", getPhoneNumber()=" + getPhoneNumber() + ", getSecretQuestion()="
-				+ getSecretQuestion() + ", getSecretAnswer()=" + getSecretAnswer() + ", getId()=" + getId() + "]";
+		return "Admin [listCategoryCreated=" + listCategoryCreated + ", getName()=" + getName() + ", getEmail()="
+				+ getEmail() + ", getPassword()=" + getPassword() + ", getAddress()=" + getAddress()
+				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getSecretQuestion()=" + getSecretQuestion()
+				+ ", getSecretAnswer()=" + getSecretAnswer() + ", getId()=" + getId() + "]";
 	}
 }
