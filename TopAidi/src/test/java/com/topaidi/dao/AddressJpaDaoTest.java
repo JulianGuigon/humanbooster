@@ -15,49 +15,58 @@ public class AddressJpaDaoTest {
 
 	@Test
 	public void testUpdateAddress() {
-		Address v = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		AddressJpaDao genericDao1 = new AddressJpaDao();
-		genericDao1.insert(v);
-		v.setStreetNumber(4);
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		AddressJpaDao adressJpaDao = new AddressJpaDao();
+		adressJpaDao.insert(address);
+		address.setStreetNumber(4);
 		try {
-			genericDao1.findByKey(v.getId());
+			adressJpaDao.update(address);
 		} catch (NotFoundException e) {
 			fail();
 		}
-		Assert.assertTrue(v.getStreetNumber()==4);
+		try {
+			Assert.assertTrue(adressJpaDao.findByKey(address.getId()).getStreetNumber()==4);
+		} catch (NotFoundException e) {
+			fail();
+		}
 	}
 
 	@Test
 	public void testDeleteAddress() {
-		Address v = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		AddressJpaDao genericDao1 = new AddressJpaDao();
-		genericDao1.insert(v);
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		AddressJpaDao adressJpaDao = new AddressJpaDao();
+		adressJpaDao.insert(address);
 		try {
-			genericDao1.delete(v);
+			adressJpaDao.delete(address);
 		} catch (NotFoundException e) {
 			fail();
+		}
+		try {
+			adressJpaDao.findByKey(address.getId());
+			fail();
+		} catch (NotFoundException e) {
 		}
 	}
 
 	@Test
 	public void testFindAll() {
-		Address h1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Address h2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",9);
-		Address h3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",10);
-		AddressJpaDao genericDao1 = new AddressJpaDao();
-		genericDao1.insert(h1);
-		genericDao1.insert(h2);
-		genericDao1.insert(h3);
-		assertTrue(genericDao1.findAll().size()==3);
+		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",9);
+		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",10);
+		AddressJpaDao addressJpaDao = new AddressJpaDao();
+		addressJpaDao.insert(address1);
+		addressJpaDao.insert(address2);
+		addressJpaDao.insert(address3);
+		assertTrue(addressJpaDao.findAll().size()==3);
 	}
 
 	@Test
 	public void testInsertAndFindByKey() {
-		Address v = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		AddressJpaDao genericDao1 = new AddressJpaDao();
-		genericDao1.insert(v);
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		AddressJpaDao addressJpaDao = new AddressJpaDao();
+		addressJpaDao.insert(address);
 		try {
-			genericDao1.findByKey(v.getId());
+			addressJpaDao.findByKey(address.getId());
 		} catch (NotFoundException e) {
 			fail();
 		}

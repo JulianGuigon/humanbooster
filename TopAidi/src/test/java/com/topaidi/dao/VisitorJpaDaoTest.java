@@ -14,35 +14,40 @@ public class VisitorJpaDaoTest {
 	
 	@Test
 	public void testDeleteVisitor() {
-		Visitor v = new Visitor();
-		VisitorJpaDao genericDao1 = new VisitorJpaDao();
-		genericDao1.insert(v);
+		Visitor visitor = new Visitor();
+		VisitorJpaDao visitorJpaDao = new VisitorJpaDao();
+		visitorJpaDao.insert(visitor);
 		try {
-			genericDao1.delete(v);
+			visitorJpaDao.delete(visitor);
 		} catch (NotFoundException e) {
 			fail();
+		}
+		try {
+			visitorJpaDao.findByKey(visitor.getId());
+			fail();
+		} catch (NotFoundException e) {
 		}
 	}
 
 	@Test
 	public void testFindAll() {
-		Visitor h1 = new Visitor();
-		Visitor h2 = new Visitor();
-		Visitor h3 = new Visitor();
-		VisitorJpaDao genericDao1 = new VisitorJpaDao();
-		genericDao1.insert(h1);
-		genericDao1.insert(h2);
-		genericDao1.insert(h3);
-		assertTrue(genericDao1.findAll().size()==3);
+		Visitor visitor1 = new Visitor();
+		Visitor visitor2 = new Visitor();
+		Visitor visitor3 = new Visitor();
+		VisitorJpaDao visitorJpaDao = new VisitorJpaDao();
+		visitorJpaDao.insert(visitor1);
+		visitorJpaDao.insert(visitor2);
+		visitorJpaDao.insert(visitor3);
+		assertTrue(visitorJpaDao.findAll().size()==3);
 	}
 
 	@Test
 	public void testInsertAndFindByKey() {
-		Visitor v = new Visitor();
-		VisitorJpaDao genericDao1 = new VisitorJpaDao();
-		genericDao1.insert(v);
+		Visitor visitor = new Visitor();
+		VisitorJpaDao visitorJpaDao = new VisitorJpaDao();
+		visitorJpaDao.insert(visitor);
 		try {
-			genericDao1.findByKey(v.getId());
+			visitorJpaDao.findByKey(visitor.getId());
 		} catch (NotFoundException e) {
 			fail();
 		}

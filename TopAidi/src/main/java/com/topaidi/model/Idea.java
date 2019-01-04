@@ -1,7 +1,7 @@
 package com.topaidi.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,49 +24,42 @@ public class Idea {
 	private String title;
 	private String description;
 	private String picture;
-	private Date createdAt;
-	private Date updatedAt;
-	private Date disabledAt;
+	private LocalDate createdAt;
+	private LocalDate updatedAt;
+	private LocalDate disabledAt;
 	
 	@OneToMany(mappedBy="ideaAlerted")
 	private List<Alert> listAlert = new ArrayList<>();
 	
-	@OneToMany(mappedBy="idea")
+	@OneToMany(mappedBy="ideaCommented")
 	private List<Comment> listComment = new ArrayList<>();
 	
 	@ManyToOne
 	private Category category;
 	
-	@OneToMany(mappedBy="idea")
+	@OneToMany(mappedBy="ideaNoted")
 	private List<Note> listFlop = new ArrayList<>();
 	
-	@OneToMany(mappedBy="idea")
+	@OneToMany(mappedBy="ideaNoted")
 	private List<Note> listTop = new ArrayList<>();
 	
 	@ManyToOne
-	private User user;
+	private User userSubmitting;
 
 	public Idea() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Idea(int id, String title, String description, String picture, Date createdAt, Date updatedAt,
-			Date disabledAt, List<Alert> listAlert, List<Comment> listComment, Category category,
-			List<Note> listFlop, List<Note> listTop, User user) {
+	public Idea(String title, String description, String picture, LocalDate createdAt, Category category, User userSubmitting) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.picture = picture;
 		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-		this.disabledAt = disabledAt;
-		this.listAlert = listAlert;
-		this.listComment = listComment;
+		this.updatedAt = null;
+		this.disabledAt = null;
 		this.category = category;
-		this.listFlop = listFlop;
-		this.listTop = listTop;
-		this.user = user;
+		this.userSubmitting = userSubmitting;
 	}
 
 	public boolean isNotable() {
@@ -117,27 +110,27 @@ public class Idea {
 		this.picture = picture;
 	}
 
-	public Date getCreatedAt() {
+	public LocalDate getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(LocalDate createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt() {
+	public LocalDate getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(LocalDate updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public Date getDisabledAt() {
+	public LocalDate getDisabledAt() {
 		return disabledAt;
 	}
 
-	public void setDisabledAt(Date disabledAt) {
+	public void setDisabledAt(LocalDate disabledAt) {
 		this.disabledAt = disabledAt;
 	}
 
@@ -181,19 +174,20 @@ public class Idea {
 		this.listTop = listTop;
 	}
 
-	public User getUser() {
-		return user;
+	public User getUserSubmitting() {
+		return userSubmitting;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserSubmitting(User userSubmitting) {
+		this.userSubmitting = userSubmitting;
 	}
 
 	@Override
 	public String toString() {
 		return "Idea [id=" + id + ", title=" + title + ", description=" + description + ", picture=" + picture
-				+ ", dateCreate=" + createdAt + ", dateLastEdit=" + updatedAt + ", dateDisable=" + disabledAt
-				+ "]";
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", disabledAt=" + disabledAt
+				+ ", listAlert=" + listAlert + ", listComment=" + listComment + ", category=" + category + ", listFlop="
+				+ listFlop + ", listTop=" + listTop + ", userSubmitting=" + userSubmitting + "]";
 	}
 
 }

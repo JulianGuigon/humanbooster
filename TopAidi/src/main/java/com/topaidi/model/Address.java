@@ -18,6 +18,8 @@ public class Address {
 	private String wording;
 	private Integer streetNumber;
 	
+	//private List<>
+	
 	public Address() {
 		// TODO Auto-generated constructor stub
 	}

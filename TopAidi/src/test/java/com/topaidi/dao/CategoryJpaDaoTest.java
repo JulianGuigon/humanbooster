@@ -1,88 +1,97 @@
-//package com.topaidi.dao;
-//
-//import static org.junit.Assert.*;
-//
-//import java.sql.Timestamp;
-//import java.time.LocalDate;
-//import java.time.LocalDateTime;
-//import java.util.ArrayList;
-//import java.util.Calendar;
-//import java.util.Date;
-//import java.util.List;
-//
-//import javax.print.attribute.standard.DateTimeAtCompleted;
-//
-//import org.junit.After;
-//import org.junit.Assert;
-//import org.junit.Test;
-//
-//import com.topaidi.model.Address;
-//import com.topaidi.model.Category;
-//import com.topaidi.model.Idea;
-//import com.topaidi.model.roles.Admin;
-//import com.topaidi.utility.Connection;
-//
-//import javassist.NotFoundException;
-//
-//public class CategoryJpaDaoTest {
-//
-//	List<Idea> ideas = new ArrayList<>();
-//	Address a = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-//	Admin ad = new Admin("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-//	
-//	@Test
-//	public void testUpdateCategory() {
-//		Category v = new Category("cuisine",LocalDate.now(),ad,ideas);
-//		CategoryJpaDao genericDao1 = new CategoryJpaDao();
-//		genericDao1.insert(v);
-//		v.setPassword("bbbb");
-//		try {
-//			genericDao1.findByKey(v.getId());
-//		} catch (NotFoundException e) {
-//			fail();
-//		}
-//		Assert.assertTrue(v.getPassword().equals("bbbb"));
-//	}
-//
-//	@Test
-//	public void testDeleteCategory() {
-//		Category v = new Category("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-//		CategoryJpaDao genericDao1 = new CategoryJpaDao();
-//		genericDao1.insert(v);
-//		try {
-//			genericDao1.delete(v);
-//		} catch (NotFoundException e) {
-//			fail();
-//		}
-//	}
-//
-//	@Test
-//	public void testFindAll() {
-//		Category h1 = new Category("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-//		Category h2 = new Category("Jean Robert","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-//		Category h3 = new Category("Jean Bernard","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-//		CategoryJpaDao genericDao1 = new CategoryJpaDao();
-//		genericDao1.insert(h1);
-//		genericDao1.insert(h2);
-//		genericDao1.insert(h3);
-//		assertTrue(genericDao1.findAll().size()==3);
-//	}
-//
-//	@Test
-//	public void testInsertAndFindByKey() {
-//		Category v = new Category("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a");
-//		CategoryJpaDao genericDao1 = new CategoryJpaDao();
-//		genericDao1.insert(v);
-//		try {
-//			genericDao1.findByKey(v.getId());
-//		} catch (NotFoundException e) {
-//			fail();
-//		}
-//	}
-//	
-//	@After
-//	public void after() {
-//		Connection.stop();
-//	}
-//
-//}
+package com.topaidi.dao;
+
+import static org.junit.Assert.*;
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.topaidi.model.Address;
+import com.topaidi.model.Category;
+import com.topaidi.model.Idea;
+import com.topaidi.model.roles.Admin;
+import com.topaidi.utility.Connection;
+
+import javassist.NotFoundException;
+
+public class CategoryJpaDaoTest {
+
+	private List<Idea> ideas = new ArrayList<>();
+	private Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+	private Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+	
+	@Test
+	public void testUpdateCategory() {
+		Category category = new Category("cuisine",LocalDate.now(),admin,ideas);
+		CategoryJpaDao categoryJpaDao = new CategoryJpaDao();
+		categoryJpaDao.insert(category);
+		category.setName("foot");
+		try {
+			categoryJpaDao.update(category);
+		} catch (NotFoundException e) {
+			fail();
+		}
+		try {
+			Assert.assertTrue(categoryJpaDao.findByKey(category.getId()).getName().equals("foot"));
+		} catch (NotFoundException e) {
+			fail();
+		}
+	}
+
+	@Test
+	public void testDeleteCategory() {
+		Category category = new Category("cuisine",LocalDate.now(),admin,ideas);
+		CategoryJpaDao categoryJpaDao = new CategoryJpaDao();
+		categoryJpaDao.insert(category);
+		try {
+			categoryJpaDao.delete(category);
+		} catch (NotFoundException e) {
+			fail();
+		}
+		try {
+			categoryJpaDao.findByKey(category.getId());
+			fail();
+		} catch (NotFoundException e) {
+		}
+	}
+
+	@Test
+	public void testFindAll() {
+		Category category1 = new Category("cuisine",LocalDate.now(),admin,ideas);
+		Category category2 = new Category("botanique",LocalDate.now(),admin,ideas);
+		Category category3 = new Category("echecs",LocalDate.now(),admin,ideas);
+		CategoryJpaDao categoryJpaDao = new CategoryJpaDao();
+		categoryJpaDao.insert(category1);
+		categoryJpaDao.insert(category2);
+		categoryJpaDao.insert(category3);
+		assertTrue(categoryJpaDao.findAll().size()==3);
+	}
+
+	@Test
+	public void testInsertAndFindByKey() {
+		Category category = new Category("cuisine",LocalDate.now(),admin,ideas);
+		CategoryJpaDao categoryJpaDao = new CategoryJpaDao();
+		categoryJpaDao.insert(category);
+		try {
+			categoryJpaDao.findByKey(category.getId());
+		} catch (NotFoundException e) {
+			fail();
+		}
+	}
+	
+	@After
+	public void after() {
+		Connection.stop();
+	}
+
+}

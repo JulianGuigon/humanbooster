@@ -14,53 +14,62 @@ import javassist.NotFoundException;
 
 public class UserJpaDaoTest {
 
-	Address a = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+	private Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 	
 	@Test
 	public void testUpdateUser() {
-		User v = new User("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a",true,true);
-		UserJpaDao genericDao1 = new UserJpaDao();
-		genericDao1.insert(v);
-		v.setPassword("bbbb");
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		UserJpaDao userJpaDao = new UserJpaDao();
+		userJpaDao.insert(user);
+		user.setPassword("bbbb");
 		try {
-			genericDao1.findByKey(v.getId());
+			userJpaDao.update(user);
 		} catch (NotFoundException e) {
 			fail();
 		}
-		Assert.assertTrue(v.getPassword().equals("bbbb"));
+		try {
+			Assert.assertTrue(userJpaDao.findByKey(user.getId()).getPassword().equals("bbbb"));
+		} catch (NotFoundException e) {
+			fail();
+		}
 	}
 
 	@Test
 	public void testDeleteUser() {
-		User v = new User("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a",true,true);
-		UserJpaDao genericDao1 = new UserJpaDao();
-		genericDao1.insert(v);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		UserJpaDao userJpaDao = new UserJpaDao();
+		userJpaDao.insert(user);
 		try {
-			genericDao1.delete(v);
+			userJpaDao.delete(user);
 		} catch (NotFoundException e) {
 			fail();
+		}
+		try {
+			userJpaDao.findByKey(user.getId());
+			fail();
+		} catch (NotFoundException e) {
 		}
 	}
 
 	@Test
 	public void testFindAll() {
-		User h1 = new User("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a",true,true);
-		User h2 = new User("Jean Robert","a.g@gmail.com","aaaa",a,"0477265898","a?","a",true,true);
-		User h3 = new User("Jean Bernard","a.g@gmail.com","aaaa",a,"0477265898","a?","a",true,true);
-		UserJpaDao genericDao1 = new UserJpaDao();
-		genericDao1.insert(h1);
-		genericDao1.insert(h2);
-		genericDao1.insert(h3);
-		assertTrue(genericDao1.findAll().size()==3);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		UserJpaDao userJpaDao = new UserJpaDao();
+		userJpaDao.insert(user1);
+		userJpaDao.insert(user2);
+		userJpaDao.insert(user3);
+		assertTrue(userJpaDao.findAll().size()==3);
 	}
 
 	@Test
 	public void testInsertAndFindByKey() {
-		User v = new User("Jean Guy","a.g@gmail.com","aaaa",a,"0477265898","a?","a",true,true);
-		UserJpaDao genericDao1 = new UserJpaDao();
-		genericDao1.insert(v);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		UserJpaDao userJpaDao = new UserJpaDao();
+		userJpaDao.insert(user);
 		try {
-			genericDao1.findByKey(v.getId());
+			userJpaDao.findByKey(user.getId());
 		} catch (NotFoundException e) {
 			fail();
 		}

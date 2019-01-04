@@ -20,16 +20,16 @@ public class User extends Connected {
 	private boolean isActive = false;
 	private boolean isValid = false;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="userCommenting")
 	private List<Comment> listComment = new ArrayList<>();
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="userNoting")
 	private List<Note> listNote = new ArrayList<>();
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="userSubmitting")
 	private List<Idea> listIdea = new ArrayList<>();
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="userAlerting")
 	private List<Alert> listAlert = new ArrayList<>();
 	
 	public User() {

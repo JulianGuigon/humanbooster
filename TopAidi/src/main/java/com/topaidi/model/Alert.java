@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.topaidi.abstracts.Connected;
+import com.topaidi.enums.AlertType;
 import com.topaidi.model.roles.User;
 
 @Entity
@@ -20,32 +20,37 @@ public class Alert {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String message;
-	private String type;
+	private AlertType alertType;
 	
 	@ManyToOne
 	private Idea ideaAlerted;
 	
 	@ManyToOne
-	private Comment comment;
-	
-//	@ManyToOne
-//	private Connected connectedAlerted;
+	private Comment commentAlerted;
 	
 	@ManyToOne
-	private User user;
-
-	//testRepo
+	private User userAlerting;
+	
 	public Alert() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Alert(int id, String message, String type, Idea ideaAlerted, Comment comment) {
+	public Alert(String message, Comment commentAlerted, User userAlerting) {
 		super();
-		this.id = id;
 		this.message = message;
-		this.type = type;
+		this.alertType = AlertType.Comment;
+		this.ideaAlerted = null;
+		this.commentAlerted = commentAlerted;
+		this.userAlerting = userAlerting;
+	}
+	
+	public Alert(String message, Idea ideaAlerted, User userAlerted) {
+		super();
+		this.message = message;
+		this.alertType = AlertType.Idea;
 		this.ideaAlerted = ideaAlerted;
-		this.comment = comment;
+		this.commentAlerted = null;
+		this.userAlerting = userAlerted;
 	}
 
 	public Alert getAlertById(int id) {
@@ -76,12 +81,12 @@ public class Alert {
 		this.message = message;
 	}
 
-	public String getType() {
-		return type;
+	public AlertType getAlertType() {
+		return alertType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setAlertType(AlertType alertType) {
+		this.alertType = alertType;
 	}
 
 	public Idea getIdeaAlerted() {
@@ -92,17 +97,26 @@ public class Alert {
 		this.ideaAlerted = ideaAlerted;
 	}
 
-	public Comment getComment() {
-		return comment;
+	public Comment getCommentAlerted() {
+		return commentAlerted;
 	}
 
-	public void setComment(Comment comment) {
-		this.comment = comment;
+	public void setCommentAlerted(Comment commentAlerted) {
+		this.commentAlerted = commentAlerted;
+	}
+
+	public User getUserAlerting() {
+		return userAlerting;
+	}
+
+	public void setUserAlerting(User userAlerting) {
+		this.userAlerting = userAlerting;
 	}
 
 	@Override
 	public String toString() {
-		return "Alert [id=" + id + ", message=" + message + ", type=" + type + "]";
+		return "Alert [id=" + id + ", message=" + message + ", alertType=" + alertType + ", ideaAlerted=" + ideaAlerted
+				+ ", commentAlerted=" + commentAlerted + ", userAlerting=" + userAlerting + "]";
 	}
 
 }

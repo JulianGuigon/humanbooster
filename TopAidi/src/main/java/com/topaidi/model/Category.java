@@ -22,7 +22,7 @@ public class Category {
 	private String name;
 	private LocalDate createdAt;
 	@ManyToOne
-	private Admin admin;
+	private Admin adminCreating;
 	@OneToMany(mappedBy="category")
 	private List<Idea> listIdea;
 
@@ -30,11 +30,11 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(String name, LocalDate createdAt, Admin admin, List<Idea> listIdea) {
+	public Category(String name, LocalDate createdAt, Admin adminCreating, List<Idea> listIdea) {
 		super();
 		this.name = name;
 		this.createdAt = createdAt;
-		this.admin = admin;
+		this.adminCreating = adminCreating;
 		this.listIdea = listIdea;
 	}
 
@@ -62,12 +62,12 @@ public class Category {
 		this.createdAt = createdAt;
 	}
 
-	public Admin getAdmin() {
-		return admin;
+	public Admin getAdminCreating() {
+		return adminCreating;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setAdminCreating(Admin adminCreating) {
+		this.adminCreating = adminCreating;
 	}
 
 	public List<Idea> getListIdea() {
@@ -80,7 +80,8 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", dateCreate=" + createdAt + "]";
+		return "Category [id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", adminCreating=" + adminCreating
+				+ ", listIdea=" + listIdea + "]";
 	}
 
 }
