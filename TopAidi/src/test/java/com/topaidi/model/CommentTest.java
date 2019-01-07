@@ -6,9 +6,5 @@ import org.junit.Test;
 
 public class CommentTest {
 
-	@Test
-	public void testGetCommentById() {
-		fail("Not yet implemented");
-	}
 
 }
