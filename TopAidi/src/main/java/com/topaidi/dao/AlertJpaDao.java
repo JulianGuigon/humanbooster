@@ -1,18 +1,47 @@
 package com.topaidi.dao;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
 import com.topaidi.enums.AlertType;
+import com.topaidi.interfaces.GenericDao;
 import com.topaidi.model.Alert;
 import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;
 import com.topaidi.model.roles.User;
+import com.topaidi.utility.Connection;
 
 import javassist.NotFoundException;
 
-public class AlertJpaDao extends GenericJpaDao<Alert, Integer> {
+public class AlertJpaDao implements GenericDao<Alert, Integer> {
+	private EntityManagerFactory emf = Connection.getInstance().getEmf();
 	private UserJpaDao userJpaDao = new UserJpaDao();
 	private IdeaJpaDao ideaJpaDao = new IdeaJpaDao();
 	private CommentJpaDao commentJpaDao = new CommentJpaDao();
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Alert> findAll() {
+		EntityManager em = emf.createEntityManager();
+		String query = "Select c from Alert c";
+		List<Alert> result = em.createQuery(query).getResultList();
+		em.close();
+		return result;
+	}
+
+	@Override
+	public Alert findByKey(Integer key) throws NotFoundException {
+		EntityManager em = emf.createEntityManager();
+		Alert result = em.find(Alert.class, key);
+		if(result==null) {
+			throw new NotFoundException("The element don't exist in the database.");
+		}
+		em.close();
+		return result;
+	}
+
 	@Override
 	public void insert(Alert obj) {
 		if(obj.getAlertType()==AlertType.Comment) {
@@ -48,20 +77,38 @@ public class AlertJpaDao extends GenericJpaDao<Alert, Integer> {
 		}else {
 			userJpaDao.insert(user);
 		}
-		
-		super.insert(obj);
-	}
-	
-	public Alert update(Alert entity) throws NotFoundException {
-		return super.update(entity, entity.getId());
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(obj);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@Override
-	public void delete(Integer key) throws NotFoundException {
-		super.delete(key);
+	public Alert update(Alert obj) throws NotFoundException {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Alert entityUpdated = em.find(Alert.class, obj.getId());
+		if(entityUpdated==null) {
+			throw new NotFoundException("The element don't exist in the database.");
+		}
+		entityUpdated = obj;
+		em.merge(entityUpdated);
+		em.getTransaction().commit();
+		em.close();
+		return entityUpdated;
 	}
-	
-	public void delete(Alert entity) throws NotFoundException {
-		delete(entity.getId());
+
+	@Override
+	public void delete(Alert obj) throws NotFoundException {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Alert entityDeleted = em.find(Alert.class, obj.getId());
+		if(entityDeleted==null) {
+			throw new NotFoundException("The element don't exist in the database.");
+		}
+		em.remove(entityDeleted);
+		em.getTransaction().commit();
+		em.close();
 	}
 }

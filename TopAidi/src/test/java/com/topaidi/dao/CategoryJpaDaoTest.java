@@ -27,8 +27,7 @@ import javassist.NotFoundException;
 public class CategoryJpaDaoTest {
 
 	private List<Idea> ideas = new ArrayList<>();
-	private Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-	private Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+	private Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",new Address("France","Lyon",69130,"chemin Louis Chirpaz",8),"0477265898","a?","a");
 	
 	@Test
 	public void testUpdateCategory() {
@@ -43,6 +42,24 @@ public class CategoryJpaDaoTest {
 		}
 		try {
 			Assert.assertTrue(categoryJpaDao.findByKey(category.getId()).getName().equals("foot"));
+		} catch (NotFoundException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testUpdateCategoryAdmin() {
+		Category Category = new Category("cuisine",LocalDate.now(),admin,ideas);
+		CategoryJpaDao CategoryJpaDao = new CategoryJpaDao();
+		CategoryJpaDao.insert(Category);
+		Category.setAdminCreating(new Admin("Jean Paul","a.g@gmail.com","aaaa",new Address("France","Lyon",69130,"chemin Louis Chirpaz",8),"0477265898","a?","a"));
+		try {
+			CategoryJpaDao.update(Category);
+		} catch (NotFoundException e) {
+			fail();
+		}
+		try {
+			Assert.assertTrue(CategoryJpaDao.findByKey(Category.getId()).getAdminCreating().getName().equals("Jean Paul"));
 		} catch (NotFoundException e) {
 			fail();
 		}

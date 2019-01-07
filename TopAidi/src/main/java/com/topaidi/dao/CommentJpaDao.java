@@ -1,15 +1,44 @@
 package com.topaidi.dao;
 
-import com.topaidi.model.Idea;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
+import com.topaidi.interfaces.GenericDao;
 import com.topaidi.model.Comment;
+import com.topaidi.model.Idea;
 import com.topaidi.model.roles.User;
+import com.topaidi.utility.Connection;
 
 import javassist.NotFoundException;
 
-public class CommentJpaDao extends GenericJpaDao<Comment, Integer>{
+public class CommentJpaDao implements GenericDao<Comment, Integer> {
+	private EntityManagerFactory emf = Connection.getInstance().getEmf();
 	private IdeaJpaDao ideaJpaDao = new IdeaJpaDao();
 	private UserJpaDao userJpaDao = new UserJpaDao();
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Comment> findAll() {
+		EntityManager em = emf.createEntityManager();
+		String query = "Select c from Comment c";
+		List<Comment> result = em.createQuery(query).getResultList();
+		em.close();
+		return result;
+	}
+
+	@Override
+	public Comment findByKey(Integer key) throws NotFoundException {
+		EntityManager em = emf.createEntityManager();
+		Comment result = em.find(Comment.class, key);
+		if(result==null) {
+			throw new NotFoundException("The element don't exist in the database.");
+		}
+		em.close();
+		return result;
+	}
+
 	@Override
 	public void insert(Comment obj) {
 		Idea idea = obj.getIdeaCommented();
@@ -32,20 +61,38 @@ public class CommentJpaDao extends GenericJpaDao<Comment, Integer>{
 		}else {
 			userJpaDao.insert(user);
 		}
-		
-		super.insert(obj);
-	}
-	
-	public Comment update(Comment entity) throws NotFoundException {
-		return super.update(entity, entity.getId());
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(obj);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@Override
-	public void delete(Integer key) throws NotFoundException {
-		super.delete(key);
+	public Comment update(Comment obj) throws NotFoundException {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Comment entityUpdated = em.find(Comment.class, obj.getId());
+		if(entityUpdated==null) {
+			throw new NotFoundException("The element don't exist in the database.");
+		}
+		entityUpdated = obj;
+		em.merge(entityUpdated);
+		em.getTransaction().commit();
+		em.close();
+		return entityUpdated;
 	}
-	
-	public void delete(Comment entity) throws NotFoundException {
-		delete(entity.getId());
+
+	@Override
+	public void delete(Comment obj) throws NotFoundException {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Comment entityDeleted = em.find(Comment.class, obj.getId());
+		if(entityDeleted==null) {
+			throw new NotFoundException("The element don't exist in the database.");
+		}
+		em.remove(entityDeleted);
+		em.getTransaction().commit();
+		em.close();
 	}
 }

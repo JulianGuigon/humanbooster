@@ -33,6 +33,24 @@ public class UserJpaDaoTest {
 			fail();
 		}
 	}
+	
+	@Test
+	public void testUpdateUserAddress() {
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		UserJpaDao userJpaDao = new UserJpaDao();
+		userJpaDao.insert(user);
+		user.setAddress(new Address("France","Lyon",69130,"chemin Louis Chirpaz",9));
+		try {
+			userJpaDao.update(user);
+		} catch (NotFoundException e) {
+			fail();
+		}
+		try {
+			Assert.assertTrue(userJpaDao.findByKey(user.getId()).getAddress().getStreetNumber()==9);
+		} catch (NotFoundException e) {
+			fail();
+		}
+	}
 
 	@Test
 	public void testDeleteUser() {

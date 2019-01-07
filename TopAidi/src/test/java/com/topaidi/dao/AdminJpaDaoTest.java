@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.topaidi.model.Address;
 import com.topaidi.model.roles.Admin;
+import com.topaidi.model.roles.User;
 import com.topaidi.utility.Connection;
 
 import javassist.NotFoundException;
@@ -32,6 +33,25 @@ public class AdminJpaDaoTest {
 			fail();
 		}
 	}
+	
+	@Test
+	public void testUpdateAdminAddress() {
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		AdminJpaDao adminJpaDao = new AdminJpaDao();
+		adminJpaDao.insert(admin);
+		admin.setAddress(new Address("France","Lyon",69130,"chemin Louis Chirpaz",9));
+		try {
+			adminJpaDao.update(admin);
+		} catch (NotFoundException e) {
+			fail();
+		}
+		try {
+			Assert.assertTrue(adminJpaDao.findByKey(admin.getId()).getAddress().getStreetNumber()==9);
+		} catch (NotFoundException e) {
+			fail();
+		}
+	}
+
 
 	@Test
 	public void testDeleteAdmin() {

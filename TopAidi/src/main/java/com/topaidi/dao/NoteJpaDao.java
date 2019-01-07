@@ -1,15 +1,44 @@
 package com.topaidi.dao;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
+import com.topaidi.interfaces.GenericDao;
 import com.topaidi.model.Idea;
 import com.topaidi.model.Note;
 import com.topaidi.model.roles.User;
+import com.topaidi.utility.Connection;
 
 import javassist.NotFoundException;
 
-public class NoteJpaDao extends GenericJpaDao<Note, Integer> {
+public class NoteJpaDao implements GenericDao<Note, Integer> {
+	private EntityManagerFactory emf = Connection.getInstance().getEmf();
 	private IdeaJpaDao ideaJpaDao = new IdeaJpaDao();
 	private UserJpaDao userJpaDao = new UserJpaDao();
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Note> findAll() {
+		EntityManager em = emf.createEntityManager();
+		String query = "Select c from Note c";
+		List<Note> result = em.createQuery(query).getResultList();
+		em.close();
+		return result;
+	}
+
+	@Override
+	public Note findByKey(Integer key) throws NotFoundException {
+		EntityManager em = emf.createEntityManager();
+		Note result = em.find(Note.class, key);
+		if(result==null) {
+			throw new NotFoundException("The element don't exist in the database.");
+		}
+		em.close();
+		return result;
+	}
+
 	@Override
 	public void insert(Note obj) {
 		Idea idea = obj.getIdeaNoted();
@@ -32,20 +61,38 @@ public class NoteJpaDao extends GenericJpaDao<Note, Integer> {
 		}else {
 			userJpaDao.insert(user);
 		}
-		
-		super.insert(obj);
-	}
-	
-	public Note update(Note entity) throws NotFoundException {
-		return super.update(entity, entity.getId());
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(obj);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@Override
-	public void delete(Integer key) throws NotFoundException {
-		super.delete(key);
+	public Note update(Note obj) throws NotFoundException {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Note entityUpdated = em.find(Note.class, obj.getId());
+		if(entityUpdated==null) {
+			throw new NotFoundException("The element don't exist in the database.");
+		}
+		entityUpdated = obj;
+		em.merge(entityUpdated);
+		em.getTransaction().commit();
+		em.close();
+		return entityUpdated;
 	}
-	
-	public void delete(Note entity) throws NotFoundException {
-		delete(entity.getId());
+
+	@Override
+	public void delete(Note obj) throws NotFoundException {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Note entityDeleted = em.find(Note.class, obj.getId());
+		if(entityDeleted==null) {
+			throw new NotFoundException("The element don't exist in the database.");
+		}
+		em.remove(entityDeleted);
+		em.getTransaction().commit();
+		em.close();
 	}
 }

@@ -33,7 +33,7 @@ public class NoteJpaDaoTest {
 		Note note = new Note(true,idea,user);
 		NoteJpaDao noteJpaDao = new NoteJpaDao();
 		noteJpaDao.insert(note);
-		note.setTop(false);;
+		note.setTop(false);
 		try {
 			note = noteJpaDao.update(note);
 		} catch (NotFoundException e) {

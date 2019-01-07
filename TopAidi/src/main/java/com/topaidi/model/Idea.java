@@ -22,6 +22,8 @@ public class Idea {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
+	@ManyToOne
+	private Category category;
 	private String description;
 	private String picture;
 	private LocalDate createdAt;
@@ -33,9 +35,6 @@ public class Idea {
 	
 	@OneToMany(mappedBy="ideaCommented")
 	private List<Comment> listComment = new ArrayList<>();
-	
-	@ManyToOne
-	private Category category;
 	
 	@OneToMany(mappedBy="ideaNoted")
 	private List<Note> listFlop = new ArrayList<>();
@@ -50,6 +49,18 @@ public class Idea {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Idea(String title, String description, String picture, Category category, User userSubmitting) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.picture = picture;
+		this.createdAt = LocalDate.now();
+		this.updatedAt = null;
+		this.disabledAt = null;
+		this.category = category;
+		this.userSubmitting = userSubmitting;
+	}
+	
 	public Idea(String title, String description, String picture, LocalDate createdAt, Category category, User userSubmitting) {
 		super();
 		this.title = title;
