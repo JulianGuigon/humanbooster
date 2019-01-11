@@ -15,7 +15,7 @@ public class Note {
 	@Id
 	@Column(name="noteId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@ManyToOne
 	private Idea ideaNoted;

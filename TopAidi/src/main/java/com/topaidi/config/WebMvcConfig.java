@@ -29,7 +29,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public UrlBasedViewResolver viewResolver() {
 		UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
 		viewResolver.setViewClass(JstlView.class);
-		viewResolver.setPrefix("/WEB-INF/views/");
+		viewResolver.setPrefix("/WEB-INF/views/pages/");
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}
