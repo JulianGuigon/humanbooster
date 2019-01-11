@@ -1,6 +1,7 @@
 package com.topaidi.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,18 +25,17 @@ public class Category {
 	@ManyToOne
 	private Admin adminCreating;
 	@OneToMany(mappedBy="category")
-	private List<Idea> listIdea;
+	private List<Idea> listIdea = new ArrayList<Idea>();
 
 	public Category() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(String name, LocalDate createdAt, Admin adminCreating, List<Idea> listIdea) {
+	public Category(String name, LocalDate createdAt, Admin adminCreating) {
 		super();
 		this.name = name;
 		this.createdAt = createdAt;
-		this.adminCreating = adminCreating;
-		this.listIdea = listIdea;
+		this.adminCreating = adminCreating;;
 	}
 
 	public int getId() {
