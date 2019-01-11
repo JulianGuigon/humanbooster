@@ -20,7 +20,7 @@ public class Idea {
 	@Id
 	@Column(name="ideaId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String title;
 	private String description;
 	private String picture;
