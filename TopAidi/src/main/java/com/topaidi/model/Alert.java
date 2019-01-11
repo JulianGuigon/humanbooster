@@ -18,7 +18,7 @@ public class Alert {
 	@Id
 	@Column(name="alertId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String message;
 	private AlertType alertType;
 	

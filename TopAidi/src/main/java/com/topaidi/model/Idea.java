@@ -20,7 +20,7 @@ public class Idea {
 	@Id
 	@Column(name="ideaId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String title;
 	private String description;
 	private String picture;
@@ -78,7 +78,7 @@ public class Idea {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

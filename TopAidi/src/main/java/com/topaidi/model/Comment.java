@@ -19,7 +19,7 @@ public class Comment {
 	@Id
 	@Column(name="commentId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String value;
 	
 	@ManyToOne
@@ -46,7 +46,7 @@ public class Comment {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
