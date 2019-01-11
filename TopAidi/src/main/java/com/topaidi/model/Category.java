@@ -25,7 +25,7 @@ public class Category {
 	@ManyToOne
 	private Admin adminCreating;
 	@OneToMany(mappedBy="category")
-	private List<Idea> listIdea = new ArrayList<>();
+	private List<Idea> listIdea = new ArrayList<Idea>();
 
 	public Category() {
 		// TODO Auto-generated constructor stub
