@@ -47,7 +47,6 @@ public class JpaConfig {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
 		em.setPackagesToScan("com.topaidi.model", "com.topaidi.model.roles", "com.topaidi.abstracts");
-		em.setPackagesToScan("com.topaidi.model");
 		em.setJpaVendorAdapter(vendorAdapter);
 		em.setJpaProperties(additionalProperties());
 

@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.topaidi.config.ContextConfig;
+import com.topaidi.config.JpaConfig;
 import com.topaidi.model.Address;
 import com.topaidi.model.Alert;
 import com.topaidi.model.Category;
@@ -26,7 +26,7 @@ import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.AlertService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= {ContextConfig.class})
+@ContextConfiguration(classes= {JpaConfig.class})
 @Transactional
 public class AlertServiceJpaTest {
 

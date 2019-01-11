@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.topaidi.config.ContextConfig;
+import com.topaidi.config.JpaConfig;
 import com.topaidi.dao.interfaces.AddressDao;
 import com.topaidi.dao.interfaces.AdminDao;
 import com.topaidi.dao.interfaces.AlertDao;
@@ -32,7 +32,7 @@ import com.topaidi.model.roles.Admin;
 import com.topaidi.model.roles.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= {ContextConfig.class})
+@ContextConfiguration(classes= {JpaConfig.class})
 @Transactional
 public class AlertDaoJpaTest {
 	@Autowired

@@ -38,7 +38,7 @@ public class Category {
 		this.adminCreating = adminCreating;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

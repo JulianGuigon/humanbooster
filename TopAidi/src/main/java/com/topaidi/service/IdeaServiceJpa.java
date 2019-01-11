@@ -41,15 +41,14 @@ public class IdeaServiceJpa implements IdeaService {
 		return ideaDao.findByKey(key);
 	}
 
-	//TODO
 	@Override
 	public Idea insert(Idea obj) {
-		if(obj.getCategory().getId()==0) {
+		if(obj.getCategory().getId()==null) {
 			categoryService.insert(obj.getCategory());
 		}else {
 			obj.setCategory(categoryService.findByKey(obj.getCategory().getId()));
 		}
-		if(obj.getUserSubmitting().getId()==0) {
+		if(obj.getUserSubmitting().getId()==null) {
 			userService.insert(obj.getUserSubmitting());
 		}else {
 			obj.setUserSubmitting(userService.findByKey(obj.getUserSubmitting().getId()));

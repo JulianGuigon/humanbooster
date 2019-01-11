@@ -40,8 +40,7 @@ public class CategoryServiceJpa implements CategoryService {
 
 	@Override
 	public Category insert(Category obj) {
-		//TODO change id==0 to id==null after merge
-		if(obj.getAdminCreating().getId()==0) {
+		if(obj.getAdminCreating().getId()==null) {
 			adminService.insert(obj.getAdminCreating());
 		}else {
 			obj.setAdminCreating(adminService.findByKey(obj.getAdminCreating().getId()));

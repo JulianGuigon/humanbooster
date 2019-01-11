@@ -41,15 +41,14 @@ public class NoteServiceJpa implements NoteService{
 		return noteDao.findByKey(key);
 	}
 
-	//TODO
 	@Override
 	public Note insert(Note obj) {
-		if(obj.getIdeaNoted().getId()==0) {
+		if(obj.getIdeaNoted().getId()==null) {
 			ideaService.insert(obj.getIdeaNoted());
 		}else {
 			obj.setIdeaNoted(ideaService.findByKey(obj.getIdeaNoted().getId()));
 		}
-		if(obj.getUserNoting().getId()==0) {
+		if(obj.getUserNoting().getId()==null) {
 			userService.insert(obj.getUserNoting());
 		}else {
 			obj.setUserNoting(userService.findByKey(obj.getUserNoting().getId()));

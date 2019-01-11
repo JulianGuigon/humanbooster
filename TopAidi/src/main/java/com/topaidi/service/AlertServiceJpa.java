@@ -45,23 +45,22 @@ public class AlertServiceJpa implements AlertService{
 		return alertDao.findByKey(key);
 	}
 
-	//TODO
 	@Override
 	public Alert insert(Alert obj) {
-		if(obj.getUserAlerting().getId()==0) {
+		if(obj.getUserAlerting().getId()==null) {
 			userService.insert(obj.getUserAlerting());
 		}else {
 			obj.setUserAlerting(userService.findByKey(obj.getUserAlerting().getId()));
 		}
 		if(obj.getAlertType().equals(AlertType.Idea)) {
-			if(obj.getIdeaAlerted().getId()==0) {
+			if(obj.getIdeaAlerted().getId()==null) {
 				ideaService.insert(obj.getIdeaAlerted());
 			}else {
 				obj.setIdeaAlerted(ideaService.findByKey(obj.getIdeaAlerted().getId()));
 			}
 		}
 		else if(obj.getAlertType().equals(AlertType.Comment)) {
-			if(obj.getCommentAlerted().getId()==0) {
+			if(obj.getCommentAlerted().getId()==null) {
 				commentService.insert(obj.getCommentAlerted());
 			}else {
 				obj.setCommentAlerted(commentService.findByKey(obj.getCommentAlerted().getId()));

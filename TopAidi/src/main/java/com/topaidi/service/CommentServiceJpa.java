@@ -43,15 +43,14 @@ public class CommentServiceJpa implements CommentService {
 		return commentDao.findByKey(key);
 	}
 
-	//TODO
 	@Override
 	public Comment insert(Comment obj) {
-		if(obj.getUserCommenting().getId()==0) {
+		if(obj.getUserCommenting().getId()==null) {
 			userService.insert(obj.getUserCommenting());
 		}else {
 			obj.setUserCommenting(userService.findByKey(obj.getUserCommenting().getId()));
 		}
-		if(obj.getIdeaCommented().getId()==0) {
+		if(obj.getIdeaCommented().getId()==null) {
 			ideaService.insert(obj.getIdeaCommented());
 		}else {
 			obj.setIdeaCommented(ideaService.findByKey(obj.getIdeaCommented().getId()));
