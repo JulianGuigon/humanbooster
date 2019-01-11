@@ -20,7 +20,7 @@ public class Role {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
