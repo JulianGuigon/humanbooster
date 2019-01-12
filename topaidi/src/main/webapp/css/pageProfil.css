@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.deletePuceList{
+	list-style-type: none;
+}
+
+.sizeList{
+	width: 30em;
+}
+
+.sizeInputQuestionAnswer{
+	/* width: 50em; */
+}
+
+
