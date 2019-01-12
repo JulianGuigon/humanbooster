@@ -50,8 +50,9 @@
 </div>
 <!-- comment test -->
 <div class="row">
+<div class="col-sm"></div>
 	<div class="col-sm">
-		<div class="sizeInputQuestionAnswer">
+		<div class="">
 			<div class="form-group">
 				<label for="forQuestion">Secret Question</label> <input type="text"
 					class="form-control" id="forQuestion"
@@ -64,6 +65,7 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-sm"></div>
 </div>
 
 <jsp:include page="../template/footer.jsp"></jsp:include>
