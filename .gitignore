@@ -6,3 +6,5 @@ topaidi/.project
 .settings
 bin
 target
+/topaidi/target
+/topaidi/bin
