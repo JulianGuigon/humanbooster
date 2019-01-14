@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.topaidi.dao.interfaces.UserDao;
+import com.topaidi.model.roles.Admin;
 import com.topaidi.model.roles.User;
 
 @Repository
@@ -47,5 +48,13 @@ public class UserDaoJpa implements UserDao {
 	@Override
 	public User update(User obj) {
 		return em.merge(obj);
+	}
+
+	@Override
+	public User findByEmailAndPassword(String email, String password) {
+		return (User) em.createQuery("from User where email = ? AND password = ?")
+				.setParameter(0, email)
+				.setParameter(1, password)
+				.getSingleResult();
 	}
 }

@@ -39,6 +39,16 @@ public class AlertServiceJpa implements AlertService{
 	public List<Alert> findAll() {
 		return alertDao.findAll();
 	}
+	
+	@Override
+	public List<Alert> findAllByCreateAt(){
+		return alertDao.findAllByCreateAt();
+	}
+	
+	@Override
+	public List<Alert> findAllByCreateAtAndByType(AlertType type){
+		return alertDao.findAllByCreateAtAndByType(type);
+	}
 
 	@Override
 	public Alert findByKey(Integer key) {
