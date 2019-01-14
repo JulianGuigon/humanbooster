@@ -108,7 +108,7 @@ public class AdminDaoJpaTest {
 	public void testFindByEmailAndPassword() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
 		adminDao.insert(admin);
 		
 		Assert.assertTrue(adminDao.findByEmailAndPassword("a.g@gmail.com", "aaaa") != null);
