@@ -63,11 +63,12 @@ public class Idea {
 	}
 
 	public boolean isNotable() {
-		throw new UnsupportedOperationException();
-	}
-
-	public boolean isNotable(User user) {
-		throw new UnsupportedOperationException();
+		int dayDifference = LocalDate.now().getDayOfMonth() - this.createdAt.getDayOfMonth();
+		if(dayDifference > 7) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 	public Idea getIdeaById(int id) {

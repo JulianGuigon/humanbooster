@@ -53,4 +53,9 @@ public class UserServiceJpa implements UserService{
 		return userDao.update(obj);
 	}
 
+	@Override
+	public User findByEmailAndPassword(String email, String password) {
+		return userDao.findByEmailAndPassword(email, password);
+	}
+
 }

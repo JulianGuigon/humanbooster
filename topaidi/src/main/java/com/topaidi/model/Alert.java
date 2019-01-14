@@ -1,5 +1,6 @@
 package com.topaidi.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -21,6 +22,7 @@ public class Alert {
 	private Integer id;
 	private String message;
 	private AlertType alertType;
+	private LocalDate createdAt;
 	
 	@ManyToOne
 	private Idea ideaAlerted;
@@ -51,6 +53,26 @@ public class Alert {
 		this.ideaAlerted = ideaAlerted;
 		this.commentAlerted = null;
 		this.userAlerting = userAlerted;
+	}
+	
+	public Alert(String message, LocalDate createAt, AlertType alertType,Idea ideaAlerted, User userAlerting) {
+		super();
+		this.message = message;
+		this.createdAt = createAt;
+		this.ideaAlerted = ideaAlerted;
+		this.userAlerting = userAlerting;
+		this.alertType = alertType;
+	}
+	
+	
+
+	public Alert(String message, LocalDate createAt, AlertType alertType,Comment commentAlerted, User userAlerting) {
+		super();
+		this.message = message;
+		this.createdAt = createAt;
+		this.commentAlerted = commentAlerted;
+		this.userAlerting = userAlerting;
+		this.alertType = alertType;
 	}
 
 	public Alert getAlertById(int id) {
@@ -111,6 +133,20 @@ public class Alert {
 
 	public void setUserAlerting(User userAlerting) {
 		this.userAlerting = userAlerting;
+	}
+	
+	
+
+	public LocalDate getCreateAt() {
+		return createdAt;
+	}
+
+	public void setCreateAt(LocalDate createAt) {
+		this.createdAt = createAt;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

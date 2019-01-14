@@ -53,4 +53,9 @@ public class AdminServiceJpa implements AdminService {
 		return adminDao.update(obj);
 	}
 
+	@Override
+	public Admin findByEmailAndPassword(String email, String password) {
+		return adminDao.findByEmailAndPassword(email, password);
+	}
+
 }

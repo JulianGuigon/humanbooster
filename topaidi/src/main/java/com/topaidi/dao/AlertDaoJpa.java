@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.topaidi.dao.interfaces.AlertDao;
+import com.topaidi.enums.AlertType;
 import com.topaidi.model.Alert;
 
 @Repository
@@ -32,6 +34,12 @@ public class AlertDaoJpa implements AlertDao {
 	public List<Alert> findAll() {
 		return em.createQuery("from Alert e order by e.id").getResultList();
 	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Alert> findAllByCreateAt(){
+		return em.createQuery("from Alert e order by e.createdAt DESC").getResultList();
+	}
 
 	@Override
 	public Alert findByKey(Integer key) {
@@ -47,6 +55,14 @@ public class AlertDaoJpa implements AlertDao {
 	@Override
 	public Alert update(Alert obj) {
 		return em.merge(obj);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Alert> findAllByCreateAtAndByType(AlertType type) {
+		Query query = em.createQuery("from Alert e where alertType = ? order by e.createdAt DESC");
+		query.setParameter(0, type);
+		return query.getResultList();
 	}
 
 }

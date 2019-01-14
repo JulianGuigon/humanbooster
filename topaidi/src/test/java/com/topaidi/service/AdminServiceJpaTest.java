@@ -93,4 +93,13 @@ public class AdminServiceJpaTest {
 		adminService.update(admin);
 		Assert.assertTrue(adminService.findByKey(admin.getId()).getPassword().equals("bbbb"));
 	}
+	
+	@Test
+	public void testFindByEmailAndPassword() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		adminService.insert(admin);
+		
+		Assert.assertTrue(adminService.findByEmailAndPassword("a.g@gmail.com", "aaaa") != null);
+	}
 }

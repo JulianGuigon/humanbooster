@@ -104,4 +104,14 @@ public class UserDaoJpaTest {
 		userDao.update(user);
 		Assert.assertTrue(userDao.findByKey(user.getId()).getPassword().equals("bbbb"));
 	}
+	
+	@Test
+	public void testFindByEmailAndPassword() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		addressDao.insert(address);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		userDao.insert(user);
+		
+		Assert.assertTrue(userDao.findByEmailAndPassword("a.g@gmail.com", "aaaa") != null);
+	}
 }

@@ -93,4 +93,13 @@ public class UserServiceJpaTest {
 		userService.update(user);
 		Assert.assertTrue(userService.findByKey(user.getId()).getPassword().equals("bbbb"));
 	}
+	
+	@Test
+	public void testFindByEmailAndPassword() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		userService.insert(user);
+		
+		Assert.assertTrue(userService.findByEmailAndPassword("a.g@gmail.com", "aaaa") != null);
+	}
 }

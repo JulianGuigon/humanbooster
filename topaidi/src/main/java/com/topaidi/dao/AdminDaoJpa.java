@@ -49,4 +49,12 @@ public class AdminDaoJpa implements AdminDao {
 		return em.merge(obj);
 	}
 
+	@Override
+	public Admin findByEmailAndPassword(String email, String password) {
+		return (Admin) em.createQuery("from Admin where email = ? AND password = ?")
+				.setParameter(0, email)
+				.setParameter(1, password)
+				.getSingleResult();
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -47,6 +48,12 @@ public class IdeaDaoJpa implements IdeaDao {
 	@Override
 	public Idea update(Idea obj) {
 		return em.merge(obj);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Idea> findAllByCreateAt() {
+		return em.createQuery("from Idea i order by i.createdAt DESC").getResultList();
 	}
 
 }
