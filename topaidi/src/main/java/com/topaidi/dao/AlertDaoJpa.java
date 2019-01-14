@@ -32,7 +32,7 @@ public class AlertDaoJpa implements AlertDao {
 	public List<Alert> findAll() {
 		return em.createQuery("from Alert e order by e.id").getResultList();
 	}
-
+	
 	@Override
 	public Alert findByKey(Integer key) {
 		return em.find(Alert.class, key);

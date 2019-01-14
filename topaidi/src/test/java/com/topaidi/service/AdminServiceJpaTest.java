@@ -29,7 +29,7 @@ public class AdminServiceJpaTest {
 	@Test
 	public void testDelete() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
 		adminService.insert(admin);
 		
 		adminService.delete(admin);
@@ -39,7 +39,7 @@ public class AdminServiceJpaTest {
 	@Test
 	public void testDeleteByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
 		adminService.insert(admin);
 		
 		adminService.deleteByKey(admin.getId());
@@ -51,9 +51,9 @@ public class AdminServiceJpaTest {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
-		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","a?","a");
-		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","a?","a");
+		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
+		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898");
+		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898");
 		adminService.insert(admin1);
 		adminService.insert(admin2);
 		adminService.insert(admin3);
@@ -64,7 +64,7 @@ public class AdminServiceJpaTest {
 	@Test
 	public void testFindByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
 		adminService.insert(admin);
 		
 		assertNotNull(admin.getId());
@@ -76,7 +76,7 @@ public class AdminServiceJpaTest {
 		int size = adminService.findAll().size();
 		
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
 		adminService.insert(admin);
 		
 		assertNotNull(admin.getId());
@@ -86,7 +86,7 @@ public class AdminServiceJpaTest {
 	@Test
 	public void testUpdate() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
 		adminService.insert(admin);
 		
 		admin.setPassword("bbbb");

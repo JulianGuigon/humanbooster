@@ -9,6 +9,6 @@ public class ProfilController {
 
 	@GetMapping("/profil")
 	public String showProfil(Model model) {
-		return "Profil";
+		return "profil";
 	}
 }

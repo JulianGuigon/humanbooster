@@ -46,13 +46,13 @@ public class IdeaDaoJpaTest {
 	public void testDelete() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address1);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address2);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 		userDao.insert(user);
 		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user);
 		ideaDao.insert(idea);
@@ -65,13 +65,13 @@ public class IdeaDaoJpaTest {
 	public void testDeleteByKey() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address1);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address2);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 		userDao.insert(user);
 		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user);
 		ideaDao.insert(idea);
@@ -88,9 +88,9 @@ public class IdeaDaoJpaTest {
 		addressDao.insert(address1);
 		addressDao.insert(address2);
 		addressDao.insert(address3);
-		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
-		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","a?","a");
-		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","a?","a");
+		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
+		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898");
+		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898");
 		adminDao.insert(admin1);
 		adminDao.insert(admin2);
 		adminDao.insert(admin3);
@@ -106,9 +106,9 @@ public class IdeaDaoJpaTest {
 		addressDao.insert(address4);
 		addressDao.insert(address5);
 		addressDao.insert(address6);
-		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address4,"0477265898","a?","a",true,true);
-		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address5,"0477265898","a?","a",true,true);
-		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address6,"0477265898","a?","a",true,true);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address4,"0477265898",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address5,"0477265898",true,true);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address6,"0477265898",true,true);
 		userDao.insert(user1);
 		userDao.insert(user2);
 		userDao.insert(user3);
@@ -126,13 +126,13 @@ public class IdeaDaoJpaTest {
 	public void testFindByKey() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address1);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address2);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 		userDao.insert(user);
 		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user);
 		ideaDao.insert(idea);
@@ -147,13 +147,13 @@ public class IdeaDaoJpaTest {
 		
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address1);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address2);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 		userDao.insert(user);
 		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user);
 		ideaDao.insert(idea);
@@ -166,13 +166,13 @@ public class IdeaDaoJpaTest {
 	public void testUpdate() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address1);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address2);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 		userDao.insert(user);
 		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user);
 		ideaDao.insert(idea);

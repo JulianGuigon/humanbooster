@@ -33,7 +33,7 @@ public class UserDaoJpaTest {
 	public void testDelete() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
 		userDao.insert(user);
 		
 		userDao.delete(user);
@@ -44,7 +44,7 @@ public class UserDaoJpaTest {
 	public void testDeleteByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
 		userDao.insert(user);
 		
 		userDao.deleteByKey(user.getId());
@@ -59,9 +59,9 @@ public class UserDaoJpaTest {
 		addressDao.insert(address1);
 		addressDao.insert(address2);
 		addressDao.insert(address3);
-		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a",true,true);
-		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
-		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,true);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
 		userDao.insert(user1);
 		userDao.insert(user2);
 		userDao.insert(user3);
@@ -73,7 +73,7 @@ public class UserDaoJpaTest {
 	public void testFindByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
 		userDao.insert(user);
 		
 		assertNotNull(user.getId());
@@ -86,7 +86,7 @@ public class UserDaoJpaTest {
 		
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
 		userDao.insert(user);
 		
 		assertNotNull(user.getId());
@@ -97,7 +97,7 @@ public class UserDaoJpaTest {
 	public void testUpdate() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
 		userDao.insert(user);
 		
 		user.setPassword("bbbb");
