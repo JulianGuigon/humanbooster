@@ -2,3 +2,7 @@ topaidi/bin
 topaidi/target
 topaidi/.settings
 topaidi/.project
+.project
+.settings
+bin
+target
