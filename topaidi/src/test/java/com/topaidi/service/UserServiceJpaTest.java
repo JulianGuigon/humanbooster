@@ -100,6 +100,15 @@ public class UserServiceJpaTest {
 		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
 		userService.insert(user);
 		
-		Assert.assertTrue(userService.findByEmailAndPassword("a.g@gmail.com", "aaaa") != null);
+		Assert.assertNotNull(userService.findByEmailAndPassword("a.g@gmail.com", "aaaa"));
+	}
+	
+	@Test
+	public void testFindByEmailAndPasswordError() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		userService.insert(user);
+		
+		Assert.assertNull(userService.findByEmailAndPassword("a.g@gmail.com", "aaab"));
 	}
 }

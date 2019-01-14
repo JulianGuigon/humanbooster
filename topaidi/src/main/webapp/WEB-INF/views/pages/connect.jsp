@@ -11,6 +11,9 @@
 			<h1 class="spaceTitle">CONNECT</h1>
 		</div>
 	</div>
+	<c:if test="${error}">
+		<h4 style="color: red;">Veuillez réessayer.</h4>
+	</c:if>
 	<form:form method="post" action="${url}" modelAttribute="user">
 		<form:errors path="email" cssStyle="color:red;"/><br>
 		<form:label path="email">Email : </form:label>

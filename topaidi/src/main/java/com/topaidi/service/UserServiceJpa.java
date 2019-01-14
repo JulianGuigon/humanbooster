@@ -2,6 +2,8 @@ package com.topaidi.service;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +57,13 @@ public class UserServiceJpa implements UserService{
 
 	@Override
 	public User findByEmailAndPassword(String email, String password) {
-		return userDao.findByEmailAndPassword(email, password);
+		User found;
+		try {		
+			 found = userDao.findByEmailAndPassword(email, password);
+		}catch(NoResultException n) {
+			found = null;
+		}
+		return found;
 	}
 
 }
