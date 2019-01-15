@@ -2,11 +2,16 @@ package com.topaidi.service;
 
 import java.util.List;
 
+import javax.persistence.TransactionRequiredException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.topaidi.dao.interfaces.AdminDao;
+import com.topaidi.model.Comment;
+import com.topaidi.model.Idea;
 import com.topaidi.model.roles.Admin;
+import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.AddressService;
 import com.topaidi.service.interfaces.AdminService;
 
@@ -56,6 +61,36 @@ public class AdminServiceJpa implements AdminService {
 	@Override
 	public Admin findByEmailAndPassword(String email, String password) {
 		return adminDao.findByEmailAndPassword(email, password);
+	}
+
+	@Override
+	public boolean banUser(User user) {	
+		return adminDao.banUser(user);
+	}
+
+	@Override
+	public boolean findEmailExist(String email) {
+		return adminDao.findEmailExist(email);
+	}
+
+	@Override
+	public boolean desactiveIdea(Idea idea) {
+		return adminDao.desactiveIdea(idea);
+	}
+
+	@Override
+	public boolean desactiveUser(User user) {
+		return adminDao.desactiveUser(user);
+	}
+
+	@Override
+	public boolean desactiveComment(Comment comment) {
+		return adminDao.desactiveComment(comment);
+	}
+
+	@Override
+	public boolean validateUser(User user) {
+		return adminDao.validateUser(user);
 	}
 
 }

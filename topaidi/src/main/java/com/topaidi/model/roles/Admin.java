@@ -1,5 +1,6 @@
 package com.topaidi.model.roles;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,34 +24,6 @@ public class Admin extends Connected {
 
 	public Admin(String name, String email, String password, Address address, String phoneNumber) {
 		super(name, email, password, address, phoneNumber);
-	}
-	
-	public boolean ban(User user) {
-		throw new UnsupportedOperationException();
-	}
-	
-	public Category createCategory() {
-		throw new UnsupportedOperationException();
-	}
-	
-	public boolean desactivate(Idea idea) {
-		throw new UnsupportedOperationException();
-	}
-	
-	public boolean desactivate(User user) {
-		throw new UnsupportedOperationException();
-	}
-	
-	public boolean desactivate(Comment comment) {
-		throw new UnsupportedOperationException();
-	}
-	
-	public boolean deleteCategory(Category category) {
-		throw new UnsupportedOperationException();
-	}
-	
-	public boolean validSubscription(User user) {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override

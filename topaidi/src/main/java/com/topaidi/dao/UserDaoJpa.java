@@ -2,19 +2,25 @@ package com.topaidi.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TransactionRequiredException;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.topaidi.dao.interfaces.UserDao;
+import com.topaidi.model.Idea;
 import com.topaidi.model.roles.Admin;
 import com.topaidi.model.roles.User;
 
 @Repository
 @Transactional
 public class UserDaoJpa implements UserDao {
+	
 	@PersistenceContext
 	EntityManager em;
 	
@@ -52,9 +58,48 @@ public class UserDaoJpa implements UserDao {
 
 	@Override
 	public User findByEmailAndPassword(String email, String password) {
-		return (User) em.createQuery("from User where email = ? AND password = ?")
-				.setParameter(0, email)
-				.setParameter(1, password)
+		return (User) em.createQuery("from User where email = :email AND password = :password")
+				.setParameter("email", email)
+				.setParameter("password", password)
 				.getSingleResult();
+	}
+
+	@Override
+	public boolean findEmailExist(String email) {
+		boolean retour = true;
+		try {
+			Query query = em.createQuery("from User where email = :email");
+			query.setParameter("email", email);
+			User admin = (User) query.getSingleResult();
+		} catch (NoResultException e) {
+			retour = false;
+		}
+		
+		return retour;
+	}
+
+	@Override
+	public Idea createIdea(Idea idea) {
+		Idea retour = idea;
+		try {
+			em.persist(idea);
+		} catch (EntityExistsException entityExist) {
+			retour = null;
+		}catch (IllegalArgumentException ie) {
+			retour = null;
+		}catch (TransactionRequiredException te) {
+			retour = null;
+		}
+		return retour;
+	}
+
+	@Override
+	public List<User> findValidUser() {
+		return em.createQuery("from User where isValid = true").getResultList();
+	}
+
+	@Override
+	public List<User> findInvalidUser() {
+		return em.createQuery("from User where isValid = false").getResultList();
 	}
 }

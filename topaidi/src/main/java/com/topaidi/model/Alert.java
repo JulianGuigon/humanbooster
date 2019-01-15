@@ -75,18 +75,6 @@ public class Alert {
 		this.alertType = alertType;
 	}
 
-	public Alert getAlertById(int id) {
-		throw new UnsupportedOperationException();
-	}
-
-	public ArrayList<Alert> getAlertSortByDateCreate() {
-		throw new UnsupportedOperationException();
-	}
-
-	public ArrayList<Alert> getAlertSortByDateCreateByType(String type) {
-		throw new UnsupportedOperationException();
-	}
-
 	public int getId() {
 		return id;
 	}

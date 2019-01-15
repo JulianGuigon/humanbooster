@@ -10,10 +10,6 @@ public class Visitor extends Role {
 		super();
 	}
 
-	public boolean connect(String email, String password) {
-		throw new UnsupportedOperationException();
-	}
-
 	@Override
 	public String toString() {
 		return "Visitor [getId()=" + getId() + "]";

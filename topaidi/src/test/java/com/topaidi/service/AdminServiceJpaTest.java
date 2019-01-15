@@ -4,6 +4,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
+
 import javax.transaction.Transactional;
 
 import org.junit.Assert;
@@ -15,8 +17,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.topaidi.config.JpaConfig;
 import com.topaidi.model.Address;
+import com.topaidi.model.Category;
+import com.topaidi.model.Comment;
+import com.topaidi.model.Idea;
 import com.topaidi.model.roles.Admin;
+import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.AdminService;
+import com.topaidi.service.interfaces.CommentService;
+import com.topaidi.service.interfaces.GenericService;
+import com.topaidi.service.interfaces.IdeaService;
+import com.topaidi.service.interfaces.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= {JpaConfig.class})
@@ -25,6 +35,12 @@ public class AdminServiceJpaTest {
 
 	@Autowired
 	AdminService adminService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	IdeaService ideaService;
+	@Autowired
+	CommentService commentService;
 	
 	@Test
 	public void testDelete() {
@@ -44,6 +60,66 @@ public class AdminServiceJpaTest {
 		
 		adminService.deleteByKey(admin.getId());
 		assertNull(adminService.findByKey(admin.getId()));
+	}
+	
+	@Test
+	public void testBanUser() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		userService.insert(user);
+		
+		Assert.assertTrue(adminService.banUser(user));
+	}
+	
+	@Test
+	public void testDesactiveIdea() {
+		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+		Category category = new Category("cuisine",LocalDate.now(),admin);
+		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user);
+		ideaService.insert(idea);
+		
+		Assert.assertTrue(adminService.desactiveIdea(idea));
+		Assert.assertTrue(ideaService.findByKey(idea.getId()).getDisabledAt() != null);
+	}
+	
+	@Test
+	public void testDesactiveUser() {
+		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		userService.insert(user);
+		
+		Assert.assertTrue(adminService.desactiveUser(user));
+		Assert.assertTrue(!user.isActive());
+	}
+	
+	@Test
+	public void testDesactiveComment() {
+		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+		Category category = new Category("cuisine",LocalDate.now(),admin);
+		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user1);
+		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,true);
+		Comment comment = new Comment("ahaha",user2,idea);
+		commentService.insert(comment);
+		
+		Assert.assertTrue(adminService.desactiveComment(comment));
+		Assert.assertTrue(!comment.isActive());
+	}
+	
+	@Test
+	public void testValidateUser() {
+		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,false);
+		userService.insert(user);
+		
+		Assert.assertTrue(adminService.validateUser(user));
+		Assert.assertTrue(user.isValid());
 	}
 	
 	@Test

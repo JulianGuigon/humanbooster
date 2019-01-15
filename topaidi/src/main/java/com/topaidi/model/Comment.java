@@ -21,6 +21,7 @@ public class Comment {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String value;
+	private boolean isActive = true;;
 	
 	@ManyToOne
 	private User userCommenting;
@@ -40,10 +41,6 @@ public class Comment {
 		this.value = value;
 		this.userCommenting = userCommenting;
 		this.ideaCommented = ideaCommented;
-	}
-
-	public Comment getCommentById(int id) {
-		throw new UnsupportedOperationException();
 	}
 
 	public Integer getId() {
@@ -76,6 +73,26 @@ public class Comment {
 
 	public void setIdeaCommented(Idea ideaCommented) {
 		this.ideaCommented = ideaCommented;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public List<Alert> getListAlerte() {
+		return listAlerte;
+	}
+
+	public void setListAlerte(List<Alert> listAlerte) {
+		this.listAlerte = listAlerte;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

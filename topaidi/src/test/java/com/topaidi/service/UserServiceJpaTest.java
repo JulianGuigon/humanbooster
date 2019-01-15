@@ -62,6 +62,36 @@ public class UserServiceJpaTest {
 	}
 	
 	@Test
+	public void testFindInvalidUser() {
+		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,false);
+		userService.insert(user1);
+		userService.insert(user2);
+		userService.insert(user3);
+		
+		assertTrue(userService.findInvalidUser().size() == 1);
+	}
+	
+	@Test
+	public void testFindValidUser() {
+		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,false);
+		userService.insert(user1);
+		userService.insert(user2);
+		userService.insert(user3);
+		
+		assertTrue(userService.findValidUser().size() == 2);
+	}
+	
+	@Test
 	public void testFindByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);

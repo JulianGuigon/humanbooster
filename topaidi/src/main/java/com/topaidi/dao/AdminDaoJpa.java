@@ -1,15 +1,23 @@
 package com.topaidi.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TransactionRequiredException;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.topaidi.dao.interfaces.AdminDao;
+import com.topaidi.model.Category;
+import com.topaidi.model.Comment;
+import com.topaidi.model.Idea;
 import com.topaidi.model.roles.Admin;
+import com.topaidi.model.roles.User;
 
 @Repository
 @Transactional
@@ -51,10 +59,95 @@ public class AdminDaoJpa implements AdminDao {
 
 	@Override
 	public Admin findByEmailAndPassword(String email, String password) {
-		return (Admin) em.createQuery("from Admin where email = ? AND password = ?")
-				.setParameter(0, email)
-				.setParameter(1, password)
+		return (Admin) em.createQuery("from Admin where email = :email AND password = :password")
+				.setParameter("email", email)
+				.setParameter("password", password)
 				.getSingleResult();
+	}
+
+	@Override
+	public boolean findEmailExist(String email) {
+		boolean retour = true;
+		try {
+			Query query = em.createQuery("from Admin where email = :email");
+			query.setParameter("email", email);
+			Admin admin = (Admin) query.getSingleResult();
+		} catch (NoResultException e) {
+			retour = false;
+		}
+		
+		return retour;
+	}
+
+	@Override
+	public boolean banUser(User user) {
+		boolean retour = true;
+		try {
+			em.remove(user);
+		} catch (IllegalArgumentException ie) {
+			retour = false;
+		} catch (TransactionRequiredException te) {
+			retour = false;
+		}
+		
+		return retour;
+	}
+
+	@Override
+	public boolean desactiveIdea(Idea idea) {
+		boolean retour = true;
+		try {
+			idea.setActive(false);
+			idea.setDisabledAt(LocalDate.now());
+			em.merge(idea);
+		} catch (IllegalArgumentException ie) {
+			retour = false;
+		} catch (TransactionRequiredException te) {
+			retour = false;
+		}
+		return retour;
+	}
+
+	@Override
+	public boolean desactiveUser(User user) {
+		boolean retour = true;
+		try {
+			user.setActive(false);
+			em.merge(user);
+		} catch (IllegalArgumentException ie) {
+			retour = false;
+		} catch (TransactionRequiredException te) {
+			retour = false;
+		}
+		return retour;
+	}
+
+	@Override
+	public boolean desactiveComment(Comment comment) {
+		boolean retour = true;
+		try {
+			comment.setActive(false);
+			em.merge(comment);
+		} catch (IllegalArgumentException ie) {
+			retour = false;
+		} catch (TransactionRequiredException te) {
+			retour = false;
+		}
+		return retour;
+	}
+
+	@Override
+	public boolean validateUser(User user) {
+		boolean retour = true;
+		try {
+			user.setValid(true);
+			em.merge(user);
+		} catch (IllegalArgumentException ie) {
+			retour = false;
+		} catch (TransactionRequiredException te) {
+			retour = false;
+		}
+		return retour;
 	}
 
 }

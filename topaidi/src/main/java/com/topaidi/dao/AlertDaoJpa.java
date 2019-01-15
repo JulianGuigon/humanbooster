@@ -60,8 +60,8 @@ public class AlertDaoJpa implements AlertDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Alert> findAllByCreateAtAndByType(AlertType type) {
-		Query query = em.createQuery("from Alert e where alertType = ? order by e.createdAt DESC");
-		query.setParameter(0, type);
+		Query query = em.createQuery("from Alert e where alertType = :alertType order by e.createdAt DESC");
+		query.setParameter("alertType", type);
 		return query.getResultList();
 	}
 
