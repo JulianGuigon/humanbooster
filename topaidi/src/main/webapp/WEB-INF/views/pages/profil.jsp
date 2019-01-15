@@ -10,6 +10,7 @@
 		<h1 class="spaceTitle">PROFIL</h1>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-sm text-center">
 		<img src="images/imgProfilDefault.png" id="imgProfil"
