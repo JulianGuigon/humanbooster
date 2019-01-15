@@ -43,19 +43,7 @@ public class User extends Connected {
 		this.isValid = isValid;
 	}
 	
-	public Idea createIdea() {
-		throw new UnsupportedOperationException();
-	}
-	
 	public boolean note(Note note) {
-		throw new UnsupportedOperationException();
-	}
-	
-	public User getUserById(Integer id) {
-		throw new UnsupportedOperationException();
-	}
-	
-	public List<User> getValidUsers(){
 		throw new UnsupportedOperationException();
 	}
 

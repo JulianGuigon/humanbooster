@@ -27,6 +27,7 @@ public class Idea {
 	private LocalDate createdAt;
 	private LocalDate updatedAt;
 	private LocalDate disabledAt;
+	private boolean isActive = true;
 	
 	@OneToMany(mappedBy="ideaAlerted")
 	private List<Alert> listAlert = new ArrayList<>();
@@ -69,14 +70,6 @@ public class Idea {
 		}else {
 			return true;
 		}
-	}
-
-	public Idea getIdeaById(int id) {
-		throw new UnsupportedOperationException();
-	}
-
-	public List<Idea> getIdeaSortByDateCreate() {
-		throw new UnsupportedOperationException();
 	}
 
 	public Integer getId() {
@@ -181,6 +174,19 @@ public class Idea {
 
 	public void setUserSubmitting(User userSubmitting) {
 		this.userSubmitting = userSubmitting;
+	}
+	
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

@@ -36,11 +36,6 @@ public class Note {
 		this.userNoting = userNoting;
 	}
 
-
-	public Note getNoteById(int id) {
-		throw new UnsupportedOperationException();
-	}
-
 	public int getId() {
 		return id;
 	}
