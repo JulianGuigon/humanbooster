@@ -11,8 +11,15 @@
 			<h1 class="spaceTitle">CONNECT</h1>
 		</div>
 	</div>
-	<c:if test="${error}">
-		<h4 style="color: red;">Veuillez réessayer.</h4>
+	<c:choose>
+		<c:when test="${error=='connectionFailed'}">
+			<h4 style="color: red;">Veuillez réessayer.</h4>			
+		</c:when>
+		<c:when test="${error=='invalidUser'}">
+			<h4 style="color: red;">You can't connect until an administrator validate your inscription.</h4>
+		</c:when>
+	</c:choose>
+	<c:if test="">
 	</c:if>
 	<form:form method="post" action="${url}" modelAttribute="user">
 		<form:errors path="email" cssStyle="color:red;"/><br>
@@ -25,7 +32,7 @@
 		<input type="submit" value="Connect"/>
 		<br>
 		<br>
-		<a href="#">Forgot password ?</a> or <a href="register">Not registered yet ?</a>
+		<!--<a href="#">Forgot password ?</a> or --><a href="register">Not registered yet ?</a>
 	</form:form>
 </div>
 <jsp:include page="../template/footer.jsp"></jsp:include>

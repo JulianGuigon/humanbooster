@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.UserService;
@@ -19,17 +20,12 @@ public class ConnectController {
 	UserService userService;
 	
 	@GetMapping("/connect")
-	public String showConnect(Model model) {
+	public String showConnect(@RequestParam(value="error",required=false) String error, Model model) {
 		User user = new User();
 		model.addAttribute("user",user);
-		return "connect";
-	}
-	
-	@GetMapping("/connect/error")
-	public String showConnectWithError(Model model) {
-		User user = new User();
-		model.addAttribute("user",user);
-		model.addAttribute("error",true);
+		if(error!=null) {
+			model.addAttribute("error",true);
+		}
 		return "connect";
 	}
 	
@@ -37,16 +33,22 @@ public class ConnectController {
 	public String connect(@ModelAttribute("user") User user, HttpServletRequest request, Model model) {
 		User userFound = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
 		if(userFound!=null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("isConnected", true);
-			return "redirect:/home";			
+			if(userFound.isValid()) {
+				HttpSession session = request.getSession();
+				session.setAttribute("user", userFound);
+				session.setAttribute("isConnected", true);
+				return "redirect:/home";							
+			}else {
+				return "redirect:/connect?error=invalidUser";	
+			}
 		}else {
-			return "redirect:/connect/error";		
+			return "redirect:/connect?error=connectionFailed";		
 		}
 	}
 	@GetMapping("/connect/disconnect")
 	public String disconnect(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
+		session.setAttribute("user", null);
 		session.setAttribute("isConnected", false);
 		return "redirect:/home";
 	}

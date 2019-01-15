@@ -20,15 +20,7 @@
 			<li>
 				<div class="form-group">
 					<label for="forName">Name</label> <input type="text"
-						class="form-control" id="forName" placeholder="name"
-						readonly="readonly">
-				</div>
-			</li>
-			<hr>
-			<li>
-				<div class="form-group">
-					<label for="forTel">Tel</label> <input type="number"
-						class="form-control" id="forTel" placeholder="06.35.24.15.35"
+						class="form-control" id="forName" placeholder="${user.name}"
 						readonly="readonly">
 				</div>
 			</li>
@@ -36,7 +28,23 @@
 			<li>
 				<div class="form-group">
 					<label for="forMail">Email</label> <input type="email"
-						class="form-control" id="forMail" placeholder="name@example.com"
+						class="form-control" id="forMail" placeholder="${user.email}"
+						readonly="readonly">
+				</div>
+			</li>
+			<hr>
+			<li>
+				<div class="form-group">
+					<label for="forMail">Address</label> <input type="email"
+						class="form-control" id="forMail" placeholder="${user.address.streetNumber} ${user.address.wording}, ${user.address.postalCode} ${user.address.city} ${user.address.country}"
+						readonly="readonly">
+				</div>
+			</li>
+			<hr>
+			<li>
+				<div class="form-group">
+					<label for="forTel">Tel</label> <input type="number"
+						class="form-control" id="forTel" placeholder="${user.phoneNumber}"
 						readonly="readonly">
 				</div>
 			</li>
