@@ -34,7 +34,6 @@ public class RegisterController {
 			return "register";
 		}
 		if(user.getId()==null) {
-			//user.setValid(true);
 			userService.insert(user);			
 		}else{
 			userService.update(user);

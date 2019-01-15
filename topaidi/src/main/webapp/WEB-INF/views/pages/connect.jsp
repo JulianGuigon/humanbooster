@@ -12,10 +12,10 @@
 		</div>
 	</div>
 	<c:choose>
-		<c:when test="${error=='connectionFailed'}">
-			<h4 style="color: red;">Veuillez réessayer.</h4>			
+		<c:when test="${error.equals('connectionFailed')}">
+			<h4 style="color: red;">Please try again.</h4>			
 		</c:when>
-		<c:when test="${error=='invalidUser'}">
+		<c:when test="${error.equals('invalidUser')}">
 			<h4 style="color: red;">You can't connect until an administrator validate your inscription.</h4>
 		</c:when>
 	</c:choose>

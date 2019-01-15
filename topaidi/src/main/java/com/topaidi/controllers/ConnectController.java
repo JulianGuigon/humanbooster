@@ -24,7 +24,7 @@ public class ConnectController {
 		User user = new User();
 		model.addAttribute("user",user);
 		if(error!=null) {
-			model.addAttribute("error",true);
+			model.addAttribute("error",error);
 		}
 		return "connect";
 	}
