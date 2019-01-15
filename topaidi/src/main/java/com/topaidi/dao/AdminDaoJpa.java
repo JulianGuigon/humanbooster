@@ -80,20 +80,6 @@ public class AdminDaoJpa implements AdminDao {
 	}
 
 	@Override
-	public boolean banUser(User user) {
-		boolean retour = true;
-		try {
-			em.remove(user);
-		} catch (IllegalArgumentException ie) {
-			retour = false;
-		} catch (TransactionRequiredException te) {
-			retour = false;
-		}
-		
-		return retour;
-	}
-
-	@Override
 	public boolean desactiveIdea(Idea idea) {
 		boolean retour = true;
 		try {

@@ -91,9 +91,9 @@ public class UserDaoJpaTest {
 		addressDao.insert(address1);
 		addressDao.insert(address2);
 		addressDao.insert(address3);
-		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a",true,false);
-		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,false);
-		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,true);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898",true,false);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898",true,false);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
 		userDao.insert(user1);
 		userDao.insert(user2);
 		userDao.insert(user3);
@@ -109,9 +109,9 @@ public class UserDaoJpaTest {
 		addressDao.insert(address1);
 		addressDao.insert(address2);
 		addressDao.insert(address3);
-		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a",true,false);
-		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,false);
-		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,true);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898",true,false);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898",true,false);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
 		userDao.insert(user1);
 		userDao.insert(user2);
 		userDao.insert(user3);
@@ -144,23 +144,6 @@ public class UserDaoJpaTest {
 	}
 	
 	@Test
-	public void testCreateIdea() {
-		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		addressDao.insert(address1);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
-		adminDao.insert(admin);
-		Category category = new Category("cuisine",LocalDate.now(),admin);
-		categoryDao.insert(category);
-		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		addressDao.insert(address2);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
-		userDao.insert(user);
-		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user);
-		
-		Assert.assertTrue(userDao.createIdea(idea) != null);
-	}
-	
-	@Test
 	public void testUpdate() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
@@ -186,7 +169,7 @@ public class UserDaoJpaTest {
 	public void testFindEmailExist() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
 		userDao.insert(user);
 		
 		Assert.assertTrue(userDao.findEmailExist("a.g@gmail.com"));
@@ -196,7 +179,7 @@ public class UserDaoJpaTest {
 	public void testFindEmailNotExist() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","a?","a",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
 		userDao.insert(user);
 		
 		Assert.assertFalse(userDao.findEmailExist("a.g@gm.com"));
