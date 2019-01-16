@@ -1,6 +1,5 @@
 package com.topaidi.validators;
 
-import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -8,7 +7,6 @@ import org.springframework.validation.Validator;
 import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.UserService;
 
-@Component
 public class UserValidator implements Validator {
 	
 	private UserService userService;
