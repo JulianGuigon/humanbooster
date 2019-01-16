@@ -17,9 +17,8 @@
 	
 	<link href="https://fonts.googleapis.com/css?family=Oswald"
 		rel="stylesheet">
-	
-	<link href="css/pageProfil.css" rel="stylesheet">
-	<link href="css/general.css" rel="stylesheet">
+	<link href="<c:url value="/css/pageProfil.css" />" rel="stylesheet">
+	<link href="<c:url value="/css/general.css" />" rel="stylesheet">
 	
 	<meta charset="UTF-8">
 	<title>TopAidi</title>
@@ -56,7 +55,7 @@
 			</ul>
 			<div class="form-inline my-2 my-lg-0">
 				<div class="dropdown dropleft">
-					<img src="images/imgProfilDefault.png" id="imgProfilNav"
+					<img src="<c:url value="/images/imgProfilDefault.png" />" id="imgProfilNav"
 						class="rounded-circle dropdown-toggle" alt="..."
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
