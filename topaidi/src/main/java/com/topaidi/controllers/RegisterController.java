@@ -29,7 +29,7 @@ public class RegisterController {
 	
 	@PostMapping("/register")
 	public String register(@ModelAttribute("user") User user, BindingResult result, HttpServletRequest request, Model model) {
-		new UserValidator().validate(user, result);
+		new UserValidator(userService).validate(user, result);
 		if(result.hasErrors()) {
 			return "register";
 		}

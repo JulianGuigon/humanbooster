@@ -85,6 +85,33 @@ public class IdeaServiceJpaTest {
 		
 		assertTrue(ideaService.findAll().size()==3);
 	}
+	
+	@Test
+	public void findAllByCreateAt() {
+		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
+		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898");
+		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898");
+		Category category1 = new Category("cuisine",LocalDate.now(),admin1);
+		Category category2 = new Category("botanique",LocalDate.now(),admin2);
+		Category category3 = new Category("echecs",LocalDate.now(),admin3);
+		Address address4 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address5 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address6 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address4,"0477265898",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address5,"0477265898",true,true);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address6,"0477265898",true,true);
+		Idea idea1 = new Idea("idea1","a","a",LocalDate.of(2015, 01, 10),category1,user1);
+		Idea idea2 = new Idea("idea2","a","a",LocalDate.of(2015, 02, 10),category2,user2);
+		Idea idea3 = new Idea("idea3","a","a",LocalDate.of(2015, 03, 10),category3,user3);
+		ideaService.insert(idea1);
+		ideaService.insert(idea2);
+		ideaService.insert(idea3);
+		
+		Assert.assertTrue(ideaService.findAllByCreateAt().get(2).getTitle().equals("idea1"));
+	}
 
 	@Test
 	public void testFindByKey() {

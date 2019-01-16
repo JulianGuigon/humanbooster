@@ -71,7 +71,7 @@ public class AdminDaoJpa implements AdminDao {
 		try {
 			Query query = em.createQuery("from Admin where email = :email");
 			query.setParameter("email", email);
-			Admin admin = (Admin) query.getSingleResult();
+			query.getSingleResult();
 		} catch (NoResultException e) {
 			retour = false;
 		}
