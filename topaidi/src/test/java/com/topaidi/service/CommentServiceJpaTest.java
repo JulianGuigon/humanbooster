@@ -34,13 +34,13 @@ public class CommentServiceJpaTest {
 	 @Test
 		public void testDelete() {
 			Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 			Category category = new Category("cuisine",LocalDate.now(),admin);
 			Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 			Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user1);
 			Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,true);
+			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
 			Comment comment = new Comment("ahaha",user2,idea);
 			commentService.insert(comment);
 			
@@ -51,13 +51,13 @@ public class CommentServiceJpaTest {
 		@Test
 		public void testDeleteByKey() {
 			Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 			Category category = new Category("cuisine",LocalDate.now(),admin);
 			Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 			Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user1);
 			Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,true);
+			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
 			Comment comment = new Comment("ahaha",user2,idea);
 			commentService.insert(comment);
 			
@@ -70,27 +70,27 @@ public class CommentServiceJpaTest {
 			Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 			Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 			Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
-			Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","a?","a");
-			Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","a?","a");
+			Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
+			Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898");
+			Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898");
 			Category category1 = new Category("cuisine",LocalDate.now(),admin1);
 			Category category2 = new Category("botanique",LocalDate.now(),admin2);
 			Category category3 = new Category("echecs",LocalDate.now(),admin3);
 			Address address4 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 			Address address5 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 			Address address6 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address4,"0477265898","a?","a",true,true);
-			User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address5,"0477265898","a?","a",true,true);
-			User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address6,"0477265898","a?","a",true,true);
+			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address4,"0477265898",true,true);
+			User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address5,"0477265898",true,true);
+			User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address6,"0477265898",true,true);
 			Idea idea1 = new Idea("idea1","a","a",LocalDate.now(),category1,user1);
 			Idea idea2 = new Idea("idea2","a","a",LocalDate.now(),category2,user2);
 			Idea idea3 = new Idea("idea3","a","a",LocalDate.now(),category3,user3);
 			Address address7 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 			Address address8 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 			Address address9 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user4 = new User("Jean Guy","a.g@gmail.com","aaaa",address7,"0477265898","a?","a",true,true);
-			User user5 = new User("Jean Robert","a.g@gmail.com","aaaa",address8,"0477265898","a?","a",true,true);
-			User user6 = new User("Jean Bernard","a.g@gmail.com","aaaa",address9,"0477265898","a?","a",true,true);
+			User user4 = new User("Jean Guy","a.g@gmail.com","aaaa",address7,"0477265898",true,true);
+			User user5 = new User("Jean Robert","a.g@gmail.com","aaaa",address8,"0477265898",true,true);
+			User user6 = new User("Jean Bernard","a.g@gmail.com","aaaa",address9,"0477265898",true,true);
 			Comment comment1 = new Comment("ahaha",user4,idea1);
 			Comment comment2 = new Comment("ahaha2",user5,idea2);
 			Comment comment3 = new Comment("ahaha3",user6,idea3);
@@ -104,13 +104,13 @@ public class CommentServiceJpaTest {
 		@Test
 		public void testFindByKey() {
 			Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 			Category category = new Category("cuisine",LocalDate.now(),admin);
 			Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 			Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user1);
 			Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,true);
+			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
 			Comment comment = new Comment("ahaha",user2,idea);
 			commentService.insert(comment);
 			
@@ -123,13 +123,13 @@ public class CommentServiceJpaTest {
 			int size = commentService.findAll().size();
 			
 			Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 			Category category = new Category("cuisine",LocalDate.now(),admin);
 			Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 			Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user1);
 			Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,true);
+			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
 			Comment comment = new Comment("ahaha",user2,idea);
 			commentService.insert(comment);
 			
@@ -140,13 +140,13 @@ public class CommentServiceJpaTest {
 		@Test
 		public void testUpdate() {
 			Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","a?","a");
+			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
 			Category category = new Category("cuisine",LocalDate.now(),admin);
 			Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","a?","a",true,true);
+			User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
 			Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user1);
 			Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898","a?","a",true,true);
+			User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
 			Comment comment = new Comment("ahaha",user2,idea);
 			commentService.insert(comment);
 			

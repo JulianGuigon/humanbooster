@@ -36,9 +36,8 @@ public class User extends Connected {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String name, String email, String password, Address address, String phoneNumber,
-			String secretQuestion, String secretAnswer, boolean isActive, boolean isValid) {
-		super(name, email, password, address, phoneNumber, secretQuestion, secretAnswer);
+	public User(String name, String email, String password, Address address, String phoneNumber, boolean isActive, boolean isValid) {
+		super(name, email, password, address, phoneNumber);
 		this.isActive = isActive;
 		this.isValid = isValid;
 	}
@@ -67,7 +66,6 @@ public class User extends Connected {
 	public String toString() {
 		return "User [isActive=" + isActive + ", isValid=" + isValid + ", getName()=" + getName() + ", getEmail()="
 				+ getEmail() + ", getPassword()=" + getPassword() + ", getAddress()=" + getAddress()
-				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getSecretQuestion()=" + getSecretQuestion()
-				+ ", getSecretAnswer()=" + getSecretAnswer() + ", getId()=" + getId() + "]";
+				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getSecretQuestion()=" + ", getId()=" + getId() + "]";
 	}
 }

@@ -22,16 +22,14 @@ public class Admin extends Connected {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(String name, String email, String password, Address address, String phoneNumber,
-			String secretQuestion, String secretAnswer) {
-		super(name, email, password, address, phoneNumber, secretQuestion, secretAnswer);
+	public Admin(String name, String email, String password, Address address, String phoneNumber) {
+		super(name, email, password, address, phoneNumber);
 	}
 
 	@Override
 	public String toString() {
 		return "Admin [listCategoryCreated=" + listCategoryCreated + ", getName()=" + getName() + ", getEmail()="
 				+ getEmail() + ", getPassword()=" + getPassword() + ", getAddress()=" + getAddress()
-				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getSecretQuestion()=" + getSecretQuestion()
-				+ ", getSecretAnswer()=" + getSecretAnswer() + ", getId()=" + getId() + "]";
+				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getSecretQuestion()=" + ", getId()=" + getId() + "]";
 	}
 }

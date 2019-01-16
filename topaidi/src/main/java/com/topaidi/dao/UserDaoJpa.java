@@ -79,21 +79,6 @@ public class UserDaoJpa implements UserDao {
 	}
 
 	@Override
-	public Idea createIdea(Idea idea) {
-		Idea retour = idea;
-		try {
-			em.persist(idea);
-		} catch (EntityExistsException entityExist) {
-			retour = null;
-		}catch (IllegalArgumentException ie) {
-			retour = null;
-		}catch (TransactionRequiredException te) {
-			retour = null;
-		}
-		return retour;
-	}
-
-	@Override
 	public List<User> findValidUser() {
 		return em.createQuery("from User where isValid = true").getResultList();
 	}

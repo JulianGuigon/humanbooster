@@ -8,7 +8,6 @@ import com.topaidi.model.roles.User;
 public interface UserDao extends GenericDao<User,Integer> {
 	User findByEmailAndPassword(String email, String password);
 	boolean findEmailExist(String email);
-	Idea createIdea(Idea idea);
 	List<User> findValidUser();
 	List<User> findInvalidUser();
 }

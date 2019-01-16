@@ -9,7 +9,6 @@ import com.topaidi.model.roles.User;
 public interface AdminDao extends GenericDao<Admin,Integer>{
 	Admin findByEmailAndPassword(String email, String password);
 	boolean findEmailExist(String email);
-	boolean banUser(User user);
 	boolean desactiveIdea(Idea idea);
 	boolean desactiveUser(User user);
 	boolean desactiveComment(Comment comment);

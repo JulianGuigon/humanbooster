@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.topaidi.dao.interfaces.AdminDao;
+import com.topaidi.model.Category;
 import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;
 import com.topaidi.model.roles.Admin;
 import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.AddressService;
 import com.topaidi.service.interfaces.AdminService;
+import com.topaidi.service.interfaces.CategoryService;
+import com.topaidi.service.interfaces.UserService;
 
 @Service
 public class AdminServiceJpa implements AdminService {
@@ -22,6 +25,10 @@ public class AdminServiceJpa implements AdminService {
 	AdminDao adminDao;
 	@Autowired
 	AddressService addressService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	CategoryService categoryService;
 	
 	@Override
 	public void delete(Admin obj) {
@@ -64,8 +71,9 @@ public class AdminServiceJpa implements AdminService {
 	}
 
 	@Override
-	public boolean banUser(User user) {	
-		return adminDao.banUser(user);
+	public User banUser(User user) {	
+		userService.delete(user);
+		return user;
 	}
 
 	@Override
@@ -91,6 +99,18 @@ public class AdminServiceJpa implements AdminService {
 	@Override
 	public boolean validateUser(User user) {
 		return adminDao.validateUser(user);
+	}
+
+	@Override
+	public Category createCategory(Category category) {
+		categoryService.insert(category);
+		return category;
+	}
+
+	@Override
+	public Category deleteCategory(Category category) {
+		categoryService.delete(category);
+		return category;
 	}
 
 }

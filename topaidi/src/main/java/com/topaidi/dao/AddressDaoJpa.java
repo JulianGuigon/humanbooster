@@ -26,7 +26,7 @@ public class AddressDaoJpa implements AddressDao {
 	public void deleteByKey(Integer key) {
 		em.remove(findByKey(key));
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Address> findAll() {

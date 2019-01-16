@@ -1,6 +1,11 @@
-
-
-TopAidi/.classpath
-TopAidi/.settings/org.eclipse.wst.common.component
-topaidi/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
-topaidi/target/m2e-wtp/web-resources/META-INF/maven/com.topaidi/topaidi/pom.properties
+topaidi/bin
+topaidi/target
+topaidi/.settings
+topaidi/.project
+.project
+.settings
+bin
+target
+/topaidi/target
+/topaidi/bin
+.classpath

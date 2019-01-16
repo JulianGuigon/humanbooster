@@ -2,14 +2,22 @@ package com.topaidi.service;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.topaidi.dao.interfaces.UserDao;
+import com.topaidi.enums.AlertType;
+import com.topaidi.model.Alert;
+import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;
 import com.topaidi.model.Note;
 import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.AddressService;
+import com.topaidi.service.interfaces.AlertService;
+import com.topaidi.service.interfaces.CommentService;
+import com.topaidi.service.interfaces.IdeaService;
 import com.topaidi.service.interfaces.NoteService;
 import com.topaidi.service.interfaces.UserService;
 
@@ -22,6 +30,12 @@ public class UserServiceJpa implements UserService{
 	AddressService addressService;
 	@Autowired
 	NoteService noteService;
+	@Autowired
+	IdeaService ideaService;
+	@Autowired
+	AlertService alertService;
+	@Autowired
+	CommentService commentService;
 	
 	@Override
 	public void delete(User obj) {
@@ -60,12 +74,18 @@ public class UserServiceJpa implements UserService{
 
 	@Override
 	public User findByEmailAndPassword(String email, String password) {
-		return userDao.findByEmailAndPassword(email, password);
+		User found;
+		try {		
+			 found = userDao.findByEmailAndPassword(email, password);
+		}catch(NoResultException n) {
+			found = null;
+		}
+		return found;
 	}
 
 	@Override
 	public Idea createIdea(Idea idea) {
-		return userDao.createIdea(idea);
+		return ideaService.insert(idea);
 	}
 
 	@Override
@@ -81,6 +101,24 @@ public class UserServiceJpa implements UserService{
 	@Override
 	public Note noteIdea(Note note) {
 		return noteService.insert(note);
+	}
+
+	@Override
+	public Idea alertIdea(Idea ideaAlerted, String message, AlertType alertType) {
+		alertService.insert(new Alert(message, ideaAlerted, ideaAlerted.getUserSubmitting()));
+		return ideaAlerted;
+	}
+
+	@Override
+	public Comment alertComment(Comment commentAlerted, String message, AlertType alertType) {
+		alertService.insert(new Alert(message, commentAlerted, commentAlerted.getUserCommenting()));
+		return commentAlerted;
+	}
+
+	@Override
+	public Comment addComment(Comment comment) {
+		commentService.insert(comment);
+		return comment;
 	}
 	
 
