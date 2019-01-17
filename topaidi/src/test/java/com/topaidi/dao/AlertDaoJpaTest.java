@@ -584,7 +584,7 @@ public class AlertDaoJpaTest {
 	}
 	
 	@Test
-	public void testInsertWithInsert() {
+	public void testInsertWithIdea() {
 		int size = alertDao.findAll().size();
 		
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);

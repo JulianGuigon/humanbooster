@@ -159,6 +159,24 @@ public class UserServiceJpaTest {
 	}
 	
 	@Test
+	public void testFindEmailExist() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		userService.insert(user);
+		
+		Assert.assertTrue(userService.findEmailExist("a.g@gmail.com"));
+	}
+	
+	@Test
+	public void testFindEmailNotExist() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		userService.insert(user);
+		
+		Assert.assertFalse(userService.findEmailExist("a.g@gm.com"));
+	}
+	
+	@Test
 	public void testAlertIdea() {
 		int size = alertService.findAll().size();
 		

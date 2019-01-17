@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,11 +25,11 @@ public class Category {
 	private LocalDate createdAt;
 	@ManyToOne
 	private Admin adminCreating;
-	@OneToMany(mappedBy="category")
+	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)
 	private List<Idea> listIdea = new ArrayList<Idea>();
 
 	public Category() {
-		// TODO Auto-generated constructor stub
+		this.createdAt = LocalDate.now();
 	}
 
 	public Category(String name, LocalDate createdAt, Admin adminCreating) {
