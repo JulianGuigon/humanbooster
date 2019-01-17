@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class Idea {
 	@OneToMany(mappedBy="ideaAlerted")
 	private List<Alert> listAlert = new ArrayList<>();
 	
-	@OneToMany(mappedBy="ideaCommented")
+	@OneToMany(mappedBy="ideaCommented", fetch=FetchType.EAGER)
 	private List<Comment> listComment = new ArrayList<>();
 	
 	@ManyToOne
