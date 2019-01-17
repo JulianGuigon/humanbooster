@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+
+#imgProfilIdea {
+	height: 80px;
+	width: 80px;
+}
+
+#imgIdea{
+	height: 400px;
+	width: 400px;
+}
+
+.sizeCardProfil{
+	width: 30em;
+}
+
+.hrIdea{
+	width: 25em;
+}
+
+.underline{
+	text-decoration: underline;
+}
+
+.sizeInputComment{
+	width: 50em;
+}
+
+.sizeParagraph{
+	
+}
