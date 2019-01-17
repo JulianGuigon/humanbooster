@@ -40,6 +40,14 @@ public class AlertDaoJpa implements AlertDao {
 	public List<Alert> findAllByCreateAt(){
 		return em.createQuery("from Alert e order by e.createdAt DESC").getResultList();
 	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Alert> findAllByCreateAtAndByType(AlertType type) {
+		Query query = em.createQuery("from Alert e where alertType = :alertType order by e.createdAt DESC");
+		query.setParameter("alertType", type);
+		return query.getResultList();
+	}
 
 	@Override
 	public Alert findByKey(Integer key) {
@@ -55,14 +63,6 @@ public class AlertDaoJpa implements AlertDao {
 	@Override
 	public Alert update(Alert obj) {
 		return em.merge(obj);
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Alert> findAllByCreateAtAndByType(AlertType type) {
-		Query query = em.createQuery("from Alert e where alertType = :alertType order by e.createdAt DESC");
-		query.setParameter("alertType", type);
-		return query.getResultList();
 	}
 
 }

@@ -166,6 +166,16 @@ public class UserDaoJpaTest {
 	}
 	
 	@Test
+	public void testFindByEmailAndPasswordError() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		addressDao.insert(address);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		userDao.insert(user);
+		
+		Assert.assertNull(userDao.findByEmailAndPassword("a.g@gmail.com", "aaab"));
+	}
+	
+	@Test
 	public void testFindEmailExist() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);

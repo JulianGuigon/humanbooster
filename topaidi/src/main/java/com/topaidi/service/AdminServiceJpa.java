@@ -71,12 +71,6 @@ public class AdminServiceJpa implements AdminService {
 	}
 
 	@Override
-	public User banUser(User user) {	
-		userService.delete(user);
-		return user;
-	}
-
-	@Override
 	public boolean findEmailExist(String email) {
 		return adminDao.findEmailExist(email);
 	}
@@ -111,6 +105,12 @@ public class AdminServiceJpa implements AdminService {
 	public Category deleteCategory(Category category) {
 		categoryService.delete(category);
 		return category;
+	}
+	
+	@Override
+	public User banUser(User user) {	
+		userService.delete(user);
+		return user;
 	}
 
 }

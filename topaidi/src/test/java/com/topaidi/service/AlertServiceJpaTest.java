@@ -306,7 +306,7 @@ public class AlertServiceJpaTest {
 	}
 	
 	@Test
-	public void testInsertWithInsert() {
+	public void testInsertWithIdea() {
 		int size = alertService.findAll().size();
 		
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);

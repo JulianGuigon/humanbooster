@@ -35,6 +35,11 @@ public class IdeaServiceJpa implements IdeaService {
 	public List<Idea> findAll() {
 		return ideaDao.findAll();
 	}
+	
+	@Override
+	public List<Idea> findAllByCreateAt(){
+		return ideaDao.findAllByCreateAt();
+	}
 
 	@Override
 	public Idea findByKey(Integer key) {

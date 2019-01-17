@@ -58,10 +58,16 @@ public class UserDaoJpa implements UserDao {
 
 	@Override
 	public User findByEmailAndPassword(String email, String password) {
-		return (User) em.createQuery("from User where email = :email AND password = :password")
-				.setParameter("email", email)
-				.setParameter("password", password)
-				.getSingleResult();
+		User found;
+		try {
+			found = (User)em.createQuery("from User where email = :email AND password = :password")
+					.setParameter("email", email)
+					.setParameter("password", password)
+					.getSingleResult();
+		}catch(NoResultException n) {
+			found = null;
+		}
+		return found;
 	}
 
 	@Override
@@ -70,7 +76,7 @@ public class UserDaoJpa implements UserDao {
 		try {
 			Query query = em.createQuery("from User where email = :email");
 			query.setParameter("email", email);
-			User admin = (User) query.getSingleResult();
+			query.getSingleResult();
 		} catch (NoResultException e) {
 			retour = false;
 		}
@@ -78,11 +84,13 @@ public class UserDaoJpa implements UserDao {
 		return retour;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findValidUser() {
 		return em.createQuery("from User where isValid = true").getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findInvalidUser() {
 		return em.createQuery("from User where isValid = false").getResultList();

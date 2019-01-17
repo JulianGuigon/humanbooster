@@ -74,29 +74,29 @@ public class UserServiceJpa implements UserService{
 
 	@Override
 	public User findByEmailAndPassword(String email, String password) {
-		User found;
-		try {		
-			 found = userDao.findByEmailAndPassword(email, password);
-		}catch(NoResultException n) {
-			found = null;
-		}
-		return found;
+		return userDao.findByEmailAndPassword(email, password);
 	}
 
+	@Override
+	public boolean findEmailExist(String email) {
+		return userDao.findEmailExist(email);
+	}
+	
+	@Override
+	public List<User> findValidUser() {
+		return userDao.findValidUser();
+	}
+	
+	@Override
+	public List<User> findInvalidUser() {
+		return userDao.findInvalidUser();
+	}
+	
 	@Override
 	public Idea createIdea(Idea idea) {
 		return ideaService.insert(idea);
 	}
 
-	@Override
-	public List<User> findValidUser() {
-		return userDao.findValidUser();
-	}
-
-	@Override
-	public List<User> findInvalidUser() {
-		return userDao.findInvalidUser();
-	}
 
 	@Override
 	public Note noteIdea(Note note) {

@@ -29,18 +29,21 @@ public class RegisterController {
 	
 	@PostMapping("/register")
 	public String register(@ModelAttribute("user") User user, BindingResult result, HttpServletRequest request, Model model) {
-		new UserValidator().validate(user, result);
+		new UserValidator(userService).validate(user, result);
 		if(result.hasErrors()) {
 			return "register";
 		}
 		if(user.getId()==null) {
+			user.setActive(true);
 			userService.insert(user);			
 		}else{
 			userService.update(user);
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
+		session.setAttribute("admin", null);
 		session.setAttribute("isConnected", true);
+		session.setAttribute("isAdmin", false);
 		return "redirect:/home";
 	}
 }

@@ -169,4 +169,22 @@ public class AdminServiceJpaTest {
 		
 		Assert.assertTrue(adminService.findByEmailAndPassword("a.g@gmail.com", "aaaa") != null);
 	}
+	
+	@Test
+	public void testFindEmailExist() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		adminService.insert(admin);
+		
+		Assert.assertTrue(adminService.findEmailExist("a.g@gmail.com"));
+	}
+	
+	@Test
+	public void testFindEmailNotExist() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		adminService.insert(admin);
+		
+		Assert.assertFalse(adminService.findEmailExist("a.g@gail.com"));
+	}
 }
