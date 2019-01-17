@@ -34,13 +34,16 @@ public class RegisterController {
 			return "register";
 		}
 		if(user.getId()==null) {
+			user.setActive(true);
 			userService.insert(user);			
 		}else{
 			userService.update(user);
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
+		session.setAttribute("admin", null);
 		session.setAttribute("isConnected", true);
+		session.setAttribute("isAdmin", false);
 		return "redirect:/home";
 	}
 }

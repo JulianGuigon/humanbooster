@@ -48,7 +48,9 @@ public class Idea {
 	private User userSubmitting;
 
 	public Idea() {
-		// TODO Auto-generated constructor stub
+		this.createdAt = LocalDate.now();
+		this.updatedAt = null;
+		this.disabledAt = null;
 	}
 
 	public Idea(String title, String description, String picture, LocalDate createdAt, Category category, User userSubmitting) {

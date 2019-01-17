@@ -52,6 +52,14 @@
 						<li class="nav-item"><a class="nav-link" href="ranking">Ranking</a></li>
 					</c:otherwise>
 				</c:choose>
+				<c:choose>
+					<c:when test="${navbarIndexSelected.equals('search')}">
+						<li class="nav-item active"><a class="nav-link" href="search">Search</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link" href="search">Search</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 			<div class="form-inline my-2 my-lg-0">
 				<div class="dropdown dropleft">
@@ -60,9 +68,15 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<c:choose>
+							<c:when test="${isAdmin}">
+								<a class="dropdown-item" href="profil">Profil</a> 
+								<a class="dropdown-item" href="post">Post idea <i class="fas fa-plus"></i></a>
+								<a class="dropdown-item" href="admin">Admin tools <i class="fas fa-wrench"></i></a> 
+								<a class="dropdown-item" href="connect/disconnect">Sign out</a>
+							</c:when>
 							<c:when test="${isConnected}">
-								<a class="dropdown-item" href="profil">Profil</a> <a
-								class="dropdown-item" href="post">Post idea <i class="fas fa-plus"></i></a> 
+								<a class="dropdown-item" href="profil">Profil</a> 
+								<a class="dropdown-item" href="post">Post idea <i class="fas fa-plus"></i></a> 
 								<a class="dropdown-item" href="connect/disconnect">Sign out</a>
 							</c:when>
 							<c:otherwise>
