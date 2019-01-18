@@ -39,7 +39,7 @@ public class CategoryDaoJpaTest {
 	public void testDelete() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
@@ -52,7 +52,7 @@ public class CategoryDaoJpaTest {
 	public void testDeleteByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
@@ -69,9 +69,9 @@ public class CategoryDaoJpaTest {
 		addressDao.insert(address1);
 		addressDao.insert(address2);
 		addressDao.insert(address3);
-		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
-		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898");
-		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898");
+		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100");
+		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100");
+		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin1);
 		adminDao.insert(admin2);
 		adminDao.insert(admin3);
@@ -89,7 +89,7 @@ public class CategoryDaoJpaTest {
 	public void testFindByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
@@ -104,7 +104,7 @@ public class CategoryDaoJpaTest {
 		
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
@@ -117,7 +117,7 @@ public class CategoryDaoJpaTest {
 	public void testUpdate() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);

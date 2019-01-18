@@ -12,6 +12,7 @@
 			<h1 class="spaceTitle">REGISTER</h1>
 		</div>
 	</div>
+	<p style="color: red;">WARNING : Your account needs to be validate by an Administrator before you can connect to the website. Please beware that you will not be connected right after your registration.</p>
 	<form:form method="post" action="${url}" modelAttribute="user">
 		<spring:hasBindErrors name="user">
 			<c:set var="errorClass" value="border:1px solid red"></c:set>
@@ -63,10 +64,12 @@
 		<form:errors path="address.postalCode" cssStyle="color:red;" />
 		<br>
 		<form:label path="phoneNumber">Phone : </form:label>
-		<form:input path="phoneNumber" cssClass="form-control" type="tel"
-			style="${errorClass}" />
+		<form:input path="phoneNumber" cssClass="form-control" type="tel" style="${errorClass}" />
 		<form:errors path="phoneNumber" cssStyle="color:red;" />
 		<br>
+		<form:label path="picture">Picture : </form:label>
+		<form:input path="picture" cssClass="form-control" type="url" style="${errorClass}"/>
+		<form:errors path="picture" cssStyle="color:red;"/><br>
 		<br>
 		<input type="submit" value="Submit" class="btn btn-primary" />
 	</form:form>

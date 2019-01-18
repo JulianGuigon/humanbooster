@@ -50,7 +50,7 @@ public class AdminDaoJpaTest {
 	public void testDelete() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		
 		adminDao.delete(admin);
@@ -61,7 +61,7 @@ public class AdminDaoJpaTest {
 	public void testDeleteByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		
 		adminDao.deleteByKey(admin.getId());
@@ -72,13 +72,13 @@ public class AdminDaoJpaTest {
 	public void testDesactiveIdea() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address1);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address2);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100",true,true);
 		userDao.insert(user);
 		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user);
 		ideaDao.insert(idea);
@@ -92,7 +92,7 @@ public class AdminDaoJpaTest {
 	public void testDesactiveUser() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userDao.insert(user);
 		
 		Assert.assertTrue(adminDao.desactiveUser(user));
@@ -100,22 +100,33 @@ public class AdminDaoJpaTest {
 	}
 	
 	@Test
+	public void testActivateUser() {
+		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		addressDao.insert(address);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
+		userDao.insert(user);
+		
+		Assert.assertTrue(adminDao.activateUser(user));
+		Assert.assertTrue(user.isActive());
+	}
+	
+	@Test
 	public void testDesactiveComment() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address1);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryDao.insert(category);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address2);
-		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100",true,true);
 		userDao.insert(user1);
 		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user1);
 		ideaDao.insert(idea);
 		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address3);
-		User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
+		User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898","http://placehold.it/100x100",true,true);
 		userDao.insert(user2);
 		Comment comment = new Comment("ahaha",user2,idea);
 		commentDao.insert(comment);
@@ -128,7 +139,7 @@ public class AdminDaoJpaTest {
 	public void testValidateUser() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,false);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,false);
 		userDao.insert(user);
 		
 		Assert.assertTrue(adminDao.validateUser(user));
@@ -143,9 +154,9 @@ public class AdminDaoJpaTest {
 		addressDao.insert(address1);
 		addressDao.insert(address2);
 		addressDao.insert(address3);
-		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
-		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898");
-		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898");
+		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100");
+		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100");
+		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin1);
 		adminDao.insert(admin2);
 		adminDao.insert(admin3);
@@ -157,7 +168,7 @@ public class AdminDaoJpaTest {
 	public void testFindByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		
 		assertNotNull(admin.getId());
@@ -170,7 +181,7 @@ public class AdminDaoJpaTest {
 		
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		
 		assertNotNull(admin.getId());
@@ -181,7 +192,7 @@ public class AdminDaoJpaTest {
 	public void testUpdate() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		
 		admin.setPassword("bbbb");
@@ -193,7 +204,7 @@ public class AdminDaoJpaTest {
 	public void testFindByEmailAndPassword() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		
 		Assert.assertTrue(adminDao.findByEmailAndPassword("a.g@gmail.com", "aaaa") != null);
@@ -203,7 +214,7 @@ public class AdminDaoJpaTest {
 	public void testFindEmailExist() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		
 		Assert.assertTrue(adminDao.findEmailExist("a.g@gmail.com"));
@@ -213,7 +224,7 @@ public class AdminDaoJpaTest {
 	public void testFindEmailNotExist() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		adminDao.insert(admin);
 		
 		Assert.assertFalse(adminDao.findEmailExist("a.g@gail.com"));

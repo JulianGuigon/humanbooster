@@ -1,7 +1,5 @@
 package com.topaidi.controllers;
 
-import java.time.LocalDate;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,14 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.topaidi.model.Address;
 import com.topaidi.model.Alert;
-import com.topaidi.model.Category;
 import com.topaidi.model.Comment;
-import com.topaidi.model.Idea;
 import com.topaidi.model.Note;
-import com.topaidi.model.roles.Admin;
-import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.CommentService;
 import com.topaidi.service.interfaces.IdeaService;
 import com.topaidi.service.interfaces.UserService;
@@ -34,7 +27,7 @@ public class IdeaController {
 	UserService userService;
 	
 	@GetMapping("/idea/{idIdea}")
-	public String showIdea(@PathVariable("idIdea")int id, Model model) {	
+	public String showIdea(@PathVariable("idIdea")int id, Model model) {
 		model.addAttribute("idea", ideaService.findByKey(id));
 		model.addAttribute("Comment", new Comment());
 		model.addAttribute("Alert", new Alert());

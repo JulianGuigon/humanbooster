@@ -16,18 +16,20 @@ public class Connected extends Role{
 	@ManyToOne
 	private Address address;
 	private String phoneNumber;
+	private String picture;
 	
 	public Connected() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Connected(String name, String email, String password, Address address, String phoneNumber) {
+	public Connected(String name, String email, String password, Address address, String phoneNumber, String picture) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
+		this.picture = picture;
 	}
 	
 	public boolean alert(Idea idea) {
@@ -81,10 +83,18 @@ public class Connected extends Role{
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 
 	@Override
 	public String toString() {
 		return "Connected [name=" + name + ", email=" + email + ", password=" + password + ", address=" + address
-				+ ", phoneNumber=" + phoneNumber + "]";
+				+ ", phoneNumber=" + phoneNumber + ", picture=" + picture + "]";
 	}
 }

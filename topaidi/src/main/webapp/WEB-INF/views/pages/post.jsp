@@ -19,7 +19,7 @@
 		<form:input path="title" cssClass="form-control" type="text" style="${errorClass}"/>
 		<form:errors path="title" cssStyle="color:red;"/><br>
 		<form:label path="description"><a style="color: red;">*</a>Description : </form:label>
-		<form:input path="description" cssClass="form-control" type="text" style="${errorClass}"/>
+		<form:textarea path="description" cssClass="form-control" type="text" style="${errorClass}" maxLength="255"/>
 		<form:errors path="description" cssStyle="color:red;"/><br>
 		<form:label path="picture">Image url : </form:label>
 		<form:input path="picture" cssClass="form-control" type="url" style="${errorClass}"/>

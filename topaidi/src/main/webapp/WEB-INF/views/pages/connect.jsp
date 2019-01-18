@@ -16,32 +16,27 @@
 		<div class="col-sm">
 			<c:choose>
 				<c:when test="${error.equals('connectionFailed')}">
-					<h4 style="color: red;">Please try again.</h4>
+					<h4 style="color: red;">Please try again.</h4>			
 				</c:when>
 				<c:when test="${error.equals('invalidUser')}">
-					<h4 style="color: red;">You can't connect until an
-						administrator validate your inscription.</h4>
+					<h4 style="color: red;">You can't connect until an administrator validate your inscription.</h4>
+				</c:when>
+				<c:when test="${error.equals('inactiveUser')}">
+					<h4 style="color: red;">You can't connect while you are desactivated.</h4>
 				</c:when>
 			</c:choose>
-			<c:if test="">
-			</c:if>
 			<form:form method="post" action="${url}" modelAttribute="user">
-				<form:errors path="email" cssStyle="color:red;" />
-				<br>
+				<form:errors path="email" cssStyle="color:red;"/><br>
 				<form:label path="email">Email : </form:label>
-				<form:input path="email" cssClass="form-control" type="email"
-					style="${errorClass}" />
-				<form:errors path="password" cssStyle="color:red;" />
-				<br>
+				<form:input path="email" cssClass="form-control" type="email" style="${errorClass}"/>
+				<form:errors path="password" cssStyle="color:red;"/><br>
 				<form:label path="password">Password : </form:label>
-				<form:input path="password" cssClass="form-control" type="password"
-					style="${errorClass}" />
+				<form:input path="password" cssClass="form-control" type="password" style="${errorClass}"/>
 				<br>
-				<input type="submit" value="Connect" class="btn btn-primary" />
+				<input type="submit" value="Connect"/>
 				<br>
 				<br>
-				<!--<a href="#">Forgot password ?</a> or -->
-				<a href="register">Not registered yet ?</a>
+				<!--<a href="#">Forgot password ?</a> or --><a href="register">Not registered yet ?</a>
 			</form:form>
 		</div>
 		<div class="col-sm"></div>

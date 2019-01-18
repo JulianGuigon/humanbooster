@@ -20,13 +20,12 @@ public class Admin extends Connected {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(String name, String email, String password, Address address, String phoneNumber) {
-		super(name, email, password, address, phoneNumber);
+	public Admin(String name, String email, String password, Address address, String phoneNumber, String picture) {
+		super(name, email, password, address, phoneNumber, picture);
 	}
 	
 	public Admin(User user) {
-		super(user.getName(), user.getEmail(), user.getPassword(), user.getAddress(), user.getPhoneNumber());
-		setId(user.getId());
+		super(user.getName(), user.getEmail(), user.getPassword(), user.getAddress(), user.getPhoneNumber(), user.getPicture());
 	}
 
 	@Override

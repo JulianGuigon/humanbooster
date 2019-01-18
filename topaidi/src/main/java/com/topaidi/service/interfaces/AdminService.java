@@ -12,6 +12,7 @@ public interface AdminService extends GenericService<Admin,Integer> {
 	User banUser(User user);
 	boolean desactiveIdea(Idea idea);
 	boolean desactiveUser(User user);
+	boolean activateUser(User user);
 	boolean desactiveComment(Comment comment);
 	boolean validateUser(User user);
 	Category createCategory(Category category);

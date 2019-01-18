@@ -11,6 +11,7 @@ import com.topaidi.model.roles.User;
 public interface UserService extends GenericService<User,Integer>{
 	User findByEmailAndPassword(String email, String password);
 	Idea createIdea(Idea idea);
+	List<User> findAllByName(String name);
 	boolean findEmailExist(String email);
 	List<User> findInvalidUser();
 	List<User> findValidUser();

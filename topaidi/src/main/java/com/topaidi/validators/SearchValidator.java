@@ -4,18 +4,17 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.topaidi.model.Category;
+import com.topaidi.model.roles.User;
 
-public class CategoryValidator implements Validator{
+public class SearchValidator implements Validator{
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Category.class.equals(clazz);
+		return User.class.equals(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "category.name", "This field can't be empty.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "user.name", "This field can't be empty.");
 	}
-
 }

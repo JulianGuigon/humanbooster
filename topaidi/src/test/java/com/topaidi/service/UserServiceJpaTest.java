@@ -45,7 +45,7 @@ public class UserServiceJpaTest {
 	@Test
 	public void testDelete() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user);
 		
 		userService.delete(user);
@@ -55,7 +55,7 @@ public class UserServiceJpaTest {
 	@Test
 	public void testDeleteByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user);
 		
 		userService.deleteByKey(user.getId());
@@ -67,9 +67,9 @@ public class UserServiceJpaTest {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898",true,true);
-		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
-		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100",true,true);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user1);
 		userService.insert(user2);
 		userService.insert(user3);
@@ -78,13 +78,28 @@ public class UserServiceJpaTest {
 	}
 	
 	@Test
+	public void testFindAllByName() {
+		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100",true,true);
+		User user3 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898","http://placehold.it/100x100",true,true);
+		userService.insert(user1);
+		userService.insert(user2);
+		userService.insert(user3);
+		
+		assertTrue(userService.findAllByName("Jean Guy").size()==2);
+	}
+	
+	@Test
 	public void testFindInvalidUser() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898",true,true);
-		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
-		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898",true,false);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100",true,true);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","http://placehold.it/100x100",true,false);
 		userService.insert(user1);
 		userService.insert(user2);
 		userService.insert(user3);
@@ -97,9 +112,9 @@ public class UserServiceJpaTest {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898",true,true);
-		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
-		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898",true,false);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100",true,true);
+		User user2 = new User("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100",true,true);
+		User user3 = new User("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","http://placehold.it/100x100",true,false);
 		userService.insert(user1);
 		userService.insert(user2);
 		userService.insert(user3);
@@ -110,7 +125,7 @@ public class UserServiceJpaTest {
 	@Test
 	public void testFindByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user);
 		
 		assertNotNull(user.getId());
@@ -122,7 +137,7 @@ public class UserServiceJpaTest {
 		int size = userService.findAll().size();
 		
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user);
 		
 		assertNotNull(user.getId());
@@ -132,7 +147,7 @@ public class UserServiceJpaTest {
 	@Test
 	public void testUpdate() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user);
 		
 		user.setPassword("bbbb");
@@ -143,7 +158,7 @@ public class UserServiceJpaTest {
 	@Test
 	public void testFindByEmailAndPassword() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user);
 		
 		Assert.assertNotNull(userService.findByEmailAndPassword("a.g@gmail.com", "aaaa"));
@@ -152,7 +167,7 @@ public class UserServiceJpaTest {
 	@Test
 	public void testFindByEmailAndPasswordError() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user);
 		
 		Assert.assertNull(userService.findByEmailAndPassword("a.g@gmail.com", "aaab"));
@@ -161,7 +176,7 @@ public class UserServiceJpaTest {
 	@Test
 	public void testFindEmailExist() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user);
 		
 		Assert.assertTrue(userService.findEmailExist("a.g@gmail.com"));
@@ -170,7 +185,7 @@ public class UserServiceJpaTest {
 	@Test
 	public void testFindEmailNotExist() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100",true,true);
 		userService.insert(user);
 		
 		Assert.assertFalse(userService.findEmailExist("a.g@gm.com"));
@@ -181,10 +196,10 @@ public class UserServiceJpaTest {
 		int size = alertService.findAll().size();
 		
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100");
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
+		User user = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100",true,true);
 		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user);
 		ideaService.insert(idea);
 		
@@ -198,13 +213,13 @@ public class UserServiceJpaTest {
 		int size = commentService.findAll().size();
 		
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100");
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898",true,true);
+		User user1 = new User("Jean Guy","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100",true,true);
 		Idea idea = new Idea("idea1","a","a",LocalDate.now(),category,user1);
 		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898",true,true);
+		User user2 = new User("Jean Guy","a.g@gmail.com","aaaa",address3,"0477265898","http://placehold.it/100x100",true,true);
 		Comment comment = new Comment("ahaha",user2,idea);
 		commentService.insert(comment);
 		

@@ -1,6 +1,5 @@
 package com.topaidi.dao.interfaces;
 
-import com.topaidi.model.Category;
 import com.topaidi.model.Comment;
 import com.topaidi.model.Idea;
 import com.topaidi.model.roles.Admin;
@@ -11,6 +10,7 @@ public interface AdminDao extends GenericDao<Admin,Integer>{
 	boolean findEmailExist(String email);
 	boolean desactiveIdea(Idea idea);
 	boolean desactiveUser(User user);
+	boolean activateUser(User user);
 	boolean desactiveComment(Comment comment);
 	boolean validateUser(User user);
 }

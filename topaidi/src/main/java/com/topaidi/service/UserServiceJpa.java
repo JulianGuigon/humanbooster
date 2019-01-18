@@ -51,6 +51,11 @@ public class UserServiceJpa implements UserService{
 	public List<User> findAll() {
 		return userDao.findAll();
 	}
+	
+	@Override
+	public List<User> findAllByName(String name) {
+		return userDao.findAllByName(name);
+	}
 
 	@Override
 	public User findByKey(Integer key) {
