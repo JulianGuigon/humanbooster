@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.topaidi.enums.AlertType;
 import com.topaidi.model.Category;
 import com.topaidi.model.roles.Admin;
 import com.topaidi.service.interfaces.AdminService;
+import com.topaidi.service.interfaces.AlertService;
 import com.topaidi.service.interfaces.CategoryService;
 import com.topaidi.service.interfaces.UserService;
 import com.topaidi.validators.AdminValidator;
@@ -27,6 +29,8 @@ public class AdminController {
 	CategoryService categoryService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	AlertService alertService;
 	
 	@GetMapping("/admin")
 	public String showAdmin(Model model, HttpServletRequest request) {
@@ -39,6 +43,8 @@ public class AdminController {
 			model.addAttribute(category);
 			model.addAttribute("categories",categoryService.findAll());
 			model.addAttribute("invalidUsers",userService.findInvalidUser());
+			model.addAttribute("listIdeaAlerted", alertService.findAllByCreateAtAndByType(AlertType.Idea));
+			model.addAttribute("listCommentAlerted", alertService.findAllByCreateAtAndByType(AlertType.Comment));
 			return "admin";
 		}else {
 			return "redirect:/home";

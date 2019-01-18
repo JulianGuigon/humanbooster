@@ -8,7 +8,7 @@
 <jsp:include page="../template/header.jsp"></jsp:include>
 <div class="row">
 	<div class="col-sm text-center">
-		<h1 class="spaceTitle">List idea</h1>
+		<h1 class="spaceTitle">LIST IDEA</h1>
 	</div>
 </div>
 
