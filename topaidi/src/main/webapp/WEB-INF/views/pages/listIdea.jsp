@@ -18,22 +18,81 @@
 			<div class="col-4 moveCardBot">
 				<div class="card shadow p-3 mb-5 bg-white rounded">
 					<img src="<c:url value="/images/table.jpg"/>" class="card-img-top"
-						alt="..." >
+						alt="...">
 					<div class="card-body">
 						<h5 class="card-title">${i.title}</h5>
 						<p class="card-text">${i.description}</p>
 						<div class="row">
 							<c:choose>
-								<c:when test="${user != null}">
-									<div class="col-sm">
-										<a href="#" class="btn btn-success sizeButtonCard"><i
-											class="fas fa-thumbs-up"></i> Top</a>
-									</div>
-									<div class="col-sm">
-										<a href="#" class="btn btn-danger sizeButtonCard"><i
-											class="fas fa-thumbs-down"></i> Flop</a>
-									</div>
+								<c:when test="${i.isNotable()}">
+									<c:choose>
+										<c:when test="${i.userSubmitting.id != user.id}">
+											<c:choose>
+												<c:when test="${!user.existInListNote(i.id)}">
+													<c:choose>
+														<c:when test="${user != null}">
+															<div class="col-sm text-center">
+																<div class="text-success">${i.getNbTop()}</div>
+																<a href="idea/note/${user.id}/${i.id}/top"
+																	class="btn btn-success sizeButtonCard"><i
+																	class="fas fa-thumbs-up"></i> Top</a>
+															</div>
+															<div class="col-sm text-center">
+																<div class="text-danger">${i.getNbFlop()}</div>
+																<a href="idea/note/${user.id}/${i.id}/flop"
+																	class="btn btn-danger sizeButtonCard"><i
+																	class="fas fa-thumbs-down"></i> Flop</a>
+															</div>
+														</c:when>
+														<c:otherwise>
+															<div class="col-sm text-center">
+																Top:
+																<div class="text-success">${i.getNbTop()}</div>
+															</div>
+															<div class="col-sm text-center">
+																Flop:
+																<div class="text-danger">${i.getNbFlop()}</div>
+															</div>
+														</c:otherwise>
+													</c:choose>
+												</c:when>
+												<c:otherwise>
+													<div class="text-danger">You have already voted</div>
+													<div class="col-sm text-center">
+														Top:
+														<div class="text-success">${i.getNbTop()}</div>
+													</div>
+													<div class="col-sm text-center">
+														Flop:
+														<div class="text-danger">${i.getNbFlop()}</div>
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+										<c:otherwise>
+											<div class="text-success">This your idea</div>
+											<div class="col-sm text-center">
+												Top:
+												<div class="text-success">${i.getNbTop()}</div>
+											</div>
+											<div class="col-sm text-center">
+												Flop:
+												<div class="text-danger">${i.getNbFlop()}</div>
+											</div>
+										</c:otherwise>
+									</c:choose>
 								</c:when>
+								<c:otherwise>
+									<div class="text-warning">End of the votes</div>
+									<div class="col-sm text-center">
+										Top:
+										<div class="text-success">${i.getNbTop()}</div>
+									</div>
+									<div class="col-sm text-center">
+										Flop:
+										<div class="text-danger">${i.getNbFlop()}</div>
+									</div>
+								</c:otherwise>
 							</c:choose>
 						</div>
 					</div>

@@ -67,6 +67,12 @@ public class Note {
 	public void setUserNoting(User userNoting) {
 		this.userNoting = userNoting;
 	}
+	
+	
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	@Override
 	public String toString() {

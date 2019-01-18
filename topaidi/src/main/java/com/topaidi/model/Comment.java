@@ -46,7 +46,7 @@ public class Comment {
 	public Integer getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}

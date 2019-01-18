@@ -5,6 +5,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../template/header.jsp"></jsp:include>
+
+<spring:url value="/postComment" var="postComment"></spring:url>
+<spring:url value="/alertIdea" var="reportIdea"></spring:url>
+<spring:url value="/alertComment" var="reportComment"></spring:url>
+
 <!-- LIGNE AVEC TITRE -->
 <div class="row">
 	<div class="col-sm text-center">
@@ -46,6 +51,13 @@
 	</div>
 	<!-- COL AVEC IMAGE PROFIL ET CATEGORY -->
 	<div class="col-sm">
+		<div class="text-center">
+			<button class="btn btn-danger" data-toggle="modal"
+				data-target="#modalReportIdea">
+				<i class="fas fa-exclamation-triangle"></i>Report idea
+			</button>
+		</div>
+		<br>
 		<div class="card sizeCardProfil">
 			<div class="card-body">
 				<img src="<c:url value="/images/imgProfilDefault.png" />"
@@ -62,12 +74,75 @@
 		<br> <br> <br>
 		<div class="row">
 			<c:choose>
-				<c:when test="${user != null}">
-					<a href="#" class="btn btn-success" style="margin-right: 1em"><i
-						class="fas fa-thumbs-up"></i> Top</a>
-					<a href="#" class="btn btn-danger"><i
-						class="fas fa-thumbs-down"></i> Flop</a>
+				<c:when test="${idea.isNotable()}">
+					<c:choose>
+						<c:when test="${idea.userSubmitting.id != user.id}">
+							<c:choose>
+								<c:when test="${!user.existInListNote(idea.id)}">
+									<c:choose>
+										<c:when test="${user != null}">
+											<div class="col-sm text-center">
+												<div class="text-success">${idea.getNbTop()}</div>
+												<a href="note/${user.id}/${idea.id}/top"
+													class="btn btn-success sizeButtonCard"><i
+													class="fas fa-thumbs-up"></i> Top</a>
+											</div>
+											<div class="col-sm text-center">
+												<div class="text-danger">${idea.getNbFlop()}</div>
+												<a href="note/${user.id}/${idea.id}/flop"
+													class="btn btn-danger sizeButtonCard"><i
+													class="fas fa-thumbs-down"></i> Flop</a>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="col-sm text-center">
+												Top:
+												<div class="text-success">${idea.getNbTop()}</div>
+											</div>
+											<div class="col-sm text-center">
+												Flop:
+												<div class="text-danger">${idea.getNbFlop()}</div>
+											</div>
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+								<c:otherwise>
+									<div class="text-danger">You have already voted</div>
+									<div class="col-sm text-center">
+										Top:
+										<div class="text-success">${idea.getNbTop()}</div>
+									</div>
+									<div class="col-sm text-center">
+										Flop:
+										<div class="text-danger">${idea.getNbFlop()}</div>
+									</div>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<div class="text-success">This your idea</div>
+							<div class="col-sm text-center">
+								Top:
+								<div class="text-success">${idea.getNbTop()}</div>
+							</div>
+							<div class="col-sm text-center">
+								Flop:
+								<div class="text-danger">${idea.getNbFlop()}</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</c:when>
+				<c:otherwise>
+					<div class="text-warning">End of the votes</div>
+					<div class="col-sm text-center">
+						Top:
+						<div class="text-success">${idea.getNbTop()}</div>
+					</div>
+					<div class="col-sm text-center">
+						Flop:
+						<div class="text-danger">${idea.getNbFlop()}</div>
+					</div>
+				</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
@@ -91,14 +166,19 @@
 <div class="row">
 	<div class="col-sm"></div>
 	<div class="col-sm">
-		<form method="POST">
+		<form:form method="POST" action="${postComment}"
+			modelAttribute="Comment">
 			<div class="sizeInputComment">
 				<div class="form-group">
 					<c:choose>
 						<c:when test="${user != null}">
-							<label class="underline">${idea.userSubmitting.name}:</label>
-							<textarea class="form-control" maxlength="200" rows="2"
-								placeholder="Add comment..."></textarea>
+							<form:input type="hidden" path="userCommenting.id"
+								value="${user.id}" />
+							<form:input type="hidden" path="ideaCommented.id"
+								value="${idea.id}" />
+							<label class="underline">${user.name}:</label>
+							<form:textarea class="form-control" maxlength="200" rows="2"
+								placeholder="Add comment..." path="value" />
 							<br>
 							<button type="submit" class="btn btn-primary">Post</button>
 						</c:when>
@@ -111,7 +191,7 @@
 				</div>
 
 			</div>
-		</form>
+		</form:form>
 	</div>
 	<div class="col-sm"></div>
 </div>
@@ -121,66 +201,123 @@
 <div class="container">
 
 	<c:forEach items="${idea.listComment}" var="c">
-		<div class="row">
-			<div>
-				<div class="card" style="width: 100%">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-1">
-								<img src="<c:url value="/images/imgProfilDefault.png" />"
-									id="imgProfilIdea" class="rounded-circle" alt="...">
+		<c:choose>
+			<c:when test="${c.isActive()}">
+				<div class="row">
+					<div class="col-sm">
+						<div class="card" style="width: 100%">
+							<div class="text-right">
+								<button class="btn btn-danger rounded" data-toggle="modal"
+									data-target="#modalReportComment">
+									<i class="fas fa-exclamation-triangle"></i>Report comment
+								</button>
 							</div>
-							<div class="col-11">
-								<h5 class="underline">${c.userCommenting.name}</h5>
-								<p>${c.value}</p>
+							<div class="card-body" style="padding-top: 0">
+								<div class="row">
+									<div class="col-1">
+										<img src="<c:url value="/images/imgProfilDefault.png" />"
+											id="imgProfilIdea" class="rounded-circle" alt="...">
+									</div>
+									<div class="col-11">
+										<h5 class="underline">${c.userCommenting.name}</h5>
+										<p>${c.value}</p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<br>
-	</c:forEach>
+				<br>
+			</c:when>
+		</c:choose>
 
-	<div class="row">
-		<div class="card">
-			<div class="card-body">
-				<div class="row">
-					<div class="col-1">
-						<img src="<c:url value="/images/imgProfilDefault.png" />"
-							id="imgProfilIdea" class="rounded-circle" alt="...">
+
+
+		<!-- Modal report comment -->
+		<div class="modal fade" id="modalReportComment" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #d32f2f;">
+						<h5 class="modal-title" id="exampleModalLabel">Report
+							${idea.title}</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
-					<div class="col-11">
-						<h5 class="underline">Philipe Ducroc</h5>
-						<p>Integer pulvinar enim vitae orci finibus lobortis.
-							Vestibulum eget consequat tellus. Nullam volutpat odio vel sem
-							consequat, et viverra magna accumsan. Aliquam erat volutpat. Ut
-							sed massa ex. Ut et ipsum ut libero tincidunt varius a eu nulla.
-							Praesent at purus fringilla, feugiat mi sit amet, pharetra diam.</p>
-					</div>
+					<form:form method="POST" action="${reportComment}"
+						modelAttribute="Alert">
+						<div class="modal-body">
+
+							<div class="form-group">
+								<form:input type="hidden" path="userAlerting.id"
+									value="${user.id}" />
+								<form:input type="hidden" path="commentAlerted.id" value="${c.id}" />
+								<label for="messageReport"> Reason for your report: </label>
+								<form:textarea id="messageReport" class="form-control"
+									maxlength="254" rows="3" placeholder="Messages..."
+									path="message" />
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-danger">Send report</button>
+						</div>
+					</form:form>
 				</div>
 			</div>
 		</div>
-	</div>
-	<br>
-	<div class="row">
-		<div class="card">
-			<div class="card-body">
-				<div class="row">
-					<div class="col-1">
-						<img src="<c:url value="/images/imgProfilDefault.png" />"
-							id="imgProfilIdea" class="rounded-circle" alt="...">
-					</div>
-					<div class="col-11">
-						<h5 class="underline">Jean Jean</h5>
-						<p>Integer pulvinar enim vitae orci finibus lobortis.
-							Vestibulum eget consequat tellus. Nullam volutpat odio vel sem
-							consequat, et viverra magna accumsan. Aliquam erat volutpat. Ut
-							sed massa ex. Ut et ipsum ut libero tincidunt varius a eu nulla.
-							Praesent at purus fringilla, feugiat mi sit amet, pharetra diam.</p>
-					</div>
-				</div>
+
+
+
+	</c:forEach>
+</div>
+<jsp:include page="../template/footer.jsp"></jsp:include>
+
+
+
+
+
+
+
+
+
+<!-- Modal report idea -->
+<div class="modal fade" id="modalReportIdea" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="background-color: #d32f2f;">
+				<h5 class="modal-title" id="exampleModalLabel">Report
+					${idea.title}</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
+			<form:form method="POST" action="${reportIdea}"
+				modelAttribute="Alert">
+				<div class="modal-body">
+
+					<div class="form-group">
+						<form:input type="hidden" path="userAlerting.id"
+							value="${user.id}" />
+						<form:input type="hidden" path="ideaAlerted.id" value="${idea.id}" />
+						<label for="messageReport"> Reason for your report: </label>
+						<form:textarea id="messageReport" class="form-control"
+							maxlength="254" rows="3" placeholder="Messages..." path="message" />
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-danger">Send report</button>
+				</div>
+			</form:form>
 		</div>
 	</div>
 </div>
-<jsp:include page="../template/footer.jsp"></jsp:include>

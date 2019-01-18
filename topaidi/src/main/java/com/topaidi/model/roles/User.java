@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,7 +24,7 @@ public class User extends Connected {
 	@OneToMany(mappedBy="userCommenting")
 	private List<Comment> listComment = new ArrayList<>();
 	
-	@OneToMany(mappedBy="userNoting")
+	@OneToMany(mappedBy="userNoting", fetch=FetchType.EAGER)
 	private List<Note> listNote = new ArrayList<>();
 	
 	@OneToMany(mappedBy="userSubmitting")
@@ -40,6 +41,17 @@ public class User extends Connected {
 		super(name, email, password, address, phoneNumber);
 		this.isActive = isActive;
 		this.isValid = isValid;
+	}
+	
+	public boolean existInListNote(Integer idIdea) {
+		boolean retour = false;
+		for (Note note : this.listNote) {
+			if(note.getIdeaNoted().getId() == idIdea ) {
+				retour = true;
+				break;
+			}
+		}
+		return retour;
 	}
 	
 	public boolean note(Note note) {
@@ -62,10 +74,10 @@ public class User extends Connected {
 		this.isValid = isValid;
 	}
 
-	@Override
-	public String toString() {
-		return "User [isActive=" + isActive + ", isValid=" + isValid + ", getName()=" + getName() + ", getEmail()="
-				+ getEmail() + ", getPassword()=" + getPassword() + ", getAddress()=" + getAddress()
-				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getSecretQuestion()=" + ", getId()=" + getId() + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "User [isActive=" + isActive + ", isValid=" + isValid + ", getName()=" + getName() + ", getEmail()="
+//				+ getEmail() + ", getPassword()=" + getPassword() + ", getAddress()=" + getAddress()
+//				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getSecretQuestion()=" + ", getId()=" + getId() + "]";
+//	}
 }

@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.topaidi.model.roles.User;
 
 @Entity
@@ -30,20 +33,20 @@ public class Idea {
 	private LocalDate disabledAt;
 	private boolean isActive = true;
 	
-	@OneToMany(mappedBy="ideaAlerted")
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy="ideaAlerted", fetch=FetchType.EAGER)
 	private List<Alert> listAlert = new ArrayList<>();
 	
+	@Fetch(FetchMode.SELECT)
 	@OneToMany(mappedBy="ideaCommented", fetch=FetchType.EAGER)
 	private List<Comment> listComment = new ArrayList<>();
 	
 	@ManyToOne
 	private Category category;
 	
-	@OneToMany(mappedBy="ideaNoted")
-	private List<Note> listFlop = new ArrayList<>();
-	
-	@OneToMany(mappedBy="ideaNoted")
-	private List<Note> listTop = new ArrayList<>();
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy="ideaNoted", fetch=FetchType.EAGER)
+	private List<Note> listNote = new ArrayList<>();
 	
 	@ManyToOne
 	private User userSubmitting;
@@ -74,7 +77,27 @@ public class Idea {
 			return true;
 		}
 	}
-
+	
+	public Integer getNbFlop() {
+		Integer nbFlop = 0;
+		for (Note n : this.listNote) {
+			if (!n.isTop()) {
+				nbFlop++;
+			}
+		}
+		return nbFlop;
+	}
+	
+	public Integer getNbTop() {
+		Integer nbTop = 0;
+		for (Note n : this.listNote) {
+			if (n.isTop()) {
+				nbTop++;
+			}
+		}
+		return nbTop;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -155,20 +178,12 @@ public class Idea {
 		this.category = category;
 	}
 
-	public List<Note> getListFlop() {
-		return listFlop;
+	public List<Note> getListNote() {
+		return listNote;
 	}
 
-	public void setListFlop(List<Note> listFlop) {
-		this.listFlop = listFlop;
-	}
-
-	public List<Note> getListTop() {
-		return listTop;
-	}
-
-	public void setListTop(List<Note> listTop) {
-		this.listTop = listTop;
+	public void setListNote(List<Note> listNote) {
+		this.listNote = listNote;
 	}
 
 	public User getUserSubmitting() {
@@ -192,12 +207,14 @@ public class Idea {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "Idea [id=" + id + ", title=" + title + ", description=" + description + ", picture=" + picture
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", disabledAt=" + disabledAt
-				+ ", listAlert=" + listAlert + ", listComment=" + listComment + ", category=" + category + ", listFlop="
-				+ listFlop + ", listTop=" + listTop + ", userSubmitting=" + userSubmitting + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Idea [id=" + id + ", title=" + title + ", description=" + description + ", picture=" + picture
+//				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", disabledAt=" + disabledAt + ", isActive="
+//				+ isActive + ", listAlert=" + listAlert + ", listComment=" + listComment + ", category=" + category
+//				+ ", listNote=" + listNote + ", userSubmitting=" + userSubmitting + "]";
+//	}
+
+	
 
 }
