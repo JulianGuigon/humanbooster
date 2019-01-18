@@ -79,6 +79,14 @@ public class Alert {
 		return id;
 	}
 
+	public LocalDate getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDate createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -125,13 +133,13 @@ public class Alert {
 	
 	
 
-	public LocalDate getCreateAt() {
-		return createdAt;
-	}
-
-	public void setCreateAt(LocalDate createAt) {
-		this.createdAt = createAt;
-	}
+//	public LocalDate getCreateAt() {
+//		return createdAt;
+//	}
+//
+//	public void setCreateAt(LocalDate createAt) {
+//		this.createdAt = createAt;
+//	}
 
 	public void setId(Integer id) {
 		this.id = id;

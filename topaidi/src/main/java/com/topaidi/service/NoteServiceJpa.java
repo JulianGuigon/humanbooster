@@ -61,4 +61,14 @@ public class NoteServiceJpa implements NoteService{
 		return noteDao.update(obj);
 	}
 
+	@Override
+	public List<Note> findAllTopByIdea(int idIdea) {
+		return noteDao.findAllTopByIdea(idIdea);
+	}
+
+	@Override
+	public List<Note> findAllFlopByIdea(int idIdea) {
+		return noteDao.findAllFlopByIdea(idIdea);
+	}
+
 }
