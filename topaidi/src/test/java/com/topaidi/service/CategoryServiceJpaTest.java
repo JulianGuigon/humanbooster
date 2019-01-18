@@ -32,7 +32,7 @@ public class CategoryServiceJpaTest {
 	@Test
 	public void testDelete() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryService.insert(category);
 		
@@ -43,7 +43,7 @@ public class CategoryServiceJpaTest {
 	@Test
 	public void testDeleteByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryService.insert(category);
 		
@@ -56,9 +56,9 @@ public class CategoryServiceJpaTest {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address3 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898");
-		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898");
-		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898");
+		Admin admin1 = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100");
+		Admin admin2 = new Admin("Jean Robert","a.g@gmail.com","aaaa",address2,"0477265898","http://placehold.it/100x100");
+		Admin admin3 = new Admin("Jean Bernard","a.g@gmail.com","aaaa",address3,"0477265898","http://placehold.it/100x100");
 		Category category1 = new Category("cuisine",LocalDate.now(),admin1);
 		Category category2 = new Category("botanique",LocalDate.now(),admin2);
 		Category category3 = new Category("echecs",LocalDate.now(),admin3);
@@ -72,7 +72,7 @@ public class CategoryServiceJpaTest {
 	@Test
 	public void testFindByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryService.insert(category);
 		
@@ -85,7 +85,7 @@ public class CategoryServiceJpaTest {
 		int size = categoryService.findAll().size();
 		
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryService.insert(category);
 		
@@ -96,7 +96,7 @@ public class CategoryServiceJpaTest {
 	@Test
 	public void testUpdate() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
-		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898");
+		Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address,"0477265898","http://placehold.it/100x100");
 		Category category = new Category("cuisine",LocalDate.now(),admin);
 		categoryService.insert(category);
 		

@@ -47,12 +47,16 @@ public class ConnectController {
 		}
 		else if(adminFound==null&&userFound!=null) {
 			if(userFound.isValid()) {
-				HttpSession session = request.getSession();
-				session.setAttribute("user", userFound);
-				session.setAttribute("admin", null);
-				session.setAttribute("isConnected", true);
-				session.setAttribute("isAdmin", false);
-				return "redirect:/home";							
+				if(userFound.isActive()) {
+					HttpSession session = request.getSession();
+					session.setAttribute("user", userFound);
+					session.setAttribute("admin", null);
+					session.setAttribute("isConnected", true);
+					session.setAttribute("isAdmin", false);
+					return "redirect:/home";
+				}else {
+					return "redirect:/connect?error=inactiveUser";
+				}
 			}else {
 				return "redirect:/connect?error=invalidUser";	
 			}

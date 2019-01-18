@@ -113,6 +113,20 @@ public class AdminDaoJpa implements AdminDao {
 		}
 		return retour;
 	}
+	
+	@Override
+	public boolean activateUser(User user) {
+		boolean retour = true;
+		try {
+			user.setActive(true);
+			em.merge(user);
+		} catch (IllegalArgumentException ie) {
+			retour = false;
+		} catch (TransactionRequiredException te) {
+			retour = false;
+		}
+		return retour;
+	}
 
 	@Override
 	public boolean desactiveComment(Comment comment) {

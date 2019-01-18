@@ -12,12 +12,33 @@
 </div>
 
 <div class="row">
-	<div class="col-sm text-center">
-		<img src="images/imgProfilDefault.png" id="imgProfil"
-			class="rounded-circle" alt="...">
-	</div>
+	<c:choose>
+		<c:when test="${user.picture}==null">
+			<div class="col-sm text-center">
+				<img src="images/imgProfilDefault.png" id="imgProfil"
+					class="rounded-circle" alt="...">
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="col-sm text-center">
+				<img src="${user.picture}" id="imgProfil"
+					class="rounded-circle" alt="...">
+			</div>
+		</c:otherwise>
+	</c:choose>
+	
 	<div class="col-sm">
 		<ul class="deletePuceList sizeList">
+			<c:choose>
+					<c:when test="${isAdmin}">
+						<li>
+							<div class="form-group">
+								<label for="forName">Admin</label>
+							</div>
+						</li>
+						<hr>
+					</c:when>
+			</c:choose>
 			<li>
 				<div class="form-group">
 					<label for="forName">Name</label> <input type="text"

@@ -84,6 +84,11 @@ public class AdminServiceJpa implements AdminService {
 	public boolean desactiveUser(User user) {
 		return adminDao.desactiveUser(user);
 	}
+	
+	@Override
+	public boolean activateUser(User user) {
+		return adminDao.activateUser(user);
+	}
 
 	@Override
 	public boolean desactiveComment(Comment comment) {

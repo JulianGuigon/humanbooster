@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.UserService;
-import com.topaidi.validators.UserValidator;
+import com.topaidi.validators.RegisterValidator;
 
 @Controller
 public class RegisterController {
@@ -29,21 +29,16 @@ public class RegisterController {
 	
 	@PostMapping("/register")
 	public String register(@ModelAttribute("user") User user, BindingResult result, HttpServletRequest request, Model model) {
-		new UserValidator(userService).validate(user, result);
+		new RegisterValidator(userService).validate(user, result);
 		if(result.hasErrors()) {
 			return "register";
 		}
 		if(user.getId()==null) {
 			user.setActive(true);
-			userService.insert(user);			
+			userService.insert(user);		
 		}else{
 			userService.update(user);
 		}
-		HttpSession session = request.getSession();
-		session.setAttribute("user", user);
-		session.setAttribute("admin", null);
-		session.setAttribute("isConnected", true);
-		session.setAttribute("isAdmin", false);
-		return "redirect:/home";
+		return "redirect:/connect?error=invalidUser";
 	}
 }

@@ -39,6 +39,14 @@ public class UserDaoJpa implements UserDao {
 	public List<User> findAll() {
 		return em.createQuery("from User e order by e.id").getResultList();
 	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<User> findAllByName(String name) {
+		return em.createQuery("from User e where e.name = :name order by e.id")
+				.setParameter("name", name)
+				.getResultList();
+	}
 
 	@Override
 	public User findByKey(Integer key) {

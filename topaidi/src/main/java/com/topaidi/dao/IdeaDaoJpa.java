@@ -37,7 +37,7 @@ public class IdeaDaoJpa implements IdeaDao {
 	public Idea findByKey(Integer key) {
 		return em.find(Idea.class, key);
 	}
-
+	
 	@Override
 	public Idea insert(Idea obj) {
 		em.persist(obj);
