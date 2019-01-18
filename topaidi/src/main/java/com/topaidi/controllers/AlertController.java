@@ -44,7 +44,7 @@ public class AlertController {
 		alert.setCreatedAt(LocalDate.now());
 		alert.setIdeaAlerted(null);
 		alertService.insert(alert);
-		return "redirect: /topaidi/listIdea/";
+		return "redirect: /topaidi/listIdea";
 	}
 }
 
