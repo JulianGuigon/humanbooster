@@ -6,6 +6,7 @@ import com.topaidi.model.Idea;
 import com.topaidi.model.roles.User;
 
 public interface UserDao extends GenericDao<User,Integer> {
+	List<User> findAllByName(String name);
 	User findByEmailAndPassword(String email, String password);
 	boolean findEmailExist(String email);
 	List<User> findValidUser();

@@ -18,9 +18,10 @@
 		<c:when test="${error.equals('invalidUser')}">
 			<h4 style="color: red;">You can't connect until an administrator validate your inscription.</h4>
 		</c:when>
+		<c:when test="${error.equals('inactiveUser')}">
+			<h4 style="color: red;">You can't connect while you are desactivated.</h4>
+		</c:when>
 	</c:choose>
-	<c:if test="">
-	</c:if>
 	<form:form method="post" action="${url}" modelAttribute="user">
 		<form:errors path="email" cssStyle="color:red;"/><br>
 		<form:label path="email">Email : </form:label>

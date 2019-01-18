@@ -59,10 +59,16 @@ public class AdminDaoJpa implements AdminDao {
 
 	@Override
 	public Admin findByEmailAndPassword(String email, String password) {
-		return (Admin) em.createQuery("from Admin where email = :email AND password = :password")
-				.setParameter("email", email)
-				.setParameter("password", password)
-				.getSingleResult();
+		Admin found;
+		try {
+			found = (Admin) em.createQuery("from Admin where email = :email AND password = :password")
+					.setParameter("email", email)
+					.setParameter("password", password)
+					.getSingleResult();
+		}catch(NoResultException n) {
+			found = null;
+		}
+		return found;
 	}
 
 	@Override
@@ -99,6 +105,20 @@ public class AdminDaoJpa implements AdminDao {
 		boolean retour = true;
 		try {
 			user.setActive(false);
+			em.merge(user);
+		} catch (IllegalArgumentException ie) {
+			retour = false;
+		} catch (TransactionRequiredException te) {
+			retour = false;
+		}
+		return retour;
+	}
+	
+	@Override
+	public boolean activateUser(User user) {
+		boolean retour = true;
+		try {
+			user.setActive(true);
 			em.merge(user);
 		} catch (IllegalArgumentException ie) {
 			retour = false;

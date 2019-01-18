@@ -15,14 +15,22 @@
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Validating user
+        	Create category
         </button>
       </h5>
     </div>
 
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
-        
+        <form:form method="post" action="${url}" modelAttribute="category">
+			<spring:hasBindErrors name="category">
+				<c:set var="errorClass" value="border:1px solid red"></c:set>
+			</spring:hasBindErrors>
+			<form:label path="name"><a style="color: red;">*</a>Name : </form:label>
+			<form:input path="name" cssClass="form-control" type="text" style="${errorClass}"/>
+			<form:errors path="name" cssStyle="color:red;"/><br>
+			<input type="submit" value="Create"/>
+		</form:form>
       </div>
     </div>
   </div>
@@ -36,7 +44,11 @@
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
       <div class="card-body">
-        
+        <ul class="list-group">
+	       	<c:forEach items="${categories}" var="category">
+	       		<li class="list-group-item">${category.name}</li>
+	       	</c:forEach>
+		</ul>
       </div>
     </div>
   </div>
@@ -44,21 +56,32 @@
     <div class="card-header" id="headingThree">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Create category
+          	Validating user
         </button>
       </h5>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
       <div class="card-body">
-        <form:form method="post" action="${url}" modelAttribute="category">
-			<spring:hasBindErrors name="category">
-				<c:set var="errorClass" value="border:1px solid red"></c:set>
-			</spring:hasBindErrors>
-			<form:label path="name"><a style="color: red;">*</a>Name : </form:label>
-			<form:input path="name" cssClass="form-control" type="text" style="${errorClass}"/>
-			<form:errors path="name" cssStyle="color:red;"/><br>
-			<input type="submit" value="Create"/>
-		</form:form>
+        <ul style="margin: 0% 20%;" class="list-group">
+	       	<c:forEach items="${invalidUsers}" var="currentUser">
+	       		<li class="list-group-item">
+	       			<c:choose>
+						<c:when test="${currentUser.picture!=null}">
+							<img style="height: 40px;width: 40px;" src="${currentUser.picture}" alt="..." class="rounded-circle">
+						</c:when>
+						<c:otherwise>
+							<img style="height: 40px;width: 40px;" src="<c:url value="/images/imgProfilDefault.png"/>" alt="..." class="rounded-circle">
+						</c:otherwise>
+					</c:choose>
+		       		&nbsp;&nbsp;
+		       		${currentUser.name} (live in : ${currentUser.address.streetNumber} ${currentUser.address.wording}, ${currentUser.address.city} ${currentUser.address.country})
+		       		&nbsp;&nbsp;
+		       		<a href="admin/validate/${currentUser.id}" class="btn btn-success"><i class="fas fa-plus-circle"></i></a>
+		       		&nbsp;&nbsp;
+		       		<a href="admin/ban/${currentUser.id}" class="btn btn-danger"><i class="fas fa-minus-circle"></i></a>
+	       		</li>
+	       	</c:forEach>
+		</ul>
       </div>
     </div>
   </div>

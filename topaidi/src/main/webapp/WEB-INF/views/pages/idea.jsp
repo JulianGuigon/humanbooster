@@ -138,7 +138,8 @@
 					</div>
 				</div>
 			</div>
-			<br>
+		</div>
+		<br>
 	</c:forEach>
 
 	<div class="row">

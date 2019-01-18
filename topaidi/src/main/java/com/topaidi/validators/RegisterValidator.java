@@ -7,11 +7,11 @@ import org.springframework.validation.Validator;
 import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.UserService;
 
-public class UserValidator implements Validator {
+public class RegisterValidator implements Validator {
 	
 	private UserService userService;
 	
-	public UserValidator(UserService userService) {
+	public RegisterValidator(UserService userService) {
 		this.userService = userService;
 	}
 	

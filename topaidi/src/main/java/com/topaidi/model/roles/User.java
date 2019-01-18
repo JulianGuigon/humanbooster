@@ -36,8 +36,8 @@ public class User extends Connected {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String name, String email, String password, Address address, String phoneNumber, boolean isActive, boolean isValid) {
-		super(name, email, password, address, phoneNumber);
+	public User(String name, String email, String password, Address address, String phoneNumber, String picture, boolean isActive, boolean isValid) {
+		super(name, email, password, address, phoneNumber, picture);
 		this.isActive = isActive;
 		this.isValid = isValid;
 	}

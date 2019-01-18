@@ -34,8 +34,10 @@
 <spring:url value="/connect/disconnect" var="disconnect"></spring:url>
 <spring:url value="/register" var="register"></spring:url>
 <spring:url value="/connect" var="connect"></spring:url>
-
-
+<spring:url value="/search" var="search"></spring:url>
+<spring:url value="/admin" var="admin"></spring:url>
+<spring:url value="/user" var="pageUser"></spring:url>
+<spring:url value="/images/imgProfilDefault.png" var="image"></spring:url>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="${home}"><i class="fas fa-lightbulb"></i>TopAidi</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -67,24 +69,33 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${navbarIndexSelected.equals('search')}">
-						<li class="nav-item active"><a class="nav-link" href="search">Search</a></li>
+						<li class="nav-item active"><a class="nav-link" href="${search}">Search</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item"><a class="nav-link" href="search">Search</a></li>
+						<li class="nav-item"><a class="nav-link" href="${search}">Search</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
 			<div class="form-inline my-2 my-lg-0">
 				<div class="dropdown dropleft">
-					<img src="<c:url value="/images/imgProfilDefault.png" />"
+					<c:choose>
+						<c:when test="${user.picture!=null}">
+							<img src="<c:url value="${user.picture}"/>"
 						id="imgProfilNav" class="rounded-circle dropdown-toggle" alt="..."
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						</c:when>
+						<c:otherwise>
+							<img src="<c:url value="/images/imgProfilDefault.png"/>"
+						id="imgProfilNav" class="rounded-circle dropdown-toggle" alt="..."
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						</c:otherwise>
+					</c:choose>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<c:choose>
 							<c:when test="${isAdmin}">
 								<a class="dropdown-item" href="${profil}">Profil</a> 
 								<a class="dropdown-item" href="${post}">Post idea <i class="fas fa-plus"></i></a>
-								<a class="dropdown-item" href="admin">Admin tools <i class="fas fa-wrench"></i></a> 
+								<a class="dropdown-item" href="${admin}">Admin tools <i class="fas fa-wrench"></i></a> 
 								<a class="dropdown-item" href="${disconnect}">Sign out</a>
 							</c:when>
 							<c:when test="${isConnected}">
