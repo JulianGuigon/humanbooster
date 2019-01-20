@@ -17,7 +17,7 @@
 		<c:forEach items="${listIdea}" var="i">
 			<div class="col-4 moveCardBot">
 				<div class="card shadow p-3 mb-5 bg-white rounded">
-					<img src="<c:url value="/images/table.jpg"/>" class="card-img-top"
+					<img src="<c:url value="${i.picture}"/>" class="card-img-top"
 						alt="...">
 					<div class="card-body">
 						<h5 class="card-title">${i.title}</h5>
@@ -99,7 +99,6 @@
 					<a class="text-right" href="idea/${i.id}">More information...</a>
 				</div>
 			</div>
-
 		</c:forEach>
 	</div>
 </div>

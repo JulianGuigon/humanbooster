@@ -55,6 +55,11 @@ public class VisitorDaoJpaTest {
 	}
 	
 	@Test
+	public void testFindAllError() {
+		assertTrue(visitorDao.findAll().size()==0);
+	}
+	
+	@Test
 	public void testFindByKey() {
 		Visitor visitor = new Visitor();
 		visitorDao.insert(visitor);

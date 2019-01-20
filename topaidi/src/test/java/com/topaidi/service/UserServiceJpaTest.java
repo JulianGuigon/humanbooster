@@ -78,6 +78,11 @@ public class UserServiceJpaTest {
 	}
 	
 	@Test
+	public void testFindAllError() {
+		assertTrue(userService.findAll().size()==0);
+	}
+	
+	@Test
 	public void testFindAllByName() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);

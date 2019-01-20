@@ -2,19 +2,15 @@ package com.topaidi.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TransactionRequiredException;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.topaidi.dao.interfaces.UserDao;
-import com.topaidi.model.Idea;
-import com.topaidi.model.roles.Admin;
 import com.topaidi.model.roles.User;
 
 @Repository

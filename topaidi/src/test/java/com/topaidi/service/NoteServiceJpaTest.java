@@ -103,6 +103,11 @@ public class NoteServiceJpaTest {
 	}
 	
 	@Test
+	public void testFindAllError() {
+		assertTrue(noteService.findAll().size()==0);
+	}
+	
+	@Test
 	public void testFindAllTopByIdea() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -52,6 +54,11 @@ public class AddressDaoJpaTest {
 		addressDao.insert(address3);
 		
 		assertTrue(addressDao.findAll().size()==3);
+	}
+	
+	@Test
+	public void testFindAllError() {
+		assertTrue(addressDao.findAll().size()==0);
 	}
 	
 	@Test

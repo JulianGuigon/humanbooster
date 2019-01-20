@@ -55,6 +55,11 @@ public class VisitorServiceJpaTest {
 	}
 	
 	@Test
+	public void testFindAllError() {
+		assertTrue(visitorService.findAll().size()==0);
+	}
+	
+	@Test
 	public void testFindByKey() {
 		Visitor visitor = new Visitor();
 		visitorService.insert(visitor);

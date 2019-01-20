@@ -165,6 +165,11 @@ public class AdminDaoJpaTest {
 	}
 	
 	@Test
+	public void testFindAllError() {
+		assertTrue(adminDao.findAll().size()==0);
+	}
+	
+	@Test
 	public void testFindByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressDao.insert(address);
