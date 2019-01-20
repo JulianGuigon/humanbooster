@@ -53,6 +53,11 @@ public class AddressServiceJpaTest {
 	}
 	
 	@Test
+	public void testFindAllError() {
+		assertTrue(addressService.findAll().size()==0);
+	}
+	
+	@Test
 	public void testFindByKey() {
 		Address address = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		addressService.insert(address);

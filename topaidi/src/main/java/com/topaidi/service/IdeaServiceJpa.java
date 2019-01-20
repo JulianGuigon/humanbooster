@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.topaidi.dao.interfaces.IdeaDao;
 import com.topaidi.model.Idea;
+import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.CategoryService;
 import com.topaidi.service.interfaces.IdeaService;
 import com.topaidi.service.interfaces.UserService;
@@ -39,6 +40,11 @@ public class IdeaServiceJpa implements IdeaService {
 	@Override
 	public List<Idea> findAllByCreateAt(){
 		return ideaDao.findAllByCreateAt();
+	}
+	
+	@Override
+	public List<Idea> findAllWithUser(User user) {
+		return ideaDao.findAllWithUser(user);
 	}
 
 	@Override

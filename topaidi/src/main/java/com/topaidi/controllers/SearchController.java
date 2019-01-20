@@ -48,6 +48,7 @@ public class SearchController {
 			users = userService.findAllByName(user.getName());
 			return "redirect:/search";
 		}else {
+			users = userService.findAll();
 			return "redirect:/search";
 		}
 	}

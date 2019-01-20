@@ -1,62 +1,43 @@
 package com.topaidi.utils;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.topaidi.model.Idea;
 import com.topaidi.model.roles.User;
 import com.topaidi.service.interfaces.IdeaService;
+import com.topaidi.service.interfaces.NoteService;
 import com.topaidi.service.interfaces.UserService;
 
 public class RankingUtil {
-	
 	private UserService userService;
 	private IdeaService ideaService;
+	private NoteService noteService;
 	
-	public RankingUtil(UserService userService, IdeaService ideaService) {
+	public RankingUtil(UserService userService, IdeaService ideaService, NoteService noteService) {
 		this.userService = userService;
 		this.ideaService = ideaService;
+		this.noteService = noteService;
 	}
 	
-	public User getBrainRanking(){
-		throw new UnsupportedOperationException();
+	public List<User> getBrainRanking(){
+		return userService.findAll().stream()
+				.sorted(Comparator.comparing((User u) -> (ideaService.findAllWithUser(u).size())*-1))
+				.collect(Collectors.toList());
 	}
 	
-	public Idea getBuzzRanking(){
-		throw new UnsupportedOperationException();
+	public List<Idea> getBuzzRanking(){
+		return ideaService.findAll().stream()
+				.sorted(Comparator.comparing((Idea i) -> (noteService.findAllTopByIdea(i.getId()).size()+noteService.findAllFlopByIdea(i.getId()).size())*-1))
+				.collect(Collectors.toList());
 	}
 	
-	public Idea getTopRanking(){
-//		int topId = 0;
-//		Idea top = new Idea();
-//		List<Idea> ideas = ideaService.findAll();
-//		for(Idea idea : ideas) {
-//			idea.getListTop()
-//		}
-//		return top;
-		throw new UnsupportedOperationException();
-	}
-	
-	private User getBrainRanking(List<Idea> ideas){
-		throw new UnsupportedOperationException();
-	}
-	
-	private Idea getBuzzRanking(List<Idea> ideas){
-		throw new UnsupportedOperationException();
-	}
-	
-	private Idea getTopRanking(List<Idea> ideas){
-		throw new UnsupportedOperationException();
-	}
-	
-	public List<User> get3BrainRanking(){
-		throw new UnsupportedOperationException();
-	}
-	
-	public List<Idea> get3BuzzRanking(){
-		throw new UnsupportedOperationException();
-	}
-	
-	public List<Idea> get3TopRanking(){
-		throw new UnsupportedOperationException();
+	public List<Idea> getTopRanking(){
+		return ideaService.findAll().stream()
+				.sorted(Comparator.comparing((Idea i) -> (((float)noteService.findAllTopByIdea(i.getId()).size())/((float)noteService.findAllFlopByIdea(i.getId()).size()))*-1)
+						.thenComparing((Idea i) -> (noteService.findAllTopByIdea(i.getId()).size()+noteService.findAllFlopByIdea(i.getId()).size())*-1)
+						.thenComparing((Idea i) -> i.getCreatedAt()))
+				.collect(Collectors.toList());
 	}
 }

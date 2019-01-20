@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.topaidi.dao.interfaces.IdeaDao;
 import com.topaidi.model.Idea;
+import com.topaidi.model.roles.User;
 
 @Repository
 @Transactional
@@ -53,6 +54,14 @@ public class IdeaDaoJpa implements IdeaDao {
 	@SuppressWarnings("unchecked")
 	public List<Idea> findAllByCreateAt() {
 		return em.createQuery("from Idea i order by i.createdAt DESC").getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Idea> findAllWithUser(User user) {
+		return em.createQuery("from Idea i where usersubmitting_roleid = :id order by i.id")
+				.setParameter("id", user.getId())
+				.getResultList();
 	}
 
 }

@@ -102,6 +102,11 @@ public class CommentServiceJpaTest {
 		}
 		
 		@Test
+		public void testFindAllError() {
+			assertTrue(commentService.findAll().size()==0);
+		}
+		
+		@Test
 		public void testFindByKey() {
 			Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 			Admin admin = new Admin("Jean Guy","a.g@gmail.com","aaaa",address1,"0477265898","http://placehold.it/100x100");

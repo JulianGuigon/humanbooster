@@ -49,11 +49,13 @@ public class NoteDaoJpa implements NoteDao {
 		return em.merge(obj);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Note> findAllTopByIdea(int idIdea) {
 		return em.createQuery("from Note e where istop = true AND ideanoted_ideaid = :idIdea").setParameter("idIdea", idIdea).getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Note> findAllFlopByIdea(int idIdea) {
 		return em.createQuery("from Note e where istop = false AND ideanoted_ideaid = :idIdea").setParameter("idIdea", idIdea).getResultList();

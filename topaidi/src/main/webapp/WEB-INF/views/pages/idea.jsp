@@ -30,12 +30,18 @@
 			</ol>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="<c:url value="/images/imageIdeaDefault.jpg"/>"
+					<img src="<c:url value="${idea.picture}"/>"
 						id="imgIdea" class="rounded" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="<c:url value="/images/imgProfilDefault.png" />"
-						id="imgProfil" class="rounded" alt="...">
+					<c:choose>
+						<c:when test="${idea.userSubmitting.picture}==null">
+							<img src="<c:url value="/images/imgProfilDefault.png" />" id="imgProfil" class="rounded" alt="...">
+						</c:when>
+						<c:otherwise>
+							<img src="<c:url value="${idea.userSubmitting.picture}" />" id="imgProfil" class="rounded" alt="...">	
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -51,25 +57,40 @@
 	</div>
 	<!-- COL AVEC IMAGE PROFIL ET CATEGORY -->
 	<div class="col-sm">
-		<div class="text-center">
-			<button class="btn btn-danger" data-toggle="modal"
-				data-target="#modalReportIdea">
-				<i class="fas fa-exclamation-triangle"></i>Report idea
-			</button>
-		</div>
-		<br>
 		<div class="card sizeCardProfil">
 			<div class="card-body">
-				<img src="<c:url value="/images/imgProfilDefault.png" />"
-					id="imgProfilIdea" class="rounded-circle" alt="..."> <span>${idea.userSubmitting.name}</span>
+				<c:choose>
+					<c:when test="${idea.userSubmitting.picture}==null">
+						<div class="col-sm text-center">
+							<img style="height: 80px;width: 80px;" src="<c:url value="/images/imgProfilDefault.png" />"
+								class="rounded-circle" alt="..."> <span>${idea.userSubmitting.name}</span>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="col-sm text-center">
+							<img style="height: 80px;width: 80px;" src="${idea.userSubmitting.picture}"
+								class="rounded-circle" alt="..."> <span>${idea.userSubmitting.name}</span>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		<br>
 		<hr class="hrIdea">
 		<br>
-		<div>
-			<h5 class="underline">Category:</h5>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<h5 class="underline">Category:</h5>
 			-${idea.category.name}
+				</div>
+				<div class="col-sm-6">
+					<button class="btn btn-danger" data-toggle="modal"
+					data-target="#modalReportIdea">
+					<i class="fas fa-exclamation-triangle"></i> Report idea
+				</button>
+				</div>
+			</div>
 		</div>
 		<br> <br> <br>
 		<div class="row">
@@ -209,14 +230,26 @@
 							<div class="text-right">
 								<button class="btn btn-danger rounded" data-toggle="modal"
 									data-target="#modalReportComment">
-									<i class="fas fa-exclamation-triangle"></i>Report comment
+									<i class="fas fa-exclamation-triangle"></i>
 								</button>
 							</div>
 							<div class="card-body" style="padding-top: 0">
 								<div class="row">
 									<div class="col-1">
-										<img src="<c:url value="/images/imgProfilDefault.png" />"
-											id="imgProfilIdea" class="rounded-circle" alt="...">
+										<c:choose>
+											<c:when test="${c.userCommenting.picture}==null">
+												<div class="col-sm text-center">
+													<img style="height: 60px;width: 60px;" src="<c:url value="/images/imgProfilDefault.png" />"
+														class="rounded-circle" alt="...">
+												</div>
+											</c:when>
+											<c:otherwise>
+												<div class="col-sm text-center">
+													<img style="height: 60px;width: 60px;" src="${c.userCommenting.picture}"
+														class="rounded-circle" alt="...">
+												</div>
+											</c:otherwise>
+										</c:choose>
 									</div>
 									<div class="col-11">
 										<h5 class="underline">${c.userCommenting.name}</h5>

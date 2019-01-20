@@ -286,6 +286,11 @@ public class AlertDaoJpaTest {
 	}
 	
 	@Test
+	public void testFindAllError() {
+		assertTrue(alertDao.findAll().size()==0);
+	}
+	
+	@Test
 	public void testFindAllByCreateAt() {
 		Address address1 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
 		Address address2 = new Address("France","Lyon",69130,"chemin Louis Chirpaz",8);
